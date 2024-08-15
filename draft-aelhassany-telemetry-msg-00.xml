@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="rfc7991bis.rnc"?>
+<!-- Required for schema validation and schema-aware editing -->
+<!-- <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?> -->
+<!-- This third-party XSLT can be enabled for direct transformations in XML processors, including most browsers -->
+<!DOCTYPE rfc [
+<!ENTITY nbsp "&#160;">
+<!ENTITY zwsp "&#8203;">
+<!ENTITY nbhy "&#8209;">
+<!ENTITY wj "&#8288;">
+]>
+<!-- If further character entities are required then they should be added to the DOCTYPE above.
+     Use of an external entity file is not recommended. -->
+<rfc category="info" docName="draft-aelhassany-telemetry-msg-00.xml"
+     ipr="trust200902" obsoletes="" submissionType="IETF" updates=""
+     version="3" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:ns2="http://www.w3.org/2000/svg"
+     xmlns:ns="http://www.w3.org/1999/xlink">
+  <front>
+    <title abbrev="Abbreviated Title">Yang Data</title>
+
+    <seriesInfo name="Internet-Draft"
+                value="draft-aelhassany-telemetry-msg-00.xml"/>
+
+    <author fullname="Ahmed Elhassany" initials="A" surname="Elhassany">
+      <organization>Swisscom</organization>
+
+      <address>
+        <postal>
+          <street>Binzring 17</street>
+
+          <city>Zuerich 8045</city>
+
+          <region/>
+
+          <code/>
+
+          <country>Switzerland</country>
+        </postal>
+
+        <phone/>
+
+        <email>ahmed.elhassany@swisscom.com</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <date year="2024"/>
+
+    <area>General</area>
+
+    <workgroup>NETCONF</workgroup>
+
+    <keyword>keyword</keyword>
+
+    <abstract>
+      <t>A YANG Telemetry Collector as defined in <xref target="RFC9232"/> and
+      , <xref target="I-D.ietf-nmop-yang-message-broker-integration"/>
+      collects YANG information from the network then exports to an external
+      system such as a message broker <xref
+      target="I-D.ietf-nmop-yang-message-broker-integration"/> This document
+      specifies a YANG Model for Telemetry Collector exported message,
+      allowing it to add additional metadata for the provinance of the
+      data.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section>
+      <name>Introduction</name>
+
+      <t>Introductory text [REPLACE]</t>
+
+      <section>
+        <name>Requirements Language</name>
+
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+        "OPTIONAL" in this document are to be interpreted as described in BCP
+        14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only
+        when, they appear in all capitals, as shown here.</t>
+      </section>
+    </section>
+
+    <section>
+      <name>YANG model</name>
+
+      <t>TODO</t>
+
+      <figure>
+      <artwork>
+<![CDATA[
+module: ietf-telemetry-message
+  +--rw message
+     +--rw event-type            telemetry-message-event-type
+     +--rw received-timestamp?   yang:date-and-time
+     +--rw session-protocol?     telemetry-session-protocol-type
+     +--rw network-node
+     |  +--rw address    inet:host
+     |  +--rw port       inet:port-number
+     +--rw collector-node
+     |  +--rw address    inet:host
+     |  +--rw port       inet:port-number
+     +--rw collector-version     string
+     +--rw session-metadata
+     |  +--rw event-time    yang:date-and-time
+     +--rw metadata
+     |  +--rw labels* [name]
+     |     +--rw name       string
+     |     +--rw (value)
+     |        +--:(string-value)
+     |        |  +--rw (string-value)?
+     |        |     +--:(string-value)
+     |        |        +--rw string-value?   string
+     |        +--:(anydata-value)
+     |           +--rw (anydata-value)?
+     |              +--:(anydata-value)
+     |                 +--rw anydata-value?   anydata
+     +--rw payload?              anydata
+]]></artwork></figure>
+      <figure>
+        <name>YANG Module</name>
+
+        <sourcecode markers="true"
+        name="ietf-telemetry-message@2024-02-20.yang" type="yang">
+  module ietf-telemetry-message {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:telemetry-message";
+  prefix tm;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization
+    "IETF Draft";
+  contact
+    "Author:    Ahmed Elhassany
+                &lt;mailto:ahmed.elhassany@swisscom.com&gt;";
+  description
+    "This YANG modules defines a model for a telemetry collector to send
+     collected YANG data from the network.
+
+     Copyright (c) 2024 IETF Trust and the persons identified as
+       authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or without
+     modification, is permitted pursuant to, and subject to the license
+     terms contained in, the Revised BSD License set forth in Section
+     4.c of the IETF Trust's Legal Provisions Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX; see the RFC
+     itself for full legal notices.";
+
+  revision 2024-02-20 {
+    description
+      "Initial revision.";
+    reference
+      "RFC XXXX";
+  }
+
+  typedef telemetry-message-event-type {
+    type enumeration {
+      enum "log" {
+        description
+          "Collector is reporting the event as it arrived from the network element";
+      }
+      enum "update" {
+        description
+          "
+           Collector has updated an entry inside its local cache.
+           This could be triggered by an event from the network for instance interface operational
+           status changed or an internal event in the collector, such as a timer triggered to
+           referesh old enteries";
+      }
+      enum "delete" {
+        description
+          "Collector has deleted an entry from its local cache";
+      }
+    }
+    description
+      "Type of event reported by the collector";
+  }
+
+  typedef telemetry-session-protocol-type {
+    type enumeration {
+      enum "netconf" {
+        description
+          "NETCONF RFC8640";
+      }
+      enum "restconf" {
+        description
+          "RESTCONF RFC8650";
+      }
+      enum "https" {
+        description
+          "HTTPS draft-ietf-netconf-https-notif";
+      }
+      enum "udp-notif" {
+        description
+          "UDP draft-ietf-netconf-udp-notif";
+      }
+    }
+    description
+      "Session protocol used to deliver the messaget to the collector";
+  }
+
+  grouping node-information {
+    description
+      "Idenitfy a network node by its hostname/IP Address and port number.";
+    leaf address {
+      type inet:host;
+      mandatory true;
+      description
+        "Node address";
+    }
+    leaf port {
+      type inet:port-number;
+      mandatory true;
+      description
+        "Node port number";
+    }
+  }
+
+  container message {
+    leaf event-type {
+      type telemetry-message-event-type;
+      mandatory true;
+      description
+        "Event type reported by the collector";
+    }
+    leaf received-timestamp {
+      type yang:date-and-time;
+      mandatory false;
+      description
+        "Timestamp when the collector received the message from the network element or an update or delete event is triggered";
+    }
+    leaf session-protocol {
+      type telemetry-session-protocol-type;
+      description
+        "Protocol used to send the message from network node to the collector";
+    }
+    container network-node {
+      description
+        "Address of network element sent the message";
+      uses node-information;
+    }
+    container collector-node {
+      description
+        "Address of the telemetry collector";
+      uses node-information;
+    }
+    leaf collector-version {
+      type string;
+      mandatory true;
+      description
+        "Collector software version";
+    }
+    container session-metadata {
+      leaf event-time {
+        type yang:date-and-time;
+        mandatory true;
+        description
+          "NETCONF eventTime";
+      }
+    }
+    container metadata {
+      description
+        "Collector added metadata.";
+      list labels {
+        key "name";
+        description
+          "arbiterary labels assinged by the collector";
+        leaf name {
+          type string {
+            length "1..max";
+          }
+          description
+            "label name";
+        }
+        choice value {
+          mandatory true;
+          choice string-value {
+            leaf string-value {
+              type string;
+            }
+          }
+          choice anydata-value {
+            anydata anydata-value {
+              description
+                "anydata yang";
+            }
+          }
+        }
+      }
+    }
+    anydata payload {
+      description
+        "message received from network element";
+    }
+  }
+}
+        </sourcecode>
+
+      </figure>
+    </section>
+
+    <section anchor="IANA">
+      <name>IANA Considerations</name>
+      <t>TODO</t>
+    </section>
+
+    <section anchor="Security">
+      <name>Security Considerations</name>
+      <t>TODO</t>
+    </section>
+  </middle>
+
+  <back>
+    <references>
+      <name>References</name>
+
+      <references>
+        <name>Normative References</name>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9232.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-nmop-yang-message-broker-integration.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+      </references>
+
+      <references>
+        <name>Informative References</name>
+      </references>
+    </references>
+
+    <section anchor="Acknowledgements" numbered="false">
+      <name>Acknowledgements</name>
+      <t>TODO</t>
+    </section>
+  </back>
+</rfc>

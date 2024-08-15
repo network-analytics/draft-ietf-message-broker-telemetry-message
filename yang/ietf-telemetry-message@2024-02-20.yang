@@ -1,0 +1,181 @@
+module ietf-telemetry-message {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:telemetry-message";
+  prefix tm;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization
+    "IETF Draft";
+  contact
+    "Author:    Ahmed Elhassany
+                <mailto:ahmed.elhassany@swisscom.com>";
+  description
+    "This YANG modules defines a model for a telemetry collector to send
+     collected YANG data from the network.
+
+     Copyright (c) 2024 IETF Trust and the persons identified as
+       authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or without
+     modification, is permitted pursuant to, and subject to the license
+     terms contained in, the Revised BSD License set forth in Section
+     4.c of the IETF Trust's Legal Provisions Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX; see the RFC
+     itself for full legal notices.";
+
+  revision 2024-02-20 {
+    description
+      "Initial revision.";
+    reference
+      "RFC XXXX";
+  }
+
+  typedef telemetry-message-event-type {
+    type enumeration {
+      enum "log" {
+        description
+          "Collector is reporting the event as it arrived from the network element";
+      }
+      enum "update" {
+        description
+          "
+           Collector has updated an entry inside its local cache.
+           This could be triggered by an event from the network for instance interface operational
+           status changed or an internal event in the collector, such as a timer triggered to
+           referesh old enteries";
+      }
+      enum "delete" {
+        description
+          "Collector has deleted an entry from its local cache";
+      }
+    }
+    description
+      "Type of event reported by the collector";
+  }
+
+  typedef telemetry-session-protocol-type {
+    type enumeration {
+      enum "netconf" {
+        description
+          "NETCONF RFC8640";
+      }
+      enum "restconf" {
+        description
+          "RESTCONF RFC8650";
+      }
+      enum "https" {
+        description
+          "HTTPS draft-ietf-netconf-https-notif";
+      }
+      enum "udp-notif" {
+        description
+          "UDP draft-ietf-netconf-udp-notif";
+      }
+    }
+    description
+      "Session protocol used to deliver the messaget to the collector";
+  }
+
+  grouping node-information {
+    description
+      "Idenitfy a network node by its hostname/IP Address and port number.";
+    leaf address {
+      type inet:host;
+      mandatory true;
+      description
+        "Node address";
+    }
+    leaf port {
+      type inet:port-number;
+      mandatory true;
+      description
+        "Node port number";
+    }
+  }
+
+  container message {
+    leaf event-type {
+      type telemetry-message-event-type;
+      mandatory true;
+      description
+        "Event type reported by the collector";
+    }
+    leaf received-timestamp {
+      type yang:date-and-time;
+      mandatory false;
+      description
+        "Timestamp when the collector received the message from the network element or an update or delete event is triggered";
+    }
+    leaf session-protocol {
+      type telemetry-session-protocol-type;
+      description
+        "Protocol used to send the message from network node to the collector";
+    }
+    container network-node {
+      description
+        "Address of network element sent the message";
+      uses node-information;
+    }
+    container collector-node {
+      description
+        "Address of the telemetry collector";
+      uses node-information;
+    }
+    leaf collector-version {
+      type string;
+      mandatory true;
+      description
+        "Collector software version";
+    }
+    container session-metadata {
+      leaf event-time {
+        type yang:date-and-time;
+        mandatory true;
+        description
+          "NETCONF eventTime";
+      }
+    }
+    container metadata {
+      description
+        "Collector added metadata.";
+      list labels {
+        key "name";
+        description
+          "arbiterary labels assinged by the collector";
+        leaf name {
+          type string {
+            length "1..max";
+          }
+          description
+            "label name";
+        }
+        choice value {
+          mandatory true;
+          choice string-value {
+            leaf string-value {
+              type string;
+            }
+          }
+          choice anydata-value {
+            anydata anydata-value {
+              description
+                "anydata yang";
+            }
+          }
+        }
+      }
+    }
+    anydata payload {
+      description
+        "message received from network element";
+    }
+  }
+}
