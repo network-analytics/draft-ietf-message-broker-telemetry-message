@@ -108,14 +108,15 @@ module ietf-telemetry-message {
       description
         "Event type reported by the collector";
     }
-    leaf received-timestamp {
+    leaf timestamp {
       type yang:date-and-time;
-      mandatory false;
+      mandatory true;
       description
         "Timestamp when the collector received the message from the network element or an update or delete event is triggered";
     }
     leaf session-protocol {
       type telemetry-session-protocol-type;
+      mandatory true;
       description
         "Protocol used to send the message from network node to the collector";
     }

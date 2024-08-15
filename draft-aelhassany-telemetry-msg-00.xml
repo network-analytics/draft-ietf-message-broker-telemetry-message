@@ -234,7 +234,7 @@ module: ietf-telemetry-message
       description
         "Event type reported by the collector";
     }
-    leaf received-timestamp {
+    leaf timestamp {
       type yang:date-and-time;
       mandatory false;
       description
@@ -242,6 +242,7 @@ module: ietf-telemetry-message
     }
     leaf session-protocol {
       type telemetry-session-protocol-type;
+      mandatory true;
       description
         "Protocol used to send the message from network node to the collector";
     }

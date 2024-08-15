@@ -1,7 +1,7 @@
 {
   "ietf-telemetry-message:message": {
     "event-type": "log",
-    "received-timestamp": "2024-02-14T11:10:10.12Z",
+    "timestamp": "2024-02-14T12:10:10.12+01:00",
     "session-protocol": "netconf",
     "network-node": {
       "address": "192.168.1.1",
@@ -13,7 +13,7 @@
     },
     "collector-version": "0.0.1",
     "session-metadata": {
-      "event-time": "2024-02-14T11:10:10.10Z"
+      "event-time": "2024-02-14T12:10:10.10+01:00"
     },
     "metadata": {
       "labels": [
