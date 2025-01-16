@@ -1,0 +1,616 @@
+
+
+
+
+NETCONF                                                     A. Elhassany
+Internet-Draft                                                  Swisscom
+Intended status: Informational                           16 January 2025
+Expires: 20 July 2025
+
+
+                               Yang Data
+                 draft-aelhassany-telemetry-msg-00.xml
+
+Abstract
+
+   A YANG Telemetry Collector as defined in [RFC9232] and,
+   [I-D.ietf-nmop-yang-message-broker-integration] collects YANG
+   information from the network then exports to an external system such
+   as a message broker [I-D.ietf-nmop-yang-message-broker-integration]
+   This document specifies a YANG Model for Telemetry Collector exported
+   message, allowing it to add additional metadata for the provinance of
+   the data.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 20 July 2025.
+
+Copyright Notice
+
+   Copyright (c) 2025 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+
+
+
+
+
+
+
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 1]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   2
+   2.  YANG model  . . . . . . . . . . . . . . . . . . . . . . . . .   2
+   3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
+   5.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     5.1.  Normative References  . . . . . . . . . . . . . . . . . .  11
+     5.2.  Informative References  . . . . . . . . . . . . . . . . .  11
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  11
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  11
+
+1.  Introduction
+
+   Introductory text [REPLACE]
+
+1.1.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.  YANG model
+
+   TODO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 2]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+   module: ietf-telemetry-message
+     +--ro message
+        +--ro timestamp           yang:date-and-time
+        +--ro session-protocol    telemetry-session-protocol-type
+        +--ro node
+        |  +--ro address             inet:host
+        |  +--ro port                inet:port-number
+        |  +--ro platform-name?      string
+        |  +--ro vendor?             string
+        |  +--ro vendor-pen?         uint32
+        |  +--ro software-version?   string
+        |  +--ro software-flavor?    string
+        |  +--ro os-version?         string
+        |  +--ro os-type?            string
+        +--ro collector
+        |  +--ro address             inet:host
+        |  +--ro port                inet:port-number
+        |  +--ro platform-name?      string
+        |  +--ro vendor?             string
+        |  +--ro vendor-pen?         uint32
+        |  +--ro software-version?   string
+        |  +--ro software-flavor?    string
+        |  +--ro os-version?         string
+        |  +--ro os-type?            string
+        +--ro session-metadata
+        |  +--ro event-time    yang:date-and-time
+        +--ro metadata
+        |  +--ro labels* [name]
+        |     +--ro name       string
+        |     +--ro (value)
+        |        +--:(string-value)
+        |        |  +--ro (string-value)?
+        |        |     +--:(string-value)
+        |        |        +--ro string-value?   string
+        |        +--:(anydata-value)
+        |           +--ro (anydata-value)?
+        |              +--:(anydata-value)
+        |                 +--ro anydata-value?   anydata
+        +--ro payload?            anydata
+
+                                  Figure 1
+
+
+
+
+
+
+
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 3]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+   module: ietf-yang-push-telemetry-message
+
+     augment /tm:message/tm:session-metadata:
+       +--ro yang-push-subscription
+          +--ro id                                   sn:subscription-id
+          +--ro filters
+          |  +--ro stream-filter* [name]
+          |     +--ro name                         string
+          |     +---u sn:stream-filter-elements
+          +---u ypr:yang-push-module-version-list
+
+
+                                  Figure 2
+
+   <CODE BEGINS> file "ietf-telemetry-message@2024-02-20.yang"
+   module ietf-telemetry-message {
+     yang-version 1.1;
+     namespace "urn:ietf:params:xml:ns:yang:telemetry-message";
+     prefix tm;
+
+     import ietf-yang-types {
+       prefix yang;
+     }
+     import ietf-inet-types {
+       prefix inet;
+     }
+     import ietf-subscribed-notifications {
+       prefix sn;
+       reference
+         "RFC 8639: Subscription to YANG Notifications";
+     }
+
+     organization
+       "IETF Draft";
+     contact
+       "Author:    Ahmed Elhassany
+                   <mailto:ahmed.elhassany@swisscom.com>";
+     description
+       "This YANG modules defines a model for a telemetry collector to send
+        collected YANG data from the network.
+
+        Copyright (c) 2024 IETF Trust and the persons identified as
+          authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or without
+        modification, is permitted pursuant to, and subject to the license
+        terms contained in, the Revised BSD License set forth in Section
+        4.c of the IETF Trust's Legal Provisions Relating to IETF Documents
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 4]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+        (https://trustee.ietf.org/license-info).
+
+        This version of this YANG module is part of RFC XXXX; see the RFC
+        itself for full legal notices.";
+
+     revision 2024-02-20 {
+       description
+         "Initial revision.";
+       reference
+         "RFC XXXX";
+     }
+
+     typedef telemetry-message-event-type {
+       type enumeration {
+         enum "log" {
+           description
+             "Collector is reporting the event as it arrived from the network element";
+         }
+         enum "update" {
+           description
+             "
+              Collector has updated an entry inside its local cache.
+              This could be triggered by an event from the network for instance interface operational
+              status changed or an internal event in the collector, such as a timer triggered to
+              referesh old enteries";
+         }
+         enum "delete" {
+           description
+             "Collector has deleted an entry from its local cache";
+         }
+       }
+       description
+         "Type of event reported by the collector";
+     }
+
+     typedef telemetry-session-protocol-type {
+       type enumeration {
+         enum "netconf" {
+           description
+             "NETCONF RFC8640";
+         }
+         enum "restconf" {
+           description
+             "RESTCONF RFC8650";
+         }
+         enum "https" {
+           description
+             "HTTPS draft-ietf-netconf-https-notif";
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 5]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+         }
+         enum "udp-notif" {
+           description
+             "UDP draft-ietf-netconf-udp-notif";
+         }
+       }
+       description
+         "Session protocol used to deliver the messaget to the collector";
+     }
+
+     grouping node-information {
+       description
+         "Idenitfy a network node by its hostname/IP Address and port number.";
+       leaf address {
+         type inet:host;
+         mandatory true;
+         description
+           "Node address";
+       }
+       leaf port {
+         type inet:port-number;
+         mandatory true;
+         description
+           "Node port number";
+       }
+       leaf platform-name {
+         type string;
+         description
+           "Model of the platform from which data is collected.";
+       }
+       leaf vendor {
+         type string;
+         description
+           "Organization that implements that platform.";
+       }
+       leaf vendor-pen {
+         type uint32;
+         description
+           "Vendor''s registered Private Enterprise Number as
+            described in RFC9371";
+       }
+       leaf software-version {
+         type string;
+         description
+           "Name of the version of software. With respect to most network
+             device appliances, this will be the operating system version.
+             But for other YANG module implementation, this would be a
+             version of appliance software. Ultimately, this should
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 6]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+             correspond to a version string that will be recognizable by
+             the consumers of the platform.";
+       }
+       leaf software-flavor {
+         type string;
+         description
+           "A variation of a specific version where YANG model support
+             may be different.  Depending on the vendor, this could be a
+             license, additional software component, or a feature set.";
+       }
+       leaf os-version {
+         type string;
+         description
+           "Version of the operating system using this module. This is
+             primarily useful if the software implementing the module is
+             an application that requires a specific operating system
+             version.";
+       }
+       leaf os-type {
+         type string;
+         description
+           "Type of the operating system using this module. This is
+             primarily useful if the software implementing the module is
+             an application that requires a specific operating system
+             type.";
+       }
+     }
+
+     container message {
+       config false;
+       leaf timestamp {
+         type yang:date-and-time;
+         mandatory true;
+         description
+           "Timestamp when the collector received the message from the network element or an update or delete event is triggered";
+       }
+       leaf session-protocol {
+         type telemetry-session-protocol-type;
+         mandatory true;
+         description
+           "Protocol used to send the message from network node to the collector";
+       }
+       container node {
+         description
+           "Address of network element sent the message";
+         uses node-information;
+       }
+       container collector {
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 7]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+         description
+           "Address of the telemetry collector";
+         uses node-information;
+       }
+       container session-metadata {
+         leaf event-time {
+           type yang:date-and-time;
+           mandatory true;
+           description
+             "NETCONF eventTime.  Redefined in here since NETCONF header is XML not YANG";
+         }
+       }
+       container metadata {
+         description
+           "Collector added metadata.";
+         list labels {
+           key "name";
+           description
+             "arbiterary labels assinged by the collector";
+           leaf name {
+             type string {
+               length "1..max";
+             }
+             description
+               "label name";
+           }
+           choice value {
+             mandatory true;
+             choice string-value {
+               leaf string-value {
+                 type string;
+               }
+             }
+             choice anydata-value {
+               anydata anydata-value {
+                 description
+                   "anydata yang";
+               }
+             }
+           }
+         }
+       }
+       anydata payload {
+         description
+           "message received from network element";
+       }
+     }
+   }
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 8]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+   <CODE ENDS>
+
+                  Figure 3: Telemetry message YANG Module
+
+   <CODE BEGINS> file "ietf-telemetry-message@2024-02-20.yang"
+   module ietf-yang-push-telemetry-message {
+     yang-version 1.1;
+     namespace "urn:ietf:params:xml:ns:yang:yang-push-telemetry-message";
+     prefix yptm;
+
+     import ietf-subscribed-notifications {
+       prefix sn;
+       reference
+         "RFC 8639: Subscription to YANG Notifications";
+     }
+     import ietf-telemetry-message {
+       prefix tm;
+       reference
+         "XXX";
+     }
+     import ietf-yang-push-revision {
+       prefix ypr;
+       reference
+         "XXX";
+     }
+
+     organization
+       "IETF Draft";
+     contact
+       "Author:    Ahmed Elhassany
+                   <mailto:ahmed.elhassany@swisscom.com>";
+     description
+       "Augments the ietf-telemetry-message with YANG Push specific
+        fields.
+
+        Copyright (c) 2024 IETF Trust and the persons identified as
+          authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or without
+        modification, is permitted pursuant to, and subject to the license
+        terms contained in, the Revised BSD License set forth in Section
+        4.c of the IETF Trust's Legal Provisions Relating to IETF Documents
+        (https://trustee.ietf.org/license-info).
+
+        This version of this YANG module is part of RFC XXXX; see the RFC
+        itself for full legal notices.";
+
+     revision 2024-02-20 {
+
+
+
+Elhassany                 Expires 20 July 2025                  [Page 9]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+       description
+         "Initial revision.";
+       reference
+         "RFC XXXX";
+     }
+
+     augment "/tm:message/tm:session-metadata" {
+       container yang-push-subscription {
+         config false;
+         leaf id {
+           type sn:subscription-id;
+           mandatory true;
+           description
+             "This references the affected subscription.";
+         }
+         container filters {
+           description
+             "Contains a list of configurable filters that can be applied to
+               subscriptions.  This facilitates the reuse of complex filters
+               once defined.";
+           list stream-filter {
+             key "name";
+             description
+               "A list of preconfigured filters that can be applied to
+                 subscriptions.";
+             leaf name {
+               type string;
+               description
+                 "A name to differentiate between filters.";
+             }
+             uses sn:stream-filter-elements;
+           }
+         }
+         uses ypr:yang-push-module-version-list;
+       }
+     }
+   }
+   <CODE ENDS>
+
+                  Figure 4: Telemetry message YANG Module
+
+3.  IANA Considerations
+
+   TODO
+
+
+
+
+
+
+
+Elhassany                 Expires 20 July 2025                 [Page 10]
+
+Internet-Draft              Abbreviated Title               January 2025
+
+
+4.  Security Considerations
+
+   TODO
+
+5.  References
+
+5.1.  Normative References
+
+   [RFC9232]  Song, H., Qin, F., Martinez-Julia, P., Ciavaglia, L., and
+              A. Wang, "Network Telemetry Framework", RFC 9232,
+              DOI 10.17487/RFC9232, May 2022,
+              <https://www.rfc-editor.org/info/rfc9232>.
+
+   [I-D.ietf-nmop-yang-message-broker-integration]
+              Graf, T. and A. Elhassany, "An Architecture for YANG-Push
+              to Message Broker Integration", Work in Progress,
+              Internet-Draft, draft-ietf-nmop-yang-message-broker-
+              integration-05, 19 October 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              yang-message-broker-integration-05>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+5.2.  Informative References
+
+Acknowledgements
+
+   TODO
+
+Author's Address
+
+   Ahmed Elhassany
+   Swisscom
+   Binzring 17
+   CH- Zuerich 8045
+   Switzerland
+   Email: ahmed.elhassany@swisscom.com
+
+
+
+
+
+
+
+Elhassany                 Expires 20 July 2025                 [Page 11]

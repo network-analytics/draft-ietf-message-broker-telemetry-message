@@ -9,6 +9,11 @@ module ietf-telemetry-message {
   import ietf-inet-types {
     prefix inet;
   }
+  import ietf-subscribed-notifications {
+    prefix sn;
+    reference
+      "RFC 8639: Subscription to YANG Notifications";
+  }
 
   organization
     "IETF Draft";
@@ -99,15 +104,59 @@ module ietf-telemetry-message {
       description
         "Node port number";
     }
+    leaf platform-name {
+      type string;
+      description
+        "Model of the platform from which data is collected.";
+    }
+    leaf vendor {
+      type string;
+      description
+        "Organization that implements that platform.";
+    }
+    leaf vendor-pen {
+      type uint32;
+      description
+        "Vendor''s registered Private Enterprise Number as
+         described in RFC9371";
+    }
+    leaf software-version {
+      type string;
+      description
+        "Name of the version of software. With respect to most network
+          device appliances, this will be the operating system version.
+          But for other YANG module implementation, this would be a
+          version of appliance software. Ultimately, this should
+          correspond to a version string that will be recognizable by
+          the consumers of the platform.";
+    }
+    leaf software-flavor {
+      type string;
+      description
+        "A variation of a specific version where YANG model support
+          may be different.  Depending on the vendor, this could be a
+          license, additional software component, or a feature set.";
+    }
+    leaf os-version {
+      type string;
+      description
+        "Version of the operating system using this module. This is
+          primarily useful if the software implementing the module is
+          an application that requires a specific operating system
+          version.";
+    }
+    leaf os-type {
+      type string;
+      description
+        "Type of the operating system using this module. This is
+          primarily useful if the software implementing the module is
+          an application that requires a specific operating system
+          type.";
+    }
   }
 
   container message {
-    leaf event-type {
-      type telemetry-message-event-type;
-      mandatory true;
-      description
-        "Event type reported by the collector";
-    }
+    config false;
     leaf timestamp {
       type yang:date-and-time;
       mandatory true;
@@ -120,28 +169,22 @@ module ietf-telemetry-message {
       description
         "Protocol used to send the message from network node to the collector";
     }
-    container network-node {
+    container node {
       description
         "Address of network element sent the message";
       uses node-information;
     }
-    container collector-node {
+    container collector {
       description
         "Address of the telemetry collector";
       uses node-information;
-    }
-    leaf collector-version {
-      type string;
-      mandatory true;
-      description
-        "Collector software version";
     }
     container session-metadata {
       leaf event-time {
         type yang:date-and-time;
         mandatory true;
         description
-          "NETCONF eventTime";
+          "NETCONF eventTime.  Redefined in here since NETCONF header is XML not YANG";
       }
     }
     container metadata {

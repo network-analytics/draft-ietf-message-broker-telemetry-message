@@ -1,19 +1,34 @@
 {
   "ietf-telemetry-message:message": {
-    "event-type": "log",
     "timestamp": "2024-02-14T12:10:10.12+01:00",
     "session-protocol": "netconf",
-    "network-node": {
-      "address": "192.168.1.1",
-      "port": 123
-    },
-    "collector-node": {
+    "node": {
       "address": "127.0.0.1",
-      "port": 123
+      "port": 123,
+      "platform-name": "core",
+      "vendor": "open source",
+      "software-version": "1.1.2"
     },
-    "collector-version": "0.0.1",
+    "collector": {
+      "address": "127.0.0.1",
+      "port": 4566,
+      "platform-name": "telemetery",
+      "vendor": "open source",
+      "software-version": "2.1.0"
+    },
     "session-metadata": {
-      "event-time": "2024-02-14T12:10:10.10+01:00"
+      "event-time": "2024-02-14T12:10:10.10+01:00",
+      "ietf-yang-push-telemetry-message:yang-push-subscription": {
+        "id": 123,
+        "filters": {
+          "stream-filter": [
+            {
+              "name": "first-fitler",
+              "stream-xpath-filter": "/some/tree"
+            }
+          ]
+        }
+      }
     },
     "metadata": {
       "labels": [
@@ -26,7 +41,6 @@
     "payload": {
       "ietf-yang-push:push-update": {
         "id": 89,
-        "ietf-yang-push-netobs-timestamping:observation-time": "2023-02-04T16:30:09.44Z",
         "datastore-contents": {
           "ietf-interfaces:interfaces": {
             "interface": [
