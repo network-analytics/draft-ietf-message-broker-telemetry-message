@@ -8,8 +8,8 @@ Intended status: Informational                          28 February 2025
 Expires: 1 September 2025
 
 
-                               Yang Data
-                 draft-aelhassany-telemetry-msg-00.xml
+           Extensible YANG Model for Telemetry Notifications
+          draft-netana-message-broker-telemetry-message-00.xml
 
 Abstract
 
@@ -55,7 +55,7 @@ Copyright Notice
 
 Elhassany               Expires 1 September 2025                [Page 1]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -111,7 +111,7 @@ Table of Contents
 
 Elhassany               Expires 1 September 2025                [Page 2]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
    This document defined a standard YANG envelope message to carry
@@ -167,7 +167,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025                [Page 3]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
    module: ietf-telemetry-message
@@ -223,7 +223,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025                [Page 4]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
    module: ietf-yang-push-telemetry-message
@@ -279,7 +279,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025                [Page 5]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
         (https://trustee.ietf.org/license-info).
@@ -335,7 +335,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025                [Page 6]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
              "HTTPS draft-ietf-netconf-https-notif";
@@ -391,7 +391,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025                [Page 7]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
              version of appliance software. Ultimately, this should
@@ -447,7 +447,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025                [Page 8]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
          uses node-information;
@@ -503,7 +503,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025                [Page 9]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
            "message received from network element";
@@ -559,7 +559,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025               [Page 10]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
         This version of this YANG module is part of RFC XXXX; see the RFC
@@ -615,7 +615,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025               [Page 11]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
 3.  IANA Considerations
@@ -671,7 +671,7 @@ Internet-Draft              Abbreviated Title              February 2025
 
 Elhassany               Expires 1 September 2025               [Page 12]
 
-Internet-Draft              Abbreviated Title              February 2025
+Internet-Draft              Telmetery Message              February 2025
 
 
    [Deh22]    Dehghani, Z., "Data Mesh", O'Reilly Media,

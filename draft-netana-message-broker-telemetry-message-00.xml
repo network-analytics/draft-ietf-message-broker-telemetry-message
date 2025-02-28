@@ -11,16 +11,19 @@
 ]>
 <!-- If further character entities are required then they should be added to the DOCTYPE above.
      Use of an external entity file is not recommended. -->
-<rfc category="info" docName="draft-aelhassany-telemetry-msg-00.xml"
+<rfc category="info"
+     docName="draft-netana-message-broker-telemetry-message-00.xml"
      ipr="trust200902" obsoletes="" submissionType="IETF" updates=""
      version="3" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude"
      xmlns:ns2="http://www.w3.org/2000/svg"
      xmlns:ns="http://www.w3.org/1999/xlink">
   <front>
-    <title abbrev="Abbreviated Title">Yang Data</title>
+    <title
+    abbrev="Telmetery Message">Extensible YANG Model for Telemetry
+     Notifications</title>
 
     <seriesInfo name="Internet-Draft"
-                value="draft-aelhassany-telemetry-msg-00.xml"/>
+                value="draft-netana-message-broker-telemetry-message-00.xml"/>
 
     <author fullname="Ahmed Elhassany" initials="A" surname="Elhassany">
       <organization>Swisscom</organization>
