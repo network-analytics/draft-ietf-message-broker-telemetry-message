@@ -114,9 +114,33 @@
     <section>
       <name>YANG model</name>
 
-      <t>TODO</t>
+      <t>This document defines an envelope message to share YANG messages via
+      message brokers in a Data Mesh architecture. This telemetry message
+      wraps the raw YANG data from the network and adds four metadata
+      categories.</t>
 
-      <figure>
+      <t>The first category is provenance information about the node that sent
+      the YANG message to the collector. This category adds fields such as the
+      node name, address, and software version to the message.</t>
+
+      <t>The second category is provenance information about the collector.
+      The data type is the same as the first category but specific to the
+      collector node.</t>
+
+      <t>The third category is session information about the session between
+      the collector and the network node. This category adds fields such as
+      the session protocol used and the time the event was generated in the
+      network node. Moreover, this document defines an extension specific to
+      YANG-Push that includes information about the YANG-Push
+      subscription.</t>
+
+      <t>The fourth category is operator-specific metadata. Some operators
+      might want to enrich the collected data with specific information—for
+      instance, the peering AS Number and the name of the data collection
+      side. For this purpose, the document defines a generic metadata map of
+      key/values that can be used freely by the network operators.</t>
+
+      <figure title="ietf-telemetry-message tree">
         <artwork><![CDATA[
 module: ietf-telemetry-message
   +--ro message
@@ -230,15 +254,16 @@ module ietf-telemetry-message {
     type enumeration {
       enum "log" {
         description
-          "Collector is reporting the event as it arrived from the network element";
+          "Collector is reporting the event as it arrived from
+            the network element";
       }
       enum "update" {
         description
-          "
-           Collector has updated an entry inside its local cache.
-           This could be triggered by an event from the network for instance interface operational
-           status changed or an internal event in the collector, such as a timer triggered to
-           referesh old enteries";
+          "Collector has updated an entry inside its local cache.
+            This could be triggered by an event from the network for
+            instance interface operational status changed or an internal 
+            event in the collector, such as a timer triggered to referesh
+            old enteries";
       }
       enum "delete" {
         description
@@ -344,13 +369,15 @@ module ietf-telemetry-message {
       type yang:date-and-time;
       mandatory true;
       description
-        "Timestamp when the collector received the message from the network element or an update or delete event is triggered";
+        "Timestamp when the collector received the message from the network
+          element or an update or delete event is triggered";
     }
     leaf session-protocol {
       type telemetry-session-protocol-type;
       mandatory true;
       description
-        "Protocol used to send the message from network node to the collector";
+        "Protocol used to send the message from network node to
+          the collector";
     }
     container node {
       description
@@ -367,7 +394,8 @@ module ietf-telemetry-message {
         type yang:date-and-time;
         mandatory true;
         description
-          "NETCONF eventTime.  Redefined in here since NETCONF header is XML not YANG";
+          "NETCONF eventTime. Redefined in here since NETCONF header is XML
+            not YANG";
       }
     }
     container metadata {
@@ -412,7 +440,10 @@ module ietf-telemetry-message {
 
     <figure>
   <name>Telemetry message YANG Module</name>
-  <sourcecode markers="true" name="ietf-telemetry-message@2024-02-20.yang" type="yang">
+  <sourcecode
+    markers="true"
+    name="ietf-telemetry-message@2024-02-20.yang"
+    type="yang">
 module ietf-yang-push-telemetry-message {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:yang-push-telemetry-message";
