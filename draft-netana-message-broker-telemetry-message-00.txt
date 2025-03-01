@@ -2,24 +2,22 @@
 
 
 
-NETCONF                                                     A. Elhassany
-Internet-Draft                                                  Swisscom
-Intended status: Informational                          28 February 2025
-Expires: 1 September 2025
+NMOP                                                        A. Elhassany
+Internet-Draft                                                   T. Graf
+Intended status: Informational                                  Swisscom
+Expires: 2 September 2025                                   1 March 2025
 
 
-           Extensible YANG Model for Telemetry Notifications
+       Extensible YANG Model for Network Telemetry Notifications
           draft-netana-message-broker-telemetry-message-00.xml
 
 Abstract
 
-   A YANG Telemetry Collector as defined in [RFC9232] and,
-   [I-D.ietf-nmop-yang-message-broker-integration] collects YANG
-   information from the network then exports to an external system such
-   as a message broker [I-D.ietf-nmop-yang-message-broker-integration]
-   This document specifies a YANG Model for Telemetry Collector exported
-   message, allowing it to add additional metadata for the provinance of
-   the data.
+   This document defines an extensible message schema in YANG to be used
+   at the data collection for transforming Network Telemetry
+   notifications into external systems such as message brokers.  The
+   extensible message schema enables a data collection to add metadata
+   for the provinance of the operational network data.
 
 Status of This Memo
 
@@ -36,27 +34,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2025.
+   This Internet-Draft will expire on 2 September 2025.
 
 Copyright Notice
 
    Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
-
-
-
-
-
-
-
-
-
-
-
-Elhassany               Expires 1 September 2025                [Page 1]
-
-Internet-Draft              Telmetery Message              February 2025
-
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
@@ -67,56 +50,95 @@ Internet-Draft              Telmetery Message              February 2025
    described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Revised BSD License.
 
+
+
+
+Elhassany & Graf        Expires 2 September 2025                [Page 1]
+
+Internet-Draft              Telmetery Message                 March 2025
+
+
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
-   2.  YANG model  . . . . . . . . . . . . . . . . . . . . . . . . .   3
-   3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  12
-   5.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
-     5.1.  Normative References  . . . . . . . . . . . . . . . . . .  12
-     5.2.  Informative References  . . . . . . . . . . . . . . . . .  12
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  13
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  13
+   2.  YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  13
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
+   5.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
+     5.1.  Normative References  . . . . . . . . . . . . . . . . . .  13
+     5.2.  Informative References  . . . . . . . . . . . . . . . . .  14
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  14
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
 
 1.  Introduction
 
-   Network operators increasingly use YANG [RFC7950] to configure their
-   networks, query the latest state of their network, and subscribe via
-   YANG-Push [RFC8639] to network changes.  Moreover, more network
-   operators organize their data in a Data Mesh [Deh22] architecture and
-   exchange network data via message brokers such as Apache Kafka
-   [Kaf11] or RabbitMQ [Rab07].
+   Nowadays network operators are using machine and human readable YANG
+   [RFC7950] to model their configurations and obtain YANG modelled
+   operational data from their networks.
+
+   Network operators organize their data in a Data Mesh [Deh22] where a
+   message broker such as Apache Kafka [Kaf11] or RabbitMQ [Rab07]
+   facilitates the exchange of messages among data processing
+   components.
+
+   Today, subscribing to a YANG datastore, publishing a YANG modeled
+   notifications message from the network and viewing the data in a time
+   series database, manual labor is needed to perform data
+   transformation to make a message broker and its data processing
+   components with YANG notifications interoperable.
+
+   Even though YANG is intented to ease data management, this promise
+   has not yet been fulfilled for Network Telemetry [RFC9232].
 
    An Architecture for YANG-Push to Message Broker Integration
-   [I-D.ietf-nmop-yang-message-broker-integration] puts forward an
-   architecture for integrating YANG with message brokers in a Data Mesh
-   architecture, and Network Telemetry Framework [RFC9232] defines the
-   architecture of YANG telemetry collectors.  However, the messages a
-   YANG telemetry collector sends to message brokers are not specified.
-   A YANG telemetry collector can push the messages it received from the
-   network as-is to their organization's standard message broker.
-   However, this approach is insufficient for correct human and
-   automated understanding of the data generated by the network.  This
-   insufficiency stems from not presenting a complete picture along with
-   the data generated by the network.  In particular, when a data
-   consumer in the data mesh consumes a YANG message from their
-   organization's message broker, they cannot answer simple questions
-   such as: who produced the data?  Who collected the data?  When did
-   the collector receive the data?  And what additional metadata are
-   necessary for a consumer to make sense of the data?
+   [I-D.ietf-nmop-yang-message-broker-integration] defined an
+   architecture for integrating YANG-Push with message brokers for a
+   Data Mesh architecture.  How the notification messages at a YANG-Push
+   receiver is being transformed to the message broker is being
+   described in Section Section 4.5 of
+   [I-D.ietf-nmop-yang-message-broker-integration], however the produced
+   message format left unspecified.
 
 
 
-Elhassany               Expires 1 September 2025                [Page 2]
+
+
+
+
+
+
+
+Elhassany & Graf        Expires 2 September 2025                [Page 2]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
-   This document defined a standard YANG envelope message to carry
-   provenance and metadata information for YANG data exchanged via
-   message brokers in a Data Mesh architecture.
+   The message could be published as it was received from the network to
+   their organization's message broker.  However, this approach is
+   insufficient for correct human and automated understanding of the
+   data generated by the network.  This insufficiency stems from not
+   presenting a holistic picture along with the data generated by the
+   network.  In particular, when a data consumer in the data mesh
+   consumes a YANG message from their organization's message broker,
+   they cannot answer simple questions such as:
+
+   *  Which network operating system collected the data?
+
+   *  To which network platform belongs the network node?
+
+   *  What is the subscribed xpath, sub-tree filter and its schema
+      reference?
+
+   *  When did the data collection received the data?
+
+   *  What additional metadata is necessary for a consumer to make sense
+      of the data?
+
+   This document defines a standard YANG envelope message to carry with
+   the collected Network Telemetry notifications the provenance and
+   metadata information for a YANG data exchanged in message brokers for
+   a Data Mesh architecture.
 
 1.1.  Requirements Language
 
@@ -126,48 +148,82 @@ Internet-Draft              Telmetery Message              February 2025
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  YANG model
+   The terms "subscriber", "publisher", and "receiver" are used as
+   defined in [RFC8639].
 
-   This document defines an envelope message to share YANG messages via
-   message brokers in a Data Mesh architecture.  This telemetry message
-   wraps the raw YANG data from the network and adds four metadata
-   categories.
+   In addition, this document reuses the terms defined in
+   [I-D.netana-netconf-notif-envelope] for the use in message broker
+   enviroment:
 
-   The first category is provenance information about the node that sent
-   the YANG message to the collector.  This category adds fields such as
-   the node name, address, and software version to the message.
+   Notification Metadata: Additional data describing the context of a
+   notification that is sent in each message, e.g. which node generated
+   the messsage or at which time the notification was published.
 
-   The second category is provenance information about the collector.
-   The data type is the same as the first category but specific to the
-   collector node.
-
-   The third category is session information about the session between
-   the collector and the network node.  This category adds fields such
-   as the session protocol used and the time the event was generated in
-   the network node.  Moreover, this document defines an extension
-   specific to YANG-Push that includes information about the YANG-Push
-   subscription.
-
-   The fourth category is operator-specific metadata.  Some operators
-   might want to enrich the collected data with specific information—for
-   instance, the peering AS Number and the name of the data collection
-   side.  For this purpose, the document defines a generic metadata map
-   of key/values that can be used freely by the network operators.
+   Notification Envelope: YANG structure encapsulating the payload of a
+   notification, allowing the inclusion of metadata.
 
 
 
 
-
-
-
-
-
-
-
-
-Elhassany               Expires 1 September 2025                [Page 3]
+Elhassany & Graf        Expires 2 September 2025                [Page 3]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
+
+
+2.  YANG Module
+
+   The extensible YANG module for Network Telemetry notifications
+   defines an envelope message schema which adds four metadata
+   categories to the collected Network Telemetry notifications.
+
+   Network Node Provenance:  Is the provenance information about the
+      network node that published YANG notifications to the receiver.
+      This category adds metadata such as the node name, address, and
+      software version to the message.
+
+   Data Collection Provenance:  Is the provenance information about the
+      data collection.  The data type is the same as the first category
+      but specific to the collector node.
+
+   Data Collection Protocol Provenance:  Is the session information
+      about the session between the collector and the network node.
+      This category adds fields such as the session protocol and the
+      time the event was generated in the network node.  Moreover, this
+      document defines an extension specific to YANG-Push that includes
+      YANG-Push subscription information.
+
+   Network Operator Provenance:  Is the operator specific metadata.
+      Some operators enrich the collected data with specific
+      information.  For instance: type of the network node (MPLS
+      provider or provider edge node) or which operational unit the node
+      is operated by.  For this purpose the document defines a generic
+      metadata map with key/values that can be used freely by the
+      network operator.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Elhassany & Graf        Expires 2 September 2025                [Page 4]
+
+Internet-Draft              Telmetery Message                 March 2025
 
 
    module: ietf-telemetry-message
@@ -221,9 +277,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025                [Page 4]
+Elhassany & Graf        Expires 2 September 2025                [Page 5]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
    module: ietf-yang-push-telemetry-message
@@ -277,9 +333,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025                [Page 5]
+Elhassany & Graf        Expires 2 September 2025                [Page 6]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
         (https://trustee.ietf.org/license-info).
@@ -333,9 +389,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025                [Page 6]
+Elhassany & Graf        Expires 2 September 2025                [Page 7]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
              "HTTPS draft-ietf-netconf-https-notif";
@@ -389,9 +445,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025                [Page 7]
+Elhassany & Graf        Expires 2 September 2025                [Page 8]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
              version of appliance software. Ultimately, this should
@@ -445,9 +501,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025                [Page 8]
+Elhassany & Graf        Expires 2 September 2025                [Page 9]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
          uses node-information;
@@ -501,9 +557,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025                [Page 9]
+Elhassany & Graf        Expires 2 September 2025               [Page 10]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
            "message received from network element";
@@ -557,9 +613,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025               [Page 10]
+Elhassany & Graf        Expires 2 September 2025               [Page 11]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
         This version of this YANG module is part of RFC XXXX; see the RFC
@@ -613,9 +669,9 @@ Internet-Draft              Telmetery Message              February 2025
 
 
 
-Elhassany               Expires 1 September 2025               [Page 11]
+Elhassany & Graf        Expires 2 September 2025               [Page 12]
 
-Internet-Draft              Telmetery Message              February 2025
+Internet-Draft              Telmetery Message                 March 2025
 
 
 3.  IANA Considerations
@@ -652,9 +708,27 @@ Internet-Draft              Telmetery Message              February 2025
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               yang-message-broker-integration-06>.
 
+   [I-D.netana-netconf-notif-envelope]
+              Feng, A. H., Francois, P., Graf, T., and B. Claise,
+              "Extensible YANG Model for YANG-Push Notifications", Work
+              in Progress, Internet-Draft, draft-netana-netconf-notif-
+              envelope-02, 28 January 2025,
+              <https://datatracker.ietf.org/doc/html/draft-netana-
+              netconf-notif-envelope-02>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+
+
+
+
+
+Elhassany & Graf        Expires 2 September 2025               [Page 13]
+
+Internet-Draft              Telmetery Message                 March 2025
+
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -662,17 +736,6 @@ Internet-Draft              Telmetery Message              February 2025
               <https://www.rfc-editor.org/info/rfc2119>.
 
 5.2.  Informative References
-
-
-
-
-
-
-
-Elhassany               Expires 1 September 2025               [Page 12]
-
-Internet-Draft              Telmetery Message              February 2025
-
 
    [Deh22]    Dehghani, Z., "Data Mesh", O'Reilly Media,
               ISBN 9781492092391, March 2022,
@@ -689,7 +752,7 @@ Acknowledgements
 
    TODO
 
-Author's Address
+Authors' Addresses
 
    Ahmed Elhassany
    Swisscom
@@ -699,6 +762,14 @@ Author's Address
    Email: ahmed.elhassany@swisscom.com
 
 
+   Thomas Graf
+   Swisscom
+   Binzring 17
+   CH- Zuerich 8045
+   Switzerland
+   <facsimile>:
+          
+   Email: thomas.graf@swisscom.com
 
 
 
@@ -710,19 +781,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Elhassany               Expires 1 September 2025               [Page 13]
+Elhassany & Graf        Expires 2 September 2025               [Page 14]
