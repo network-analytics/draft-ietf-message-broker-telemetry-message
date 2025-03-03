@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<?xml-model href="rfc7991bis.rnc"?>
-<!-- Required for schema validation and schema-aware editing -->
-<!-- <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?> -->
-<!-- This third-party XSLT can be enabled for direct transformations in XML processors, including most browsers -->
-<!DOCTYPE rfc [
-<!ENTITY nbsp "&#160;">
-<!ENTITY zwsp "&#8203;">
-<!ENTITY nbhy "&#8209;">
-<!ENTITY wj "&#8288;">
-]>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rfc>
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
 <!-- If further character entities are required then they should be added to the DOCTYPE above.
      Use of an external entity file is not recommended. -->
 <rfc category="info"
@@ -66,8 +67,6 @@
         </postal>
 
         <phone/>
-
-        <facsimile/>
 
         <email>thomas.graf@swisscom.com</email>
 
@@ -274,7 +273,7 @@ module: ietf-telemetry-message
         ]]></artwork>
       </figure>
 
-<figure>
+<figure title="ietf-yang-push-telemetry-message tree">
   <artwork>
 <![CDATA[
 module: ietf-yang-push-telemetry-message
@@ -294,7 +293,7 @@ module: ietf-yang-push-telemetry-message
 <figure>
   <name>Telemetry message YANG Module</name>
   <sourcecode markers="true"
-    name="ietf-yang-push-telemetry-message@2024-02-20.yang" type="yang">
+    name="ietf-yang-push-telemetry-message@2024-02-20.yang" type="yang"><![CDATA[
 module ietf-telemetry-message {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:telemetry-message";
@@ -614,7 +613,7 @@ module ietf-yang-push-telemetry-message {
     }
   }
 }
-  </sourcecode>
+  ]]></sourcecode>
   </figure>
     </section>
 
