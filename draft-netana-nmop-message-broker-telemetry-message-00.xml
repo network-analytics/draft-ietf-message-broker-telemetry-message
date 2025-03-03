@@ -12,7 +12,7 @@
 <!-- If further character entities are required then they should be added to the DOCTYPE above.
      Use of an external entity file is not recommended. -->
 <rfc category="info"
-     docName="draft-netana-message-broker-telemetry-message-00.xml"
+     docName="draft-netana-nmop-message-broker-telemetry-message-00"
      ipr="trust200902" obsoletes="" submissionType="IETF" updates=""
      version="3" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude"
      xmlns:ns2="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@
      Notifications</title>
 
     <seriesInfo name="Internet-Draft"
-                value="draft-netana-message-broker-telemetry-message-00.xml"/>
+                value="draft-netana-nmop-message-broker-telemetry-message-00"/>
 
     <author fullname="Ahmed Elhassany" initials="A" surname="Elhassany">
       <organization>Swisscom</organization>
@@ -88,7 +88,7 @@
 	  be used at the data collection for transforming Network Telemetry
 	  notifications into external systems such as message brokers.
 	  The extensible message schema enables a data collection to add
-	  metadata for the provinance of the operational network data.</t>
+	  metadata for the provenance of the operational network data.</t>
     </abstract>
   </front>
 
@@ -532,7 +532,7 @@ module ietf-telemetry-message {
   <name>Telemetry message YANG Module</name>
   <sourcecode
     markers="true"
-    name="ietf-telemetry-message@2024-02-20.yang"
+    name="ietf-yang-push-telemetry-message@2024-02-20.yang"
     type="yang">
 module ietf-yang-push-telemetry-message {
   yang-version 1.1;

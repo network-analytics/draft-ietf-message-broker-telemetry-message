@@ -9,7 +9,7 @@ Expires: 2 September 2025                                   1 March 2025
 
 
        Extensible YANG Model for Network Telemetry Notifications
-          draft-netana-message-broker-telemetry-message-00.xml
+         draft-netana-nmop-message-broker-telemetry-message-00
 
 Abstract
 
@@ -17,7 +17,7 @@ Abstract
    at the data collection for transforming Network Telemetry
    notifications into external systems such as message brokers.  The
    extensible message schema enables a data collection to add metadata
-   for the provinance of the operational network data.
+   for the provenance of the operational network data.
 
 Status of This Memo
 
@@ -570,7 +570,7 @@ Internet-Draft              Telmetery Message                 March 2025
 
                   Figure 3: Telemetry message YANG Module
 
-   <CODE BEGINS> file "ietf-telemetry-message@2024-02-20.yang"
+   <CODE BEGINS> file "ietf-yang-push-telemetry-message@2024-02-20.yang"
    module ietf-yang-push-telemetry-message {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:yang-push-telemetry-message";
