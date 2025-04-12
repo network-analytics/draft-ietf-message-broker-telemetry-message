@@ -638,6 +638,8 @@ module ietf-yang-push-telemetry-message {
         <li>XML: N/A; the requested URI is an XML namespace.</li>
       </ul>
 
+			<t/>
+
       <ul>
         <li>URI: urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message</li>
         <li>Registrant Contact: The IESG.</li>
@@ -654,6 +656,8 @@ module ietf-yang-push-telemetry-message {
         <li>Prefix: tm</li>
         <li>Reference: RFC XXXX</li>
       </ul>
+
+			<t/>
 
       <ul>
         <li>Name: ietf-yang-push-telemetry-message</li>

@@ -65,7 +65,7 @@ Table of Contents
    2.  YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   4
    3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  13
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
-   5.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
+   5.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
      5.1.  Normative References  . . . . . . . . . . . . . . . . . .  14
      5.2.  Informative References  . . . . . . . . . . . . . . . . .  14
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  15
@@ -687,6 +687,7 @@ Internet-Draft              Telmetery Message                 April 2025
 
    *  XML: N/A; the requested URI is an XML namespace.
 
+
    *  URI: urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message
 
    *  Registrant Contact: The IESG.
@@ -704,6 +705,7 @@ Internet-Draft              Telmetery Message                 April 2025
 
    *  Reference: RFC XXXX
 
+
    *  Name: ietf-yang-push-telemetry-message
 
    *  Namespace: urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-
@@ -720,8 +722,6 @@ Internet-Draft              Telmetery Message                 April 2025
    Following the guidance in Section 3.7 of
    [I-D.ietf-netmod-rfc8407bis], the YANG security template is not used.
 
-5.  References
-
 
 
 
@@ -729,6 +729,8 @@ Elhassany & Graf         Expires 14 October 2025               [Page 13]
 
 Internet-Draft              Telmetery Message                 April 2025
 
+
+5.  References
 
 5.1.  Normative References
 
@@ -776,8 +778,6 @@ Internet-Draft              Telmetery Message                 April 2025
               <https://www.rfc-editor.org/info/rfc2119>.
 
 5.2.  Informative References
-
-
 
 
 
