@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="08" month="April" year="2025"/>
+    <date day="12" month="April" year="2025"/>
 
     <area>General</area>
 
@@ -229,13 +229,17 @@
       operator.</dd>
         </dl>
 
-      <figure title="ietf-telemetry-message tree">
-        <artwork><![CDATA[
+      <figure anchor="ietf-telemetry-message-tree"
+			title="YANG tree diagram for 'ietf-telemetry-message' module.">
+      
+<sourcecode type="yangtree"><![CDATA[
 module: ietf-telemetry-message
-  +--ro message
-     +--ro timestamp                     yang:date-and-time
-     +--ro session-protocol
-     |       telemetry-session-protocol-type
+  +--ro notification
+     +--ro timestamp                          yang:date-and-time
+     +--ro notification-protocol
+     |       telemetry-notification-protocol-type
+     +--ro transport-protocol
+     |       telemetry-transport-protocol-type
      +--ro network-node-manifest
      |  +--ro name?               string
      |  +--ro vendor?             string
@@ -252,7 +256,7 @@ module: ietf-telemetry-message
      |  +--ro software-flavor?    string
      |  +--ro os-version?         string
      |  +--ro os-type?            string
-     +--ro telemetry-session-metadata
+     +--ro telemetry-notification-metadata
      |  +--ro event-time    yang:date-and-time
      +--ro data-collection-metadata
      |  +--ro remote-address    inet:host
@@ -270,16 +274,15 @@ module: ietf-telemetry-message
      |           +--ro (anydata-value)?
      |              +--:(anydata-values)
      |                 +--ro anydata-values?   <anydata>
-     +--ro payload?                      <anydata>
-        ]]></artwork>
-      </figure>
+     +--ro payload?                           <anydata>
+]]></sourcecode></figure>
 
 <figure title="ietf-yang-push-telemetry-message tree">
   <artwork>
 <![CDATA[
 module: ietf-yang-push-telemetry-message
 
-  augment /tm:message/tm:telemetry-session-metadata:
+  augment /tm:notification/tm:telemetry-notification-metadata:
     +--ro yang-push-subscription
        +--ro id?               sn:subscription-id
        +--ro filters
@@ -296,14 +299,15 @@ module: ietf-yang-push-telemetry-message
           +--ro module-name       yang:yang-identifier
           +--ro revision          rev:revision-date
           +--ro revision-label?   ysver:version
-]]>
-  </artwork>
+]]></artwork>
 </figure>
 
-<figure>
-  <name>Telemetry Message YANG Module</name>
-  <sourcecode markers="true"
-    name="ietf-telemetry-message@2024-04-08.yang" type="yang"><![CDATA[
+
+      <figure anchor="ietf-telemetry-message-module"
+			title="YANG 'ietf-telemetry-message' module.">
+			
+<sourcecode name="ietf-telemetry-message@2025-04-12.yang" type="yang"
+markers="true"><![CDATA[
 module ietf-telemetry-message {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:telemetry-message";
@@ -346,28 +350,28 @@ module ietf-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2024-04-08 {
+  revision 2025-04-12 {
     description
       "Initial revision.";
     reference
       "RFC XXXX";
   }
 
-  typedef telemetry-message-event-type {
+  typedef telemetry-notification-event-type {
     type enumeration {
       enum log {
         description
           "Collector is reporting the event as it arrived from the
-          network element.";
+                \t\t\tnetwork element.";
       }
       enum update {
         description
           "
            Collector has updated an entry inside its local cache.
            This could be triggered by an event from the network for
-           instance interface operational status changed or an internal
-           event in the collector, such as a timer triggered to
-           referesh old enteries.";
+                \t\t\t instance interface operational status changed or an internal
+                \t\t\t event in the collector, such as a timer triggered to referesh
+                \t\t\t old enteries.";
       }
       enum delete {
         description
@@ -378,62 +382,98 @@ module ietf-telemetry-message {
       "Type of event reported by the collector.";
   }
 
-  typedef telemetry-session-protocol-type {
+  typedef telemetry-notification-protocol-type {
     type enumeration {
       enum netconf {
         description
-          "NETCONF RFC8640.";
+          "NETCONF RFC 8640.";
       }
       enum restconf {
         description
-          "RESTCONF RFC8650.";
+          "RESTCONF RFC 8650.";
       }
-      enum https {
+      enum yp-configured {
         description
-          "HTTPS draft-ietf-netconf-https-notif.";
+          "YANG-Push Configured Subscription.";
       }
-      enum udp-notif {
+      enum yp-dynamic {
         description
-          "UDP draft-ietf-netconf-udp-notif.";
+          "YANG-Push Dynamic Subscription.";
       }
     }
     description
-      "Session protocol used to deliver the messaget to the collector.";
+      "Notification protocol used to deliver the notification to the
+       data collection.";
   }
 
-  container message {
+  typedef telemetry-transport-protocol-type {
+    type enumeration {
+      enum ssh {
+        description
+          "SSH RFC 4253. Being used as transport in NETCONF RFC 8640.";
+      }
+      enum http {
+        description
+          "HTTP RFC 7231. Being used as transport in RESTCONF
+           RFC 8650.";
+      }
+      enum udp-notif {
+        description
+          "draft-ietf-netconf-udp-notif, Being used as transport in
+           YANG-Push Configured Subscription.";
+      }
+      enum https-notif {
+        description
+          "draft-ietf-netconf-https-notif, Being used as transport in
+           YANG-Push Configured Subscription.";
+      }
+    }
+    description
+      "Transport protocol used to deliver the notification to the
+       data collection.";
+  }
+
+  container notification {
     config false;
     leaf timestamp {
       type yang:date-and-time;
       mandatory true;
       description
-        "Timestamp when the collector received the message from the
-        network element or an update or delete event is triggered.";
+        "Timestamp when the data collection received the notification
+                \t\tfrom the network element or an update or delete event is
+                \t\ttriggered.";
     }
-    leaf session-protocol {
-      type telemetry-session-protocol-type;
+    leaf notification-protocol {
+      type telemetry-notification-protocol-type;
       mandatory true;
       description
-        "Protocol used to send the message from network node to the
-        collector.";
+        "Notification protocol used to send the notification from
+         network node to the data collection.";
+    }
+    leaf transport-protocol {
+      type telemetry-transport-protocol-type;
+      mandatory true;
+      description
+        "Transport protocol used to send the notification from network
+         node to the data collection.";
     }
     container network-node-manifest {
       description
-        "Address of network element sent the message.";
+        "Address of network element sent the notification.";
       uses p-mf:platform-details;
     }
     container data-collection-manifest {
       description
-        "Address of the telemetry collector.";
+        "Address of the telemetry data collection.";
       uses p-mf:platform-details;
     }
-    container telemetry-session-metadata {
+    container telemetry-notification-metadata {
       leaf event-time {
         type yang:date-and-time;
         mandatory true;
         description
           "NETCONF eventTime. Redefined in here since NETCONF header is
-          XML not YANG.";
+           XML not YANG.";
       }
     }
     container data-collection-metadata {
@@ -493,14 +533,14 @@ module ietf-telemetry-message {
     }
   }
 }
-  ]]></sourcecode>
+]]></sourcecode>
 </figure>
-<figure>
-  <name>YANG-Push Telemetry Message Augment YANG Module</name>
-  <sourcecode
-    markers="true"
-    name="ietf-yang-push-telemetry-message@2024-04-08.yang"
-    type="yang"><![CDATA[
+
+      <figure anchor="ietf-yang-push-telemetry-message"
+			title="YANG 'ietf-yang-push-telemetry-message' module.">
+			
+<sourcecode name="ietf-yang-push-telemetry-message@2025-04-12.yang"
+type="yang" markers="true"><![CDATA[
 module ietf-yang-push-telemetry-message {
   yang-version 1.1;
   namespace
@@ -532,7 +572,7 @@ module ietf-yang-push-telemetry-message {
                 Thomas Graf
                 <mailto:thomas.graf@swisscom.com>";
   description
-    "Augments the ietf-telemetry-message with YANG-Push specific
+    "Augments the ietf-telemetry-message with YANG Push specific
      fields.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
@@ -547,14 +587,14 @@ module ietf-yang-push-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2024-04-08 {
+  revision 2025-04-12 {
     description
       "Initial revision.";
     reference
       "RFC XXXX";
   }
 
-  augment "/tm:message/tm:telemetry-session-metadata" {
+  augment "/tm:notification/tm:telemetry-notification-metadata" {
     container yang-push-subscription {
       config false;
       leaf id {
@@ -565,13 +605,13 @@ module ietf-yang-push-telemetry-message {
       container filters {
         description
           "Contains a list of configurable filters that can be applied
-          to subscriptions.  This facilitates the reuse of complex
-          filters once defined.";
+                \t\t\tto subscriptions.  This facilitates the reuse of complex
+                \t\t\tfilters once defined.";
         list stream-filter {
           key "name";
           description
             "A list of preconfigured filters that can be applied to
-              subscriptions.";
+             subscriptions.";
           leaf name {
             type string;
             description
@@ -584,7 +624,7 @@ module ietf-yang-push-telemetry-message {
     }
   }
 }
-  ]]></sourcecode>
+]]></sourcecode>
 </figure>
     </section>
 

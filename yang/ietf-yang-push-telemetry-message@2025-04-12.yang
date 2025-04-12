@@ -43,14 +43,14 @@ module ietf-yang-push-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2024-04-08 {
+  revision 2025-04-12 {
     description
       "Initial revision.";
     reference
       "RFC XXXX";
   }
 
-  augment "/tm:message/tm:telemetry-session-metadata" {
+  augment "/tm:notification/tm:telemetry-notification-metadata" {
     container yang-push-subscription {
       config false;
       leaf id {
@@ -60,14 +60,14 @@ module ietf-yang-push-telemetry-message {
       }
       container filters {
         description
-          "Contains a list of configurable filters that can be applied to
-            subscriptions.  This facilitates the reuse of complex filters
-            once defined.";
+          "Contains a list of configurable filters that can be applied
+					to subscriptions.  This facilitates the reuse of complex
+					filters once defined.";
         list stream-filter {
           key "name";
           description
             "A list of preconfigured filters that can be applied to
-              subscriptions.";
+            subscriptions.";
           leaf name {
             type string;
             description

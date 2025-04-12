@@ -40,26 +40,28 @@ module ietf-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2024-04-08 {
+  revision 2025-04-12 {
     description
       "Initial revision.";
     reference
       "RFC XXXX";
   }
 
-  typedef telemetry-message-event-type {
+  typedef telemetry-notification-event-type {
     type enumeration {
       enum "log" {
         description
-          "Collector is reporting the event as it arrived from the network element.";
+          "Collector is reporting the event as it arrived from the
+					network element.";
       }
       enum "update" {
         description
           "
            Collector has updated an entry inside its local cache.
-           This could be triggered by an event from the network for instance interface operational
-           status changed or an internal event in the collector, such as a timer triggered to
-           referesh old enteries.";
+           This could be triggered by an event from the network for
+					 instance interface operational status changed or an internal
+					 event in the collector, such as a timer triggered to referesh
+					 old enteries.";
       }
       enum "delete" {
         description
@@ -70,59 +72,98 @@ module ietf-telemetry-message {
       "Type of event reported by the collector.";
   }
 
-  typedef telemetry-session-protocol-type {
+  typedef telemetry-notification-protocol-type {
     type enumeration {
       enum "netconf" {
         description
-          "NETCONF RFC8640.";
+          "NETCONF RFC 8640.";
       }
       enum "restconf" {
         description
-          "RESTCONF RFC8650.";
+          "RESTCONF RFC 8650.";
       }
-      enum "https" {
+      enum "yp-configured" {
         description
-          "HTTPS draft-ietf-netconf-https-notif.";
+          "YANG-Push Configured Subscription.";
       }
-      enum "udp-notif" {
+      enum "yp-dynamic" {
         description
-          "UDP draft-ietf-netconf-udp-notif.";
+          "YANG-Push Dynamic Subscription.";
       }
     }
     description
-      "Session protocol used to deliver the messaget to the collector.";
+      "Notification protocol used to deliver the notification to the
+      data collection.";
   }
 
-  container message {
+  typedef telemetry-transport-protocol-type {
+    type enumeration {
+      enum "ssh" {
+        description
+          "SSH RFC 4253. Being used as transport in NETCONF RFC 8640.";
+      }
+      enum "http" {
+        description
+          "HTTP RFC 7231. Being used as transport in RESTCONF
+          RFC 8650.";
+      }
+      enum "udp-notif" {
+        description
+          "draft-ietf-netconf-udp-notif, Being used as transport in
+          YANG-Push Configured Subscription.";
+      }
+      enum "https-notif" {
+        description
+          "draft-ietf-netconf-https-notif, Being used as transport in
+          YANG-Push Configured Subscription.";
+      }
+    }
+    description
+      "Transport protocol used to deliver the notification to the
+      data collection.";
+  }
+
+  container notification {
     config false;
     leaf timestamp {
       type yang:date-and-time;
       mandatory true;
       description
-        "Timestamp when the collector received the message from the network element or an update or delete event is triggered.";
+        "Timestamp when the data collection received the notification
+				from the network element or an update or delete event is
+				triggered.";
     }
-    leaf session-protocol {
-      type telemetry-session-protocol-type;
+    leaf notification-protocol {
+      type telemetry-notification-protocol-type;
       mandatory true;
       description
-        "Protocol used to send the message from network node to the collector.";
+        "Notification protocol used to send the notification from
+        network node to the data collection.";
+    }
+    leaf transport-protocol {
+      type telemetry-transport-protocol-type;
+      mandatory true;
+      description
+        "Transport protocol used to send the notification from network
+        node to the data collection.";
     }
     container network-node-manifest {
       description
-        "Address of network element sent the message.";
+        "Address of network element sent the notification.";
       uses p-mf:platform-details;
     }
     container data-collection-manifest {
       description
-        "Address of the telemetry collector.";
+        "Address of the telemetry data collection.";
       uses p-mf:platform-details;
     }
-    container telemetry-session-metadata {
+    container telemetry-notification-metadata {
       leaf event-time {
         type yang:date-and-time;
         mandatory true;
         description
-          "NETCONF eventTime. Redefined in here since NETCONF header is XML not YANG.";
+          "NETCONF eventTime. Redefined in here since NETCONF header is
+          XML not YANG.";
       }
     }
     container data-collection-metadata {
