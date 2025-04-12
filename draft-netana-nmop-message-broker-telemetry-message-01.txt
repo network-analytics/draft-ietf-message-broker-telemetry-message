@@ -66,10 +66,10 @@ Table of Contents
    3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  13
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
    5.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
-     5.1.  Normative References  . . . . . . . . . . . . . . . . . .  13
+     5.1.  Normative References  . . . . . . . . . . . . . . . . . .  14
      5.2.  Informative References  . . . . . . . . . . . . . . . . .  14
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  14
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  15
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
 
 1.  Introduction
 
@@ -678,17 +678,63 @@ Internet-Draft              Telmetery Message                 April 2025
 
 3.  IANA Considerations
 
-   TBD https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-   rfc8407bis-22#name-iana-considerations-section
+   This document registers the following two namespace URIs in the IETF
+   XML Registry [RFC3688]:
+
+   *  URI: urn:ietf:params:xml:ns:yang:ietf-telemetry-message
+
+   *  Registrant Contact: The IESG.
+
+   *  XML: N/A; the requested URI is an XML namespace.
+
+   *  URI: urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message
+
+   *  Registrant Contact: The IESG.
+
+   *  XML: N/A; the requested URI is an XML namespace.
+
+   This document registers the following two YANG modules in the YANG
+   Module Names registry [RFC3688]:
+
+   *  Name: ietf-telemetry-message
+
+   *  Namespace: urn:ietf:params:xml:ns:yang:ietf-telemetry-message
+
+   *  Prefix: tm
+
+   *  Reference: RFC XXXX
+
+   *  Name: ietf-yang-push-telemetry-message
+
+   *  Namespace: urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-
+      message
+
+   *  Prefix: yptm
+
+   *  Reference: RFC XXXX
 
 4.  Security Considerations
 
-   TBD https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-   rfc8407bis-22#name-security-considerations-sect.
+   The document defines an information YANG data module Section 3 of
+   [RFC3444].  As such, this document does not define data nodes.
+   Following the guidance in Section 3.7 of
+   [I-D.ietf-netmod-rfc8407bis], the YANG security template is not used.
 
 5.  References
 
+
+
+
+Elhassany & Graf         Expires 14 October 2025               [Page 13]
+
+Internet-Draft              Telmetery Message                 April 2025
+
+
 5.1.  Normative References
+
+   [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
+              DOI 10.17487/RFC3688, January 2004,
+              <https://www.rfc-editor.org/info/rfc3688>.
 
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
@@ -720,16 +766,6 @@ Internet-Draft              Telmetery Message                 April 2025
               <https://datatracker.ietf.org/doc/html/draft-netana-
               netconf-notif-envelope-02>.
 
-
-
-
-
-
-Elhassany & Graf         Expires 14 October 2025               [Page 13]
-
-Internet-Draft              Telmetery Message                 April 2025
-
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -740,6 +776,28 @@ Internet-Draft              Telmetery Message                 April 2025
               <https://www.rfc-editor.org/info/rfc2119>.
 
 5.2.  Informative References
+
+
+
+
+
+Elhassany & Graf         Expires 14 October 2025               [Page 14]
+
+Internet-Draft              Telmetery Message                 April 2025
+
+
+   [RFC3444]  Pras, A. and J. Schoenwaelder, "On the Difference between
+              Information Models and Data Models", RFC 3444,
+              DOI 10.17487/RFC3444, January 2003,
+              <https://www.rfc-editor.org/info/rfc3444>.
+
+   [I-D.ietf-netmod-rfc8407bis]
+              Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
+              Authors and Reviewers of Documents Containing YANG Data
+              Models", Work in Progress, Internet-Draft, draft-ietf-
+              netmod-rfc8407bis-22, 14 January 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
+              rfc8407bis-22>.
 
    [Deh22]    Dehghani, Z., "Data Mesh", O'Reilly Media,
               ISBN 9781492092391, March 2022,
@@ -779,6 +837,4 @@ Authors' Addresses
 
 
 
-
-
-Elhassany & Graf         Expires 14 October 2025               [Page 14]
+Elhassany & Graf         Expires 14 October 2025               [Page 15]

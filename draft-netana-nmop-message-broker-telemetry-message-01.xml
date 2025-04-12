@@ -230,7 +230,7 @@
         </dl>
 
       <figure anchor="ietf-telemetry-message-tree"
-			title="YANG tree diagram for 'ietf-telemetry-message' module.">
+      title="YANG tree diagram for 'ietf-telemetry-message' module.">
       
 <sourcecode type="yangtree"><![CDATA[
 module: ietf-telemetry-message
@@ -304,8 +304,8 @@ module: ietf-yang-push-telemetry-message
 
 
       <figure anchor="ietf-telemetry-message-module"
-			title="YANG 'ietf-telemetry-message' module.">
-			
+      title="YANG 'ietf-telemetry-message' module.">
+
 <sourcecode name="ietf-telemetry-message@2025-04-12.yang" type="yang"
 markers="true"><![CDATA[
 module ietf-telemetry-message {
@@ -537,8 +537,8 @@ module ietf-telemetry-message {
 </figure>
 
       <figure anchor="ietf-yang-push-telemetry-message"
-			title="YANG 'ietf-yang-push-telemetry-message' module.">
-			
+      title="YANG 'ietf-yang-push-telemetry-message' module.">
+
 <sourcecode name="ietf-yang-push-telemetry-message@2025-04-12.yang"
 type="yang" markers="true"><![CDATA[
 module ietf-yang-push-telemetry-message {
@@ -628,19 +628,53 @@ module ietf-yang-push-telemetry-message {
 </figure>
     </section>
 
-    <section anchor="IANA">
-      <name>IANA Considerations</name>
+    <section anchor="IANA" title="IANA Considerations">
+      <t>This document registers the following two namespace URIs in the
+    <xref target="RFC3688">IETF XML Registry</xref>:</t>
 
-      <t>TBD https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-      rfc8407bis-22#name-iana-considerations-section</t>
+      <ul>
+        <li>URI: urn:ietf:params:xml:ns:yang:ietf-telemetry-message</li>
+        <li>Registrant Contact: The IESG.</li>
+        <li>XML: N/A; the requested URI is an XML namespace.</li>
+      </ul>
+
+      <ul>
+        <li>URI: urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message</li>
+        <li>Registrant Contact: The IESG.</li>
+        <li>XML: N/A; the requested URI is an XML namespace.</li>
+      </ul>
+
+      <t>This document registers the following two YANG modules in the
+    <xref target="RFC3688">YANG Module Names registry</xref>:</t>
+
+      <ul>
+        <li>Name: ietf-telemetry-message</li>
+        <li>Namespace: 
+      urn:ietf:params:xml:ns:yang:ietf-telemetry-message</li>
+        <li>Prefix: tm</li>
+        <li>Reference: RFC XXXX</li>
+      </ul>
+
+      <ul>
+        <li>Name: ietf-yang-push-telemetry-message</li>
+        <li>Namespace: 
+      urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message</li>
+        <li>Prefix: yptm</li>
+        <li>Reference: RFC XXXX</li>
+      </ul>
     </section>
 
-    <section anchor="Security">
-      <name>Security Considerations</name>
+    <section anchor="Security" title="Security Considerations">
 
-      <t>TBD https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-      rfc8407bis-22#name-security-considerations-sect.</t>
+      <t>The document defines an information YANG data module <xref
+      section="3" sectionFormat="of" target="RFC3444"/>. As such, this
+      document does not define data nodes. Following the guidance in
+      <xref section="3.7" sectionFormat="of"
+      target="I-D.ietf-netmod-rfc8407bis"/>, the YANG security
+      template is not used.</t>
+
     </section>
+
   </middle>
 
   <back>
@@ -649,6 +683,7 @@ module ietf-yang-push-telemetry-message {
 
       <references>
         <name>Normative References</name>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3688.xml"/>
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml"/>
 
@@ -667,6 +702,9 @@ module ietf-yang-push-telemetry-message {
 
       <references>
         <name>Informative References</name>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3444.xml"/>
+
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netmod-rfc8407bis.xml"/>
 
         <reference anchor="Deh22"
                    target="https://www.oreilly.com/library/view/data-mesh/9781492092384/">
