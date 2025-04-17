@@ -40,11 +40,125 @@ module ietf-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2025-04-12 {
+  revision 2025-04-17 {
     description
       "Initial revision.";
     reference
       "RFC XXXX";
+  }
+
+  identity notification-protocol {
+    description
+      "Base identity to represent notification protocols.";
+  }
+
+  identity yp-dynamic {
+    base transport-protocol;
+    base encoding;
+    description
+      "YANG-Push Dynamic Subscription as described in RFC 8640 or
+			RFC 8650.";
+    reference
+      "RFC 8640, RFC 8650: Dynamic Subscription to YANG Events and
+			Datastores over NETCONF or RESTCONF.";
+  }
+	
+  identity yp-configured {
+    base transport-protocol;
+    base encoding;
+    description
+      "YANG-Push Configured Subscription as described in RFC 8641.";
+    reference
+      "RFC 8641: Subscription to YANG Notifications for Datastore
+			Updates.";
+  }
+
+  identity netconf-get {
+    base transport-protocol;
+    base encoding;
+    description
+      "NETCONF <get> RPC as described in RFC 6241.";
+    reference
+      "RFC 6241: <get> RPC.";
+  }
+	
+  identity restconf-get {
+    base transport-protocol;
+    base encoding;
+    description
+      "RESTCONF HTTP GET as described in RFC 8040.";
+    reference
+      "RFC 8040: HTTP GET.";
+  }
+
+  identity transport-protocol {
+    description
+      "Base identity to represent notification transport protocols.";
+  }
+
+  identity netconf {
+    base transport-protocol;
+    description
+      "Network Configuration Protocol as described in RFC 6241.";
+    reference
+      "RFC 6241: Network Configuration Protocol.";
+  }
+	
+  identity restconf {
+    base transport-protocol;
+    description
+      "RESTCONF Protocol as described in RFC 8040.";
+    reference
+      "RFC 8040: RESTCONF Protocol.";
+  }
+
+  identity udp-notif {
+    base transport-protocol;
+    description
+      "YANG-Push configured subscription transport protocol
+			as described in draft-ietf-netconf-udp-notif.";
+    reference
+      "draft-ietf-netconf-udp-notif: UDP-based Transport for Configured
+			Subscriptions.";
+  }
+
+  identity https-notif {
+    base transport-protocol;
+    description
+      "YANG-Push configured subscription transport protocol
+			as described in draft-ietf-netconf-https-notif.";
+    reference
+      "draft-ietf-netconf-https-notif: An HTTPS-based Transport for¨
+			YANG Notifications.";
+  }
+
+  identity encoding {
+    description
+      "Base identity to represent notification encodings.";
+  }
+
+  identity cbor {
+    base encoding;
+    description
+      "Encoded data using CBOR as described in RFC 9254.";
+    reference
+      "RFC 9254: CBOR Encoding of Data Modeled with YANG";
+  }
+ 
+  identity xml {
+    base encoding;
+    description
+      "Encoded data using XML as described in RFC 7950.";
+    reference
+      "RFC 7950: The YANG 1.1 Data Modeling Language";
+  }
+ 
+  identity json {
+    base encoding;
+    description
+      "Encoded data using JSON as described in RFC 7951.";
+    reference
+      "RFC 7951: JSON Encoding of Data Modeled with YANG";
   }
 
   typedef telemetry-notification-event-type {
@@ -73,54 +187,30 @@ module ietf-telemetry-message {
   }
 
   typedef telemetry-notification-protocol-type {
-    type enumeration {
-      enum "netconf" {
-        description
-          "NETCONF RFC 8640.";
-      }
-      enum "restconf" {
-        description
-          "RESTCONF RFC 8650.";
-      }
-      enum "yp-configured" {
-        description
-          "YANG-Push Configured Subscription.";
-      }
-      enum "yp-dynamic" {
-        description
-          "YANG-Push Dynamic Subscription.";
-      }
+    type identityref {
+      base notification-protocol;
     }
     description
       "Notification protocol used to deliver the notification to the
       data collection.";
   }
 
-  typedef telemetry-transport-protocol-type {
-    type enumeration {
-      enum "ssh" {
-        description
-          "SSH RFC 4253. Being used as transport in NETCONF RFC 8640.";
-      }
-      enum "http" {
-        description
-          "HTTP RFC 7231. Being used as transport in RESTCONF
-          RFC 8650.";
-      }
-      enum "udp-notif" {
-        description
-          "draft-ietf-netconf-udp-notif, Being used as transport in
-          YANG-Push Configured Subscription.";
-      }
-      enum "https-notif" {
-        description
-          "draft-ietf-netconf-https-notif, Being used as transport in
-          YANG-Push Configured Subscription.";
-      }
+  typedef telemetry-notification-encoding-type {
+    type identityref {
+      base encoding;
     }
     description
-      "Transport protocol used to deliver the notification to the
+      "Notification encoding used to deliver the notification to the
       data collection.";
+  }
+
+  typedef telemetry-notification-transport-type {
+    type identityref {
+      base transport-protocol;
+    }
+    description
+      "Notification transport protocol used to deliver the notification
+			to the data collection.";
   }
 
   container notification {
@@ -140,12 +230,19 @@ module ietf-telemetry-message {
         "Notification protocol used to send the notification from
         network node to the data collection.";
     }
-    leaf transport-protocol {
-      type telemetry-transport-protocol-type;
+    leaf notification-encoding {
+      type telemetry-notification-encoding-type;
       mandatory true;
       description
-        "Transport protocol used to send the notification from network
-        node to the data collection.";
+        "Encoding used to send the notification from network node to the
+				data collection.";
+    }		
+    leaf notification-transport {
+      type telemetry-notification-transport-type;
+      mandatory true;
+      description
+        "Notofication transport protocol used to send the notification
+				from network node to the data collection.";
     }
     container network-node-manifest {
       description

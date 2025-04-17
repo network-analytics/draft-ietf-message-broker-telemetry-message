@@ -43,7 +43,7 @@ module ietf-yang-push-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2025-04-12 {
+  revision 2025-04-17 {
     description
       "Initial revision.";
     reference
