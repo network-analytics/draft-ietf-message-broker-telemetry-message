@@ -521,7 +521,7 @@ module ietf-telemetry-message {
 
   typedef telemetry-notification-transport-type {
     type identityref {
-      base transport-protocol;
+      base transport;
     }
     description
       "Notification transport protocol used to deliver the notification
