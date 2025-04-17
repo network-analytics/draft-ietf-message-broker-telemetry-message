@@ -53,8 +53,7 @@ module ietf-telemetry-message {
   }
 
   identity yp-dynamic {
-    base transport-protocol;
-    base encoding;
+    base notification-protocol;
     description
       "YANG-Push Dynamic Subscription as described in RFC 8640 or
 			RFC 8650.";
@@ -64,8 +63,7 @@ module ietf-telemetry-message {
   }
 	
   identity yp-configured {
-    base transport-protocol;
-    base encoding;
+    base notification-protocol;
     description
       "YANG-Push Configured Subscription as described in RFC 8641.";
     reference
@@ -74,8 +72,7 @@ module ietf-telemetry-message {
   }
 
   identity netconf-get {
-    base transport-protocol;
-    base encoding;
+    base notification-protocol;
     description
       "NETCONF <get> RPC as described in RFC 6241.";
     reference
@@ -83,21 +80,22 @@ module ietf-telemetry-message {
   }
 	
   identity restconf-get {
-    base transport-protocol;
-    base encoding;
+    base notification-protocol;
     description
       "RESTCONF HTTP GET as described in RFC 8040.";
     reference
       "RFC 8040: HTTP GET.";
   }
 
-  identity transport-protocol {
+  identity transport {
     description
       "Base identity to represent notification transport protocols.";
   }
 
   identity netconf {
-    base transport-protocol;
+    base transport;
+		base netconf-get;
+    base yp-dynamic;		
     description
       "Network Configuration Protocol as described in RFC 6241.";
     reference
@@ -105,7 +103,9 @@ module ietf-telemetry-message {
   }
 	
   identity restconf {
-    base transport-protocol;
+    base transport;
+		base restconf-get;
+    base yp-dynamic;
     description
       "RESTCONF Protocol as described in RFC 8040.";
     reference
@@ -113,7 +113,8 @@ module ietf-telemetry-message {
   }
 
   identity udp-notif {
-    base transport-protocol;
+    base transport;
+    base yp-configured;
     description
       "YANG-Push configured subscription transport protocol
 			as described in draft-ietf-netconf-udp-notif.";
@@ -123,7 +124,8 @@ module ietf-telemetry-message {
   }
 
   identity https-notif {
-    base transport-protocol;
+    base transport;
+    base yp-configured;
     description
       "YANG-Push configured subscription transport protocol
 			as described in draft-ietf-netconf-https-notif.";
@@ -257,7 +259,7 @@ module ietf-telemetry-message {
     container telemetry-notification-metadata {
       leaf event-time {
         type yang:date-and-time;
-        mandatory true;
+        mandatory false;
         description
           "NETCONF eventTime. Redefined in here since NETCONF header is
           XML not YANG.";

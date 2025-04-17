@@ -369,23 +369,23 @@ Internet-Draft              Telmetery Message                 April 2025
      }
 
      identity yp-dynamic {
-       base transport-protocol;
-       base encoding;
+       base notification-protocol;
        description
          "YANG-Push Dynamic Subscription as described in RFC 8640 or
-         RFC 8650.";
+                           RFC 8650.";
        reference
          "RFC 8640, RFC 8650: Dynamic Subscription to YANG Events and
-         Datastores over NETCONF or RESTCONF.";
+                           Datastores over NETCONF or RESTCONF.";
      }
 
      identity yp-configured {
-       base transport-protocol;
-       base encoding;
+       base notification-protocol;
        description
          "YANG-Push Configured Subscription as described in RFC 8641.";
        reference
          "RFC 8641: Subscription to YANG Notifications for Datastore
+                           Updates.";
+     }
 
 
 
@@ -394,12 +394,8 @@ Elhassany & Graf         Expires 19 October 2025                [Page 7]
 Internet-Draft              Telmetery Message                 April 2025
 
 
-         Updates.";
-     }
-
      identity netconf-get {
-       base transport-protocol;
-       base encoding;
+       base notification-protocol;
        description
          "NETCONF <get> RPC as described in RFC 6241.";
        reference
@@ -407,21 +403,22 @@ Internet-Draft              Telmetery Message                 April 2025
      }
 
      identity restconf-get {
-       base transport-protocol;
-       base encoding;
+       base notification-protocol;
        description
          "RESTCONF HTTP GET as described in RFC 8040.";
        reference
          "RFC 8040: HTTP GET.";
      }
 
-     identity transport-protocol {
+     identity transport {
        description
          "Base identity to represent notification transport protocols.";
      }
 
      identity netconf {
-       base transport-protocol;
+       base transport;
+                   base netconf-get;
+       base yp-dynamic;
        description
          "Network Configuration Protocol as described in RFC 6241.";
        reference
@@ -429,7 +426,9 @@ Internet-Draft              Telmetery Message                 April 2025
      }
 
      identity restconf {
-       base transport-protocol;
+       base transport;
+                   base restconf-get;
+       base yp-dynamic;
        description
          "RESTCONF Protocol as described in RFC 8040.";
        reference
@@ -437,10 +436,11 @@ Internet-Draft              Telmetery Message                 April 2025
      }
 
      identity udp-notif {
-       base transport-protocol;
+       base transport;
+       base yp-configured;
        description
          "YANG-Push configured subscription transport protocol
-         tas described in draft-ietf-netconf-udp-notif.";
+                           as described in draft-ietf-netconf-udp-notif.";
        reference
 
 
@@ -451,17 +451,18 @@ Internet-Draft              Telmetery Message                 April 2025
 
 
          "draft-ietf-netconf-udp-notif: UDP-based Transport for Configured
-         Subscriptions.";
+                           Subscriptions.";
      }
 
      identity https-notif {
-       base transport-protocol;
+       base transport;
+       base yp-configured;
        description
          "YANG-Push configured subscription transport protocol
-         as described in draft-ietf-netconf-https-notif.";
+                           as described in draft-ietf-netconf-https-notif.";
        reference
-         "draft-ietf-netconf-https-notif: An HTTPS-based Transport for
-         YANG Notifications.";
+         "draft-ietf-netconf-https-notif: An HTTPS-based Transport for¨
+                           YANG Notifications.";
      }
 
      identity encoding {
@@ -497,7 +498,6 @@ Internet-Draft              Telmetery Message                 April 2025
        type enumeration {
          enum log {
            description
-             "Collector is reporting the event as it arrived from the
 
 
 
@@ -506,6 +506,7 @@ Elhassany & Graf         Expires 19 October 2025                [Page 9]
 Internet-Draft              Telmetery Message                 April 2025
 
 
+             "Collector is reporting the event as it arrived from the
              network element.";
          }
          enum update {
@@ -553,7 +554,6 @@ Internet-Draft              Telmetery Message                 April 2025
      }
 
      container notification {
-       config false;
 
 
 
@@ -562,6 +562,7 @@ Elhassany & Graf         Expires 19 October 2025               [Page 10]
 Internet-Draft              Telmetery Message                 April 2025
 
 
+       config false;
        leaf timestamp {
          type yang:date-and-time;
          mandatory true;
@@ -604,12 +605,11 @@ Internet-Draft              Telmetery Message                 April 2025
        container telemetry-notification-metadata {
          leaf event-time {
            type yang:date-and-time;
-           mandatory true;
+           mandatory false;
            description
              "NETCONF eventTime. Redefined in here since NETCONF header is
               XML not YANG.";
          }
-       }
 
 
 
@@ -618,6 +618,7 @@ Elhassany & Graf         Expires 19 October 2025               [Page 11]
 Internet-Draft              Telmetery Message                 April 2025
 
 
+       }
        container data-collection-metadata {
          description
            "Metadata added by data collection.";
@@ -665,7 +666,6 @@ Internet-Draft              Telmetery Message                 April 2025
                  description
                    "anydata yang";
                }
-             }
 
 
 
@@ -674,6 +674,7 @@ Elhassany & Graf         Expires 19 October 2025               [Page 12]
 Internet-Draft              Telmetery Message                 April 2025
 
 
+             }
            }
          }
        }
@@ -721,7 +722,6 @@ Internet-Draft              Telmetery Message                 April 2025
      description
        "Augments the ietf-telemetry-message with YANG Push specific
         fields.
-
 
 
 
