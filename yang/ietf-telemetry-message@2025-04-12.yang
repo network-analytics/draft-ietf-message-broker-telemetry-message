@@ -13,7 +13,7 @@ module ietf-telemetry-message {
     prefix p-mf;
     reference
       "draft-ietf-opsawg-collected-data-manifest: A Data Manifest for
-			Contextualized Telemetry Data";
+      Contextualized Telemetry Data";
   }
 
   organization
@@ -52,16 +52,16 @@ module ietf-telemetry-message {
       enum "log" {
         description
           "Collector is reporting the event as it arrived from the
-					network element.";
+          network element.";
       }
       enum "update" {
         description
           "
            Collector has updated an entry inside its local cache.
            This could be triggered by an event from the network for
-					 instance interface operational status changed or an internal
-					 event in the collector, such as a timer triggered to referesh
-					 old enteries.";
+           instance interface operational status changed or an internal
+           event in the collector, such as a timer triggered to referesh
+           old enteries.";
       }
       enum "delete" {
         description
@@ -130,8 +130,8 @@ module ietf-telemetry-message {
       mandatory true;
       description
         "Timestamp when the data collection received the notification
-				from the network element or an update or delete event is
-				triggered.";
+        from the network element or an update or delete event is
+        triggered.";
     }
     leaf notification-protocol {
       type telemetry-notification-protocol-type;
