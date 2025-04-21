@@ -1,7 +1,9 @@
 {
-  "ietf-telemetry-message:message": {
+  "ietf-telemetry-message:notification": {
     "timestamp": "2024-02-14T12:10:10.12+01:00",
-    "session-protocol": "netconf",
+    "notification-protocol": "yp-configured",
+    "notification-encoding": "json",
+    "notification-transport": "udp-notif",
     "node": {
       "address": "127.0.0.1",
       "port": 123,
