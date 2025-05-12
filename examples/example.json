@@ -15,19 +15,19 @@
     "telemetry-message-metadata": {
       "event-time": "2024-02-14T12:10:10.10+01:00",
       "ietf-yang-push-telemetry-message:yang-push-subscription": {
-        "id": 6666,
+        "id": 89,
+        "xpath-filter": "/ietf-interfaces:interfaces",
         "datastore": "ietf-datastores:operational",
-        "datastore-xpath-filter": "/ietf-interfaces:interfaces",
         "transport": "ietf-udp-notif-transport:udp-notif",
         "encoding": "ietf-subscribed-notifications:encode-json",
         "module-version": [
-           {
-           "module-name": "ietf-interfaces",
-           "revision": "2018-02-20",
-           "revision-label": "2.0.0"
-           }
-         ],
-         "yang-library-content-id": "123"
+          {
+            "module-name": "ietf-interfaces",
+            "revision": "2018-02-20",
+            "revision-label": "2.0.0"
+          }
+        ],
+        "yang-library-content-id": "abc"
       }
     },
     "data-collection-metadata": {

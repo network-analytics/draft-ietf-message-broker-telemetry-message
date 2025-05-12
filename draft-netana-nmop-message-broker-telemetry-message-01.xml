@@ -282,32 +282,20 @@ module: ietf-yang-push-telemetry-message
 
   augment /tm:message/tm:telemetry-message-metadata:
     +--ro yang-push-subscription
-       +--ro id?
-       |       sn:subscription-id
+       +--ro id?                        sn:subscription-id
+       +--ro (filter-spec)
+       |  +--:(subtree-filter)?
+       |  |  +--ro subtree-filter?   anydata
+       |  +--:(xpath-filter)?
+       |     +--ro xpath-filter?     yang:xpath1.0
        +--ro (target)
        |  +--:(stream)
-       |  |  +--ro (stream-filter)?
-       |  |     +--:(stream-filter-spec)
-       |  |     |  +--ro (stream-filter-spec)?
-       |  |     |     +--:(stream-subtree-filter)
-       |  |     |     |  +--ro stream-subtree-filter?   <anydata>
-       |  |     |     +--:(stream-xpath-filter)
-       |  |     |        +--ro stream-xpath-filter?     yang:xpath1.0
-       |  |     +--:(replay-start-time)
-       |  |        +--ro replay-start-time?
-       |  |                yang:date-and-time
+       |  |  +--ro stream    string
        |  +--:(datastore)
-       |     +--ro datastore                            identityref
-       |     +--ro (datastore-filter-spec)?
-       |        +--:(datastore-subtree-filter)
-       |        |  +--ro datastore-subtree-filter?      <anydata>
-       |        +--:(datastore-xpath-filter)
-       |           +--ro datastore-xpath-filter?        yang:xpath1.0
-       +--ro stop-time?
-       |       yang:date-and-time
-       +--ro transport?                                 sn:transport
-       +--ro encoding?                                  sn:encoding
-       +--ro purpose?                                   string
+       |     +--ro datastore    identityref
+       +--ro transport?                 sn:transport
+       +--ro encoding?                  sn:encoding
+       +--ro purpose?                   string
        +--ro (update-trigger)?
        |  +--:(periodic)
        |  |  +--ro periodic!
@@ -322,7 +310,7 @@ module: ietf-yang-push-telemetry-message
        |  +--ro module-name       yang:yang-identifier
        |  +--ro revision          rev:revision-date
        |  +--ro revision-label?   ysver:version
-       +--ro yang-library-content-id?                   string
+       +--ro yang-library-content-id?   string
 ]]></artwork>
 </figure>
 
@@ -573,11 +561,6 @@ module ietf-yang-push-telemetry-message {
     reference
       "XXX";
   }
-  import ietf-yang-push-revision {
-    prefix ypr;
-    reference
-      "XXX";
-  }
   import ietf-yang-push {
     prefix yp;
     reference
@@ -593,6 +576,18 @@ module ietf-yang-push-telemetry-message {
     reference
       "RFC 8342: Network Management Datastore Architecture (NMDA)";
   }
+  import ietf-yang-revisions {
+    prefix rev;
+    reference
+      "RFC YYYY: draft-ietf-netmod-yang-module-versioning-11,
+       Updated YANG Module Revision Handling";
+  }
+  import ietf-yang-semver {
+    prefix ysver;
+    reference
+      "RFC ZZZZ: draft-ietf-netmod-yang-semver-15, YANG Semantic
+       Versioning";
+  }
 
   organization
     "IETF Draft";
@@ -605,6 +600,13 @@ module ietf-yang-push-telemetry-message {
   description
     "Augments the ietf-telemetry-message with YANG Push specific
      fields.
+
+     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
+     'SHALL NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED',
+     'NOT RECOMMENDED', 'MAY', and 'OPTIONAL' in this document
+     are to be interpreted as described in BCP 14 (RFC 2119)
+     (RFC 8174) when, and only when, they appear in all
+     capitals, as shown here.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
        authors of the code.  All rights reserved.
@@ -625,28 +627,6 @@ module ietf-yang-push-telemetry-message {
       "RFC XXXX";
   }
 
-  identity notification-protocol {
-    description
-      "Base identity to represent YANG-Push notification protocols.";
-  }
-
-  identity yp-dynamic {
-    base notification-protocol;
-    description
-      "YANG-Push Dynamic Subscription as described in RFC 8640 or RFC 8650.";
-    reference
-      "RFC 8640, RFC 8650: Dynamic Subscription to YANG Events and
-       Datastores over NETCONF or RESTCONF.";
-  }
-
-  identity yp-configured {
-    base notification-protocol;
-    description
-      "YANG-Push Configured Subscription as described in RFC 8641.";
-    reference
-      "RFC 8641: Subscription to YANG Notifications for Datastore Updates.";
-  }
-
   augment "/tm:message/tm:telemetry-message-metadata" {
     description
       "Augments telemetry-message-metadata with YANG-Push specific metadata";
@@ -659,7 +639,27 @@ module ietf-yang-push-telemetry-message {
         description
           "This references the affected subscription.";
       }
-      //uses sn:subscription-policy;
+      choice filter-spec {
+        mandatory true;
+        description
+          "The content filter specification for this request.";
+        anydata subtree-filter {
+          description
+            "Event stream evaluation criteria or the parameter identifies the port of the target datastore encoded in the syntax of a subtree filter as defined in RFC 6241, Section 6.";
+          reference
+            "RFC 6241: Network Configuration Protocol (NETCONF), Section 6.";
+        }
+        leaf xpath-filter {
+          type yang:xpath1.0;
+          description
+            "Event stream evaluation criteria or porting of the target datastore encoded in the syntax of an XPath 1.0 expression";
+          reference
+            "XML Path Language (XPath) Version 1.0
+              (https://www.w3.org/TR/1999/REC-xpath-19991116)
+              RFC 7950: The YANG 1.1 Data Modeling Language,
+                      Section 10";
+        }
+      }
       choice target {
         mandatory true;
         description
@@ -667,88 +667,11 @@ module ietf-yang-push-telemetry-message {
            subscription is being applied as well as specifics on the
            subset of information desired from that source.";
         case stream {
-          choice stream-filter {
+          leaf stream {
+            type string;
+            mandatory true;
             description
-              "This grouping defines the base for filters applied to event
-               streams.";
-            choice stream-filter-spec {
-              description
-                "The content filter specification for this request.";
-              anydata stream-subtree-filter {
-                description
-                  "Event stream evaluation criteria encoded in the syntax of
-                   a subtree filter as defined in RFC 6241, Section 6.
-
-                   The subtree filter is applied to the representation of
-                   individual, delineated event records as contained in the
-                   event stream.
-
-                   If the subtree filter returns a non-empty node set, the
-                   filter matches the event record, and the event record is
-                   included in the notification message sent to the
-                   receivers.";
-                reference
-                  "RFC 6241: Network Configuration Protocol (NETCONF),
-                            Section 6";
-              }
-              leaf stream-xpath-filter {
-                type yang:xpath1.0;
-                description
-                  "Event stream evaluation criteria encoded in the syntax of
-                   an XPath 1.0 expression.
-
-                   The XPath expression is evaluated on the representation of
-                   individual, delineated event records as contained in
-                   the event stream.
-
-                   The result of the XPath expression is converted to a
-                   boolean value using the standard XPath 1.0 rules.  If the
-                   boolean value is 'true', the filter matches the event
-                   record, and the event record is included in the
-                   notification message sent to the receivers.
-
-                   The expression is evaluated in the following XPath
-                   context:
-
-                      o  The set of namespace declarations is the set of
-                        prefix and namespace pairs for all YANG modules
-                        implemented by the server, where the prefix is the
-                        YANG module name and the namespace is as defined by
-                        the 'namespace' statement in the YANG module.
-
-                        If the leaf is encoded in XML, all namespace
-                        declarations in scope on the 'stream-xpath-filter'
-                        leaf element are added to the set of namespace
-                        declarations.  If a prefix found in the XML is
-                        already present in the set of namespace
-                        declarations, the namespace in the XML is used.
-
-                      o  The set of variable bindings is empty.
-
-                      o  The function library is comprised of the core
-                        function library and the XPath functions defined in
-                        Section 10 in RFC 7950.
-
-                      o  The context node is the root node.";
-                reference
-                  "XML Path Language (XPath) Version 1.0
-                   (https://www.w3.org/TR/1999/REC-xpath-19991116)
-                   RFC 7950: The YANG 1.1 Data Modeling Language,
-                            Section 10";
-              }
-            }
-            leaf replay-start-time {
-              type yang:date-and-time;
-              config false;
-              description
-                "Used to trigger the 'replay' feature for a dynamic
-                  subscription, where event records that are selected
-                  need to be at or after the specified starting time.  If
-                  'replay-start-time' is not present, this is not a replay
-                  subscription and event record push should start
-                  immediately.  It is never valid to specify start times
-                  that are later than or equal to the current time.";
-            }
+              "Indicates the event stream to be considered for this subscription.";
           }
         }
         case datastore {
@@ -760,64 +683,7 @@ module ietf-yang-push-telemetry-message {
             description
               "Datastore from which to retrieve data.";
           }
-          choice datastore-filter-spec {
-            description
-              "The content filter specification for this request.";
-            anydata datastore-subtree-filter {
-              description
-                "This parameter identifies the portions of the
-                 target datastore to retrieve.";
-              reference
-                "RFC 6241: Network Configuration Protocol, Section 6.";
-            }
-            leaf datastore-xpath-filter {
-              type yang:xpath1.0;
-              description
-                "This parameter contains an XPath expression identifying
-                 the portions of the target datastore to retrieve.
-
-                 If the expression returns a node-set, all nodes in the
-                 node-set are selected by the filter.  Otherwise, if the
-                 expression does not return a node-set, the filter
-                 doesn't select any nodes.
-
-                 The expression is evaluated in the following XPath
-                 context:
-
-                  o   The set of namespace declarations is the set of prefix
-                      and namespace pairs for all YANG modules implemented
-                      by the server, where the prefix is the YANG module
-                      name and the namespace is as defined by the
-                      'namespace' statement in the YANG module.
-
-                      If the leaf is encoded in XML, all namespace
-                      declarations in scope on the 'stream-xpath-filter'
-                      leaf element are added to the set of namespace
-                      declarations.  If a prefix found in the XML is
-                      already present in the set of namespace declarations,
-                      the namespace in the XML is used.
-
-                  o  The set of variable bindings is empty.
-
-                  o  The function library is the core function library, and
-                    the XPath functions defined in section 10 in RFC 7950.
-
-                  o  The context node is the root node of the target
-                    datastore.";
-            }
-          }
         }
-      }
-      leaf stop-time {
-        type yang:date-and-time;
-        description
-          "Identifies a time after which notification messages for a
-           subscription should not be sent.  If 'stop-time' is not
-           present, the notification messages will continue until the
-           subscription is terminated.  If 'replay-start-time' exists,
-           'stop-time' must be for a subsequent time.  If
-           'replay-start-time' doesn't exist, 'stop-time', when
-           established, must be for a future time.";
       }
       leaf transport {
         type sn:transport;
@@ -842,7 +708,6 @@ module ietf-yang-push-telemetry-message {
           "Open text allowing a configuring entity to embed the
            originator or other specifics of this subscription.";
       }
-      // do we need to add sn:update-qos
       choice update-trigger {
         description
           "Defines necessary conditions for sending an event record to
@@ -925,20 +790,42 @@ module ietf-yang-push-telemetry-message {
       }
       list module-version {
         key "module-name";
+        config false;
         description
           "List of yang-push-module-version grouping. The revision is
            not configurable.";
-        uses ypr:yang-push-module-version;
+        leaf module-name {
+          type yang:yang-identifier;
+          config false;
+          mandatory true;
+          description
+            "This references the YANG module name.";
+        }
+        leaf revision {
+          type rev:revision-date;
+          config false;
+          mandatory true;
+          description
+            "This references the YANG module revision of the sent
+             notification message.";
+        }
+        leaf revision-label {
+          type ysver:version;
+          description
+            "This references the YANG module semantic version of the syanglibent
+             notification message.";
+        }
       }
       leaf yang-library-content-id {
         type string;
+        config false;
         description
-          "Contains the YANG library content identifier RFC 8525
-           information.";
+          "Contains the YANG library content identifier RFC 8525 information.";
       }
     }
   }
 }
+
 ]]></sourcecode>
 </figure>
     </section>
