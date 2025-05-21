@@ -92,7 +92,6 @@ module ietf-yang-push-telemetry-message {
           "This references the affected subscription.";
       }
       choice filter-spec {
-        mandatory true;
         description
           "The content filter specification for this request.";
         anydata subtree-filter {
@@ -113,7 +112,6 @@ module ietf-yang-push-telemetry-message {
         }
       }
       choice target {
-        mandatory true;
         description
           "Identifies the source of information against which a
            subscription is being applied as well as specifics on the
@@ -121,7 +119,6 @@ module ietf-yang-push-telemetry-message {
         case stream {
           leaf stream {
             type string;
-            mandatory true;
             description
               "Indicates the event stream to be considered for this subscription.";
           }
@@ -131,7 +128,6 @@ module ietf-yang-push-telemetry-message {
             type identityref {
               base ds:datastore;
             }
-            mandatory true;
             description
               "Datastore from which to retrieve data.";
           }
@@ -173,7 +169,6 @@ module ietf-yang-push-telemetry-message {
                selection filter.";
             leaf period {
               type yp:centiseconds;
-              mandatory true;
               description
                 "Duration of time which should occur between periodic
                  push updates, in one hundredths of a second.";
@@ -230,13 +225,6 @@ module ietf-yang-push-telemetry-message {
                  chooses to resync the subscription via a new push-update
                  notification.";
             }
-            leaf-list excluded-change {
-              type yp:change-type;
-              description
-                "Use to restrict which changes trigger an update.  For
-                 example, if modify is excluded, only creation and
-                 deletion of objects is reported.";
-            }
           }
         }
       }
@@ -249,14 +237,12 @@ module ietf-yang-push-telemetry-message {
         leaf module-name {
           type yang:yang-identifier;
           config false;
-          mandatory true;
           description
             "This references the YANG module name.";
         }
         leaf revision {
           type rev:revision-date;
           config false;
-          mandatory true;
           description
             "This references the YANG module revision of the sent
              notification message.";

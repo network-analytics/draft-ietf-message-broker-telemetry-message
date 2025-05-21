@@ -1,41 +1,8 @@
-module: ietf-yang-push-telemetry-message
-
-  augment /tm:message/tm:telemetry-message-metadata:
-    +--ro yang-push-subscription
-       +--ro id?                        sn:subscription-id
-       +--ro (filter-spec)
-       |  +--:(subtree-filter)?
-       |  |  +--ro subtree-filter?   anydata
-       |  +--:(xpath-filter)?
-       |     +--ro xpath-filter?     yang:xpath1.0
-       +--ro (target)
-       |  +--:(stream)
-       |  |  +--ro stream    string
-       |  +--:(datastore)
-       |     +--ro datastore    identityref
-       +--ro transport?                 sn:transport
-       +--ro encoding?                  sn:encoding
-       +--ro purpose?                   string
-       +--ro (update-trigger)?
-       |  +--:(periodic)
-       |  |  +--ro periodic!
-       |  |     +--ro period         yp:centiseconds
-       |  |     +--ro anchor-time?   yang:date-and-time
-       |  +--:(on-change)
-       |     +--ro on-change!
-       |        +--ro dampening-period?   yp:centiseconds
-       |        +--ro sync-on-start?      boolean
-       |        +--ro excluded-change*    yp:change-type
-       +--ro module-version* [module-name]
-       |  +--ro module-name       yang:yang-identifier
-       |  +--ro revision          rev:revision-date
-       |  +--ro revision-label?   ysver:version
-       +--ro yang-library-content-id?   string
-
 module: ietf-telemetry-message
   +--ro message
      +--ro timestamp                     yang:date-and-time
-     +--ro session-protocol              telemetry-session-protocol-type
+     +--ro session-protocol
+     |       telemetry-session-protocol-type
      +--ro network-node-manifest
      |  +--ro name?               string
      |  +--ro vendor?             string
@@ -56,32 +23,31 @@ module: ietf-telemetry-message
      |  +--ro event-time?                    yang:date-and-time
      |  +--ro yptm:yang-push-subscription
      |     +--ro yptm:id?                        sn:subscription-id
-     |     +--ro (yptm:filter-spec)
+     |     +--ro (yptm:filter-spec)?
      |     |  +--:(yptm:subtree-filter)
-     |     |  |  +--ro yptm:subtree-filter?   anydata
+     |     |  |  +--ro yptm:subtree-filter?      <anydata>
      |     |  +--:(yptm:xpath-filter)
-     |     |     +--ro yptm:xpath-filter?   yang:xpath1.0
-     |     +--ro (yptm:target)
+     |     |     +--ro yptm:xpath-filter?        yang:xpath1.0
+     |     +--ro (yptm:target)?
      |     |  +--:(yptm:stream)
-     |     |  |  +--ro yptm:stream    string
+     |     |  |  +--ro yptm:stream?              string
      |     |  +--:(yptm:datastore)
-     |     |     +--ro yptm:datastore    identityref
+     |     |     +--ro yptm:datastore?           identityref
      |     +--ro yptm:transport?                 sn:transport
      |     +--ro yptm:encoding?                  sn:encoding
      |     +--ro yptm:purpose?                   string
      |     +--ro (yptm:update-trigger)?
      |     |  +--:(yptm:periodic)
      |     |  |  +--ro yptm:periodic!
-     |     |  |     +--ro yptm:period         yp:centiseconds
+     |     |  |     +--ro yptm:period?        yp:centiseconds
      |     |  |     +--ro yptm:anchor-time?   yang:date-and-time
      |     |  +--:(yptm:on-change)
      |     |     +--ro yptm:on-change!
      |     |        +--ro yptm:dampening-period?   yp:centiseconds
      |     |        +--ro yptm:sync-on-start?      boolean
-     |     |        +--ro yptm:excluded-change*    yp:change-type
      |     +--ro yptm:module-version* [module-name]
      |     |  +--ro yptm:module-name       yang:yang-identifier
-     |     |  +--ro yptm:revision          rev:revision-date
+     |     |  +--ro yptm:revision?         rev:revision-date
      |     |  +--ro yptm:revision-label?   ysver:version
      |     +--ro yptm:yang-library-content-id?   string
      +--ro data-collection-metadata
@@ -90,14 +56,14 @@ module: ietf-telemetry-message
      |  +--ro local-address?    inet:host
      |  +--ro local-port?       inet:port-number
      |  +--ro labels* [name]
-     |     +--ro name       string
+     |     +--ro name                          string
      |     +--ro (value)
      |        +--:(string-choice)
      |        |  +--ro (string-choice)?
      |        |     +--:(string-value)
-     |        |        +--ro string-value?   string
+     |        |        +--ro string-value?     string
      |        +--:(anydata-choice)
      |           +--ro (anydata-choice)?
      |              +--:(anydata-values)
-     |                 +--ro anydata-values?   anydata
-     +--ro payload?                      anydata
+     |                 +--ro anydata-values?   <anydata>
+     +--ro payload?                      <anydata>
