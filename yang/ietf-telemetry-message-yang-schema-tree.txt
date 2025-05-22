@@ -1,12 +1,8 @@
 module: ietf-telemetry-message
-  +--ro notification
-     +--ro timestamp                          yang:date-and-time
-     +--ro notification-protocol
-     |       telemetry-notification-protocol-type
-     +--ro notification-encoding
-     |       telemetry-notification-encoding-type
-     +--ro notification-transport
-     |       telemetry-notification-transport-type
+  +--ro message
+     +--ro timestamp                     yang:date-and-time
+     +--ro session-protocol
+     |       telemetry-session-protocol-type
      +--ro network-node-manifest
      |  +--ro name?               string
      |  +--ro vendor?             string
@@ -23,26 +19,37 @@ module: ietf-telemetry-message
      |  +--ro software-flavor?    string
      |  +--ro os-version?         string
      |  +--ro os-type?            string
-     +--ro telemetry-notification-metadata
-     |  +--ro event-time                     yang:date-and-time
+     +--ro telemetry-message-metadata
+     |  +--ro event-time?                    yang:date-and-time
      |  +--ro yptm:yang-push-subscription
      |     +--ro yptm:id?                        sn:subscription-id
-     |     +--ro yptm:filters
-     |     |  +--ro yptm:stream-filter* [name]
-     |     |     +--ro yptm:name                           string
-     |     |     +--ro (yptm:filter-spec)?
-     |     |        +--:(yptm:stream-subtree-filter)
-     |     |        |  +--ro yptm:stream-subtree-filter?   <anydata>
-     |     |        |          {subtree}?
-     |     |        +--:(yptm:stream-xpath-filter)
-     |     |           +--ro yptm:stream-xpath-filter?
-     |     |                   yang:xpath1.0 {xpath}?
+     |     +--ro (yptm:filter-spec)?
+     |     |  +--:(yptm:subtree-filter)
+     |     |  |  +--ro yptm:subtree-filter?      <anydata>
+     |     |  +--:(yptm:xpath-filter)
+     |     |     +--ro yptm:xpath-filter?        yang:xpath1.0
+     |     +--ro (yptm:target)?
+     |     |  +--:(yptm:stream)
+     |     |  |  +--ro yptm:stream?              string
+     |     |  +--:(yptm:datastore)
+     |     |     +--ro yptm:datastore?           identityref
+     |     +--ro yptm:transport?                 sn:transport
+     |     +--ro yptm:encoding?                  sn:encoding
+     |     +--ro yptm:purpose?                   string
+     |     +--ro (yptm:update-trigger)?
+     |     |  +--:(yptm:periodic)
+     |     |  |  +--ro yptm:periodic!
+     |     |  |     +--ro yptm:period?        yp:centiseconds
+     |     |  |     +--ro yptm:anchor-time?   yang:date-and-time
+     |     |  +--:(yptm:on-change)
+     |     |     +--ro yptm:on-change!
+     |     |        +--ro yptm:dampening-period?   yp:centiseconds
+     |     |        +--ro yptm:sync-on-start?      boolean
      |     +--ro yptm:module-version* [module-name]
      |     |  +--ro yptm:module-name       yang:yang-identifier
-     |     |  +--ro yptm:revision          rev:revision-date
+     |     |  +--ro yptm:revision?         rev:revision-date
      |     |  +--ro yptm:revision-label?   ysver:version
-     |     +--ro yptm:yang-library-content-id?
-     |             -> /yanglib:yang-library/content-id
+     |     +--ro yptm:yang-library-content-id?   string
      +--ro data-collection-metadata
      |  +--ro remote-address    inet:host
      |  +--ro remote-port?      inet:port-number
@@ -51,12 +58,12 @@ module: ietf-telemetry-message
      |  +--ro labels* [name]
      |     +--ro name                          string
      |     +--ro (value)
-     |        +--:(string-value)
-     |        |  +--ro (string-value)?
-     |        |     +--:(string-values)
-     |        |        +--ro string-values?    string
-     |        +--:(anydata-value)
-     |           +--ro (anydata-value)?
+     |        +--:(string-choice)
+     |        |  +--ro (string-choice)?
+     |        |     +--:(string-value)
+     |        |        +--ro string-value?     string
+     |        +--:(anydata-choice)
+     |           +--ro (anydata-choice)?
      |              +--:(anydata-values)
      |                 +--ro anydata-values?   <anydata>
-     +--ro payload?                           <anydata>
+     +--ro payload?                      <anydata>

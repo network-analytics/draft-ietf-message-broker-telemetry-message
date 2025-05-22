@@ -1,10 +1,12 @@
 module ietf-telemetry-message {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:telemetry-message";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-telemetry-message";
   prefix tm;
 
   import ietf-yang-types {
     prefix yang;
+    reference
+      "RFC 6991: Common YANG Data Types";
   }
   import ietf-inet-types {
     prefix inet;
@@ -13,7 +15,7 @@ module ietf-telemetry-message {
     prefix p-mf;
     reference
       "draft-ietf-opsawg-collected-data-manifest: A Data Manifest for
-      Contextualized Telemetry Data";
+       Contextualized Telemetry Data";
   }
 
   organization
@@ -47,130 +49,43 @@ module ietf-telemetry-message {
       "RFC XXXX";
   }
 
-  identity notification-protocol {
+  identity session-protocol {
     description
-      "Base identity to represent notification protocols.";
+      "Base identity to represent session protocols.";
   }
 
-  identity yp-dynamic {
-    base notification-protocol;
+  identity yp-push {
+    base session-protocol;
     description
-      "YANG-Push Dynamic Subscription as described in RFC 8640 or
-			RFC 8650.";
+      "YANG-Push in RFC 8640 or RFC 8641 or RFC 8650.";
     reference
-      "RFC 8640, RFC 8650: Dynamic Subscription to YANG Events and
-			Datastores over NETCONF or RESTCONF.";
-  }
-	
-  identity yp-configured {
-    base notification-protocol;
-    description
-      "YANG-Push Configured Subscription as described in RFC 8641.";
-    reference
-      "RFC 8641: Subscription to YANG Notifications for Datastore
-			Updates.";
-  }
-
-  identity netconf-get {
-    base notification-protocol;
-    description
-      "NETCONF <get> RPC as described in RFC 6241.";
-    reference
-      "RFC 6241: <get> RPC.";
-  }
-	
-  identity restconf-get {
-    base notification-protocol;
-    description
-      "RESTCONF HTTP GET as described in RFC 8040.";
-    reference
-      "RFC 8040: HTTP GET.";
-  }
-
-  identity transport {
-    description
-      "Base identity to represent notification transport protocols.";
+      "RFC 8640, RFC 8641, RFC 8650: YANG-Push Events and Notifications for Datastores.";
   }
 
   identity netconf {
-    base transport;
-		base netconf-get;
-    base yp-dynamic;		
+    base session-protocol;
     description
-      "Network Configuration Protocol as described in RFC 6241.";
+      "NETCONF RPC as described in RFC 6241.";
     reference
-      "RFC 6241: Network Configuration Protocol.";
+      "RFC 6241: NETCONF RPC.";
   }
-	
+
   identity restconf {
-    base transport;
-		base restconf-get;
-    base yp-dynamic;
+    base session-protocol;
     description
-      "RESTCONF Protocol as described in RFC 8040.";
+      "RESTCONF HTTP as described in RFC 8040.";
     reference
-      "RFC 8040: RESTCONF Protocol.";
-  }
-
-  identity udp-notif {
-    base transport;
-    base yp-configured;
-    description
-      "YANG-Push configured subscription transport protocol
-			as described in draft-ietf-netconf-udp-notif.";
-    reference
-      "draft-ietf-netconf-udp-notif: UDP-based Transport for Configured
-			Subscriptions.";
-  }
-
-  identity https-notif {
-    base transport;
-    base yp-configured;
-    description
-      "YANG-Push configured subscription transport protocol
-			as described in draft-ietf-netconf-https-notif.";
-    reference
-      "draft-ietf-netconf-https-notif: An HTTPS-based Transport for¨
-			YANG Notifications.";
-  }
-
-  identity encoding {
-    description
-      "Base identity to represent notification encodings.";
-  }
-
-  identity cbor {
-    base encoding;
-    description
-      "Encoded data using CBOR as described in RFC 9254.";
-    reference
-      "RFC 9254: CBOR Encoding of Data Modeled with YANG";
-  }
- 
-  identity xml {
-    base encoding;
-    description
-      "Encoded data using XML as described in RFC 7950.";
-    reference
-      "RFC 7950: The YANG 1.1 Data Modeling Language";
-  }
- 
-  identity json {
-    base encoding;
-    description
-      "Encoded data using JSON as described in RFC 7951.";
-    reference
-      "RFC 7951: JSON Encoding of Data Modeled with YANG";
+      "RFC 8040.";
   }
 
   typedef telemetry-notification-event-type {
     type enumeration {
-      enum "log" {
+      enum log {
         description
           "Collector is reporting the event as it arrived from the
-          network element.";
+           network element.";
       }
-      enum "update" {
+      enum update {
         description
           "
            Collector has updated an entry inside its local cache.
@@ -179,7 +94,7 @@ module ietf-telemetry-message {
            event in the collector, such as a timer triggered to referesh
            old enteries.";
       }
-      enum "delete" {
+      enum delete {
         description
           "Collector has deleted an entry from its local cache.";
       }
@@ -188,67 +103,37 @@ module ietf-telemetry-message {
       "Type of event reported by the collector.";
   }
 
-  typedef telemetry-notification-protocol-type {
+  typedef telemetry-session-protocol-type {
     type identityref {
-      base notification-protocol;
+      base session-protocol;
     }
     description
       "Notification protocol used to deliver the notification to the
-      data collection.";
+       data collection.";
   }
 
-  typedef telemetry-notification-encoding-type {
-    type identityref {
-      base encoding;
-    }
-    description
-      "Notification encoding used to deliver the notification to the
-      data collection.";
-  }
-
-  typedef telemetry-notification-transport-type {
-    type identityref {
-      base transport;
-    }
-    description
-      "Notification transport protocol used to deliver the notification
-			to the data collection.";
-  }
-
-  container notification {
+  container message {
     config false;
+    description
+      "Telemetry message used in Data Mesh";
     leaf timestamp {
       type yang:date-and-time;
       mandatory true;
       description
-        "Timestamp when the data collection received the notification
-        from the network element or an update or delete event is
-        triggered.";
+        "Timestamp when the data collection collected the payload
+         from the network element or an update or delete event is
+         triggered.";
     }
-    leaf notification-protocol {
-      type telemetry-notification-protocol-type;
+    leaf session-protocol {
+      type telemetry-session-protocol-type;
       mandatory true;
       description
-        "Notification protocol used to send the notification from
-        network node to the data collection.";
-    }
-    leaf notification-encoding {
-      type telemetry-notification-encoding-type;
-      mandatory true;
-      description
-        "Encoding used to send the notification from network node to the
-				data collection.";
-    }		
-    leaf notification-transport {
-      type telemetry-notification-transport-type;
-      mandatory true;
-      description
-        "Notofication transport protocol used to send the notification
-				from network node to the data collection.";
+        "Session protocol used to collect the payload of this message
+         from the network";
     }
     container network-node-manifest {
       description
-        "Address of network element sent the notification.";
+        "Address of network element from which the payload is collected.";
       uses p-mf:platform-details;
     }
     container data-collection-manifest {
@@ -256,13 +141,14 @@ module ietf-telemetry-message {
         "Address of the telemetry data collection.";
       uses p-mf:platform-details;
     }
-    container telemetry-notification-metadata {
+    container telemetry-message-metadata {
+      description
+        "Extensible message and protocol specific metadata";
       leaf event-time {
         type yang:date-and-time;
-        mandatory false;
         description
           "NETCONF eventTime. Redefined in here since NETCONF header is
-          XML not YANG.";
+           XML not YANG.";
       }
     }
     container data-collection-metadata {
@@ -288,7 +174,7 @@ module ietf-telemetry-message {
         type inet:port-number;
         description
           "Data collection transport port number.";
-      }			
+      }
       list labels {
         key "name";
         description
@@ -302,12 +188,20 @@ module ietf-telemetry-message {
         }
         choice value {
           mandatory true;
-          choice string-value {
-            leaf string-values {
+          description
+            "label value";
+          choice string-choice {
+            description
+              "String value";
+            leaf string-value {
               type string;
+              description
+                "String value";
             }
           }
-          choice anydata-value {
+          choice anydata-choice {
+            description
+              "YANG anydata value";
             anydata anydata-values {
               description
                 "anydata yang";
@@ -318,7 +212,7 @@ module ietf-telemetry-message {
     }
     anydata payload {
       description
-        "Notification received from network element.";
+        "Message or notification received from network element.";
     }
   }
 }
