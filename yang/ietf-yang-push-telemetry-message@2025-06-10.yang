@@ -11,12 +11,14 @@ module ietf-yang-push-telemetry-message {
   import ietf-telemetry-message {
     prefix tm;
     reference
-      "XXX";
+      "draft-netana-nmop-message-broker-telemetry-message: Extensible
+       YANG Model for Network Telemetry Messages";
   }
   import ietf-yang-push {
     prefix yp;
     reference
-      "RFC 8641: Subscription to YANG Notifications for Datastore Updates";
+      "RFC 8641: Subscription to YANG Notifications for Datastore
+       Updates";
   }
   import ietf-yang-types {
     prefix yang;
@@ -31,14 +33,13 @@ module ietf-yang-push-telemetry-message {
   import ietf-yang-revisions {
     prefix rev;
     reference
-      "RFC YYYY: draft-ietf-netmod-yang-module-versioning-11,
-       Updated YANG Module Revision Handling";
+      "draft-ietf-netmod-yang-module-versioning: Updated YANG Module
+       Revision Handling";
   }
   import ietf-yang-semver {
     prefix ysver;
     reference
-      "RFC ZZZZ: draft-ietf-netmod-yang-semver-15, YANG Semantic
-       Versioning";
+      "draft-ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
 
   organization
@@ -50,8 +51,9 @@ module ietf-yang-push-telemetry-message {
                 Thomas Graf
                 <mailto:thomas.graf@swisscom.com>";
   description
-    "Augments the ietf-telemetry-message with YANG Push specific
-     fields.
+    "Adds YANG-Push specific subscription metadata to the data
+     collection protocol provenance of the ietf-telemetry-message
+     envelope.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
      'SHALL NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED',
@@ -72,7 +74,7 @@ module ietf-yang-push-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2025-04-17 {
+  revision 2025-06-10 {
     description
       "Initial revision.";
     reference
@@ -81,11 +83,12 @@ module ietf-yang-push-telemetry-message {
 
   augment "/tm:message/tm:telemetry-message-metadata" {
     description
-      "Augments telemetry-message-metadata with YANG-Push specific metadata";
+      "Augments telemetry-message-metadata with YANG-Push specific
+       subscription metadata";
     container yang-push-subscription {
       config false;
       description
-        "YANG-Push specific metadata";
+        "YANG-Push specific subscription metadata";
       leaf id {
         type sn:subscription-id;
         description
@@ -96,14 +99,20 @@ module ietf-yang-push-telemetry-message {
           "The content filter specification for this request.";
         anydata subtree-filter {
           description
-            "Event stream evaluation criteria or the parameter identifies the port of the target datastore encoded in the syntax of a subtree filter as defined in RFC 6241, Section 6.";
+            "Event stream evaluation criteria or the parameter
+             identifies the port of the target datastore encoded in the
+             syntax of a subtree filter as defined in RFC 6241,
+             Section 6.";
           reference
-            "RFC 6241: Network Configuration Protocol (NETCONF), Section 6.";
+            "RFC 6241: Network Configuration Protocol (NETCONF),
+             Section 6.";
         }
         leaf xpath-filter {
           type yang:xpath1.0;
           description
-            "Event stream evaluation criteria or porting of the target datastore encoded in the syntax of an XPath 1.0 expression";
+            "Event stream evaluation criteria or porting of the target
+             datastore encoded in the syntax of an XPath 1.0
+             expression";
           reference
             "XML Path Language (XPath) Version 1.0
               (https://www.w3.org/TR/1999/REC-xpath-19991116)
@@ -120,7 +129,8 @@ module ietf-yang-push-telemetry-message {
           leaf stream {
             type string;
             description
-              "Indicates the event stream to be considered for this subscription.";
+              "Indicates the event stream to be considered for this
+               subscription.";
           }
         }
         case datastore {
@@ -213,17 +223,17 @@ module ietf-yang-push-telemetry-message {
               description
                 "When this object is set to false, it restricts an
                  on-change subscription from sending push-update
-                 notifications.  When false, pushing a full selection per
-                 the terms of the selection filter MUST NOT be done for
-                 this subscription.  Only updates about changes,
+                 notifications.  When false, pushing a full selection
+                 per the terms of the selection filter MUST NOT be done
+                 for this subscription.  Only updates about changes,
                  i.e. only push-change-update notifications are sent.
                  When true (default behavior), in order to facilitate a
                  receiver's synchronization, a full update is sent when
                  the subscription starts using a push-update
                  notification.  After that, push-change-update
                  notifications are exclusively sent unless the publisher
-                 chooses to resync the subscription via a new push-update
-                 notification.";
+                 chooses to resync the subscription via a new
+                 push-update notification.";
             }
           }
         }
@@ -250,15 +260,16 @@ module ietf-yang-push-telemetry-message {
         leaf revision-label {
           type ysver:version;
           description
-            "This references the YANG module semantic version of the syanglibent
-             notification message.";
+            "This references the YANG module semantic version of the
+             sent notification message.";
         }
       }
       leaf yang-library-content-id {
         type string;
         config false;
         description
-          "Contains the YANG library content identifier RFC 8525 information.";
+          "Contains the YANG library content identifier RFC 8525
+           information.";
       }
     }
   }

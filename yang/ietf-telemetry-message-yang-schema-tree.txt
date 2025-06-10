@@ -1,8 +1,7 @@
+pyang ietf-telemetry-message@2025-06-10.yang ietf-yang-push-telemetry-message@2025-06-10.yang -f tree --tree-line-length 69 -p deps
+
 module: ietf-telemetry-message
   +--ro message
-     +--ro timestamp                     yang:date-and-time
-     +--ro session-protocol
-     |       telemetry-session-protocol-type
      +--ro network-node-manifest
      |  +--ro name?               string
      |  +--ro vendor?             string
@@ -11,16 +10,11 @@ module: ietf-telemetry-message
      |  +--ro software-flavor?    string
      |  +--ro os-version?         string
      |  +--ro os-type?            string
-     +--ro data-collection-manifest
-     |  +--ro name?               string
-     |  +--ro vendor?             string
-     |  +--ro vendor-pen?         uint32
-     |  +--ro software-version?   string
-     |  +--ro software-flavor?    string
-     |  +--ro os-version?         string
-     |  +--ro os-type?            string
      +--ro telemetry-message-metadata
-     |  +--ro event-time?                    yang:date-and-time
+     |  +--ro node-export-timestamp?         yang:date-and-time
+     |  +--ro collection-timestamp           yang:date-and-time
+     |  +--ro session-protocol
+     |  |       telemetry-session-protocol-type
      |  +--ro yptm:yang-push-subscription
      |     +--ro yptm:id?                        sn:subscription-id
      |     +--ro (yptm:filter-spec)?
@@ -50,6 +44,14 @@ module: ietf-telemetry-message
      |     |  +--ro yptm:revision?         rev:revision-date
      |     |  +--ro yptm:revision-label?   ysver:version
      |     +--ro yptm:yang-library-content-id?   string
+     +--ro data-collection-manifest
+     |  +--ro name?               string
+     |  +--ro vendor?             string
+     |  +--ro vendor-pen?         uint32
+     |  +--ro software-version?   string
+     |  +--ro software-flavor?    string
+     |  +--ro os-version?         string
+     |  +--ro os-type?            string
      +--ro data-collection-metadata
      |  +--ro remote-address    inet:host
      |  +--ro remote-port?      inet:port-number
