@@ -229,11 +229,11 @@
       <dl>
         <dt>Network Node Provenance:</dt>
 
-        <dd>The "network-node-manifest" container in <xref
+        <dd>The OPTIONAL "network-node-manifest" container in <xref
 				target="ietf-telemetry-message-module"/> contains the Data
 				Manifest about the network node that exported Network Telemetry
-				data. This category adds OPTIONAL information such as the node
-				name, address, and software version to the message.
+				data. It adds information such as the node name, address, and
+				software version. Each leaf is OPTIONAL.
 				</dd>
       </dl>
 
@@ -255,20 +255,22 @@
       <dl>
         <dt>Data Collection Provenance:</dt>
 
-        <dd>The "data-collection-metadata" container in <xref
+        <dd>The OPTIONAL "data-collection-manifest" container in <xref
 				target="ietf-telemetry-message-module"/> contains the Data
 				Manifest of the data collection which collected the Network
 				Telemetry data. The data type is the same as the previous
 				category but specific to the collector node. It containes
 				information from which address or port the notification was
 				exported from and collected at. Apart from the remote-address
-				leaf all other leafs are	OPTIONAL.</dd>
+				leaf all other leafs are OPTIONAL. This Network Telemetry
+				transport session informations allow a network operator to
+				troubleshoot and measure delay and loss related issues.</dd>
       </dl>
 
       <dl>
         <dt>Network Operator Metadata:</dt>
 
-        <dd>The OPTIONAL labels list in the "data-collection-metadata"
+        <dd>The OPTIONAL "labels" list in the "data-collection-metadata"
         container in <xref target="ietf-telemetry-message-module"/> contains
 				the operator specific metadata. Some operators enrich the
 				collected data with specific information. For instance: type of
@@ -284,7 +286,7 @@
 <sourcecode type="yangtree"><![CDATA[
 module: ietf-telemetry-message
   +--ro message
-     +--ro network-node-manifest
+     +--ro network-node-manifest {network-node-manifest}?
      |  +--ro name?               string
      |  +--ro vendor?             string
      |  +--ro vendor-pen?         uint32
@@ -297,7 +299,7 @@ module: ietf-telemetry-message
      |  +--ro collection-timestamp     yang:date-and-time
      |  +--ro session-protocol
      |          telemetry-session-protocol-type
-     +--ro data-collection-manifest
+     +--ro data-collection-manifest {data-collection-manifest}?
      |  +--ro name?               string
      |  +--ro vendor?             string
      |  +--ro vendor-pen?         uint32
@@ -452,6 +454,16 @@ module ietf-telemetry-message {
       "RFC 8040.";
   }
 
+  feature network-node-manifest {
+    description
+      "This feature indicates the network node manifest support.";
+  }
+
+  feature data-collection-manifest {
+    description
+      "This feature indicates the data collection manifest support.";
+  }
+
   typedef telemetry-notification-event-type {
     type enumeration {
       enum log {
@@ -493,6 +505,7 @@ module ietf-telemetry-message {
       description
         "Contains the Data Manifest about the network node that
          exported Network Telemetry data.";
+      if-feature "network-node-manifest";
       uses p-mf:platform-details;
     }
     container telemetry-message-metadata {
@@ -524,6 +537,7 @@ module ietf-telemetry-message {
       description
         "Contains the Data Manifest of the data collection which
          collected the Network Telemetry data.";
+      if-feature "data-collection-manifest";
       uses p-mf:platform-details;
     }
     container data-collection-metadata {
@@ -540,19 +554,19 @@ module ietf-telemetry-message {
         type inet:port-number;
         description
           "Network node transport port number from where the Network
-           Telemetry data was exported from.";
+           Telemetry data was exported.";
       }
       leaf local-address {
         type inet:host;
         description
           "Data collection IP address at which the Network Telemetry
-           data was collected from.";
+           data was collected.";
       }
       leaf local-port {
         type inet:port-number;
         description
           "Data collection transport port number at which the Network
-           Telemetry data was collected from";
+           Telemetry data was collected.";
       }
       list labels {
         key "name";

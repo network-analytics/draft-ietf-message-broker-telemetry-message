@@ -200,11 +200,11 @@ Internet-Draft              Telmetery Message                  June 2025
    The YANG-Push extension adds YANG-Push specific subscription metadata
    to the Network Telemetry protocol provenance of the envelope.
 
-   Network Node Provenance:  The "network-node-manifest" container in
-      Figure 3 contains the Data Manifest about the network node that
-      exported Network Telemetry data.  This category adds OPTIONAL
-      information such as the node name, address, and software version
-      to the message.
+   Network Node Provenance:  The OPTIONAL "network-node-manifest"
+      container in Figure 3 contains the Data Manifest about the network
+      node that exported Network Telemetry data.  It adds information
+      such as the node name, address, and software version.  Each leaf
+      is OPTIONAL.
 
    Network Telemetry Protocol Metadata:  The "telemetry-message-
       metadata" container in Figure 3 contains the session information
@@ -215,7 +215,7 @@ Internet-Draft              Telmetery Message                  June 2025
       with Figure 4 an extension specific to YANG-Push that includes
       YANG-Push subscription information.
 
-   Data Collection Provenance:  The "data-collection-metadata" container
+   Data Collection Provenance:  The OPTIONAL "data-collection-manifest"
 
 
 
@@ -226,14 +226,17 @@ Elhassany & Graf        Expires 12 December 2025                [Page 4]
 Internet-Draft              Telmetery Message                  June 2025
 
 
-      in Figure 3 contains the Data Manifest of the data collection
-      which collected the Network Telemetry data.  The data type is the
-      same as the previous category but specific to the collector node.
-      It containes information from which address or port the
-      notification was exported from and collected at.  Apart from the
-      remote-address leaf all other leafs are OPTIONAL.
+      container in Figure 3 contains the Data Manifest of the data
+      collection which collected the Network Telemetry data.  The data
+      type is the same as the previous category but specific to the
+      collector node.  It containes information from which address or
+      port the notification was exported from and collected at.  Apart
+      from the remote-address leaf all other leafs are OPTIONAL.  This
+      Network Telemetry transport session informations allow a network
+      operator to troubleshoot and measure delay and loss related
+      issues.
 
-   Network Operator Metadata:  The OPTIONAL labels list in the "data-
+   Network Operator Metadata:  The OPTIONAL "labels" list in the "data-
       collection-metadata" container in Figure 3 contains the operator
       specific metadata.  Some operators enrich the collected data with
       specific information.  For instance: type of the network node
@@ -274,9 +277,6 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-
-
-
 Elhassany & Graf        Expires 12 December 2025                [Page 5]
 
 Internet-Draft              Telmetery Message                  June 2025
@@ -284,7 +284,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
    module: ietf-telemetry-message
      +--ro message
-        +--ro network-node-manifest
+        +--ro network-node-manifest {network-node-manifest}?
         |  +--ro name?               string
         |  +--ro vendor?             string
         |  +--ro vendor-pen?         uint32
@@ -297,7 +297,7 @@ Internet-Draft              Telmetery Message                  June 2025
         |  +--ro collection-timestamp     yang:date-and-time
         |  +--ro session-protocol
         |          telemetry-session-protocol-type
-        +--ro data-collection-manifest
+        +--ro data-collection-manifest {data-collection-manifest}?
         |  +--ro name?               string
         |  +--ro vendor?             string
         |  +--ro vendor-pen?         uint32
@@ -474,6 +474,16 @@ Internet-Draft              Telmetery Message                  June 2025
          "RFC 8040.";
      }
 
+     feature network-node-manifest {
+       description
+         "This feature indicates the network node manifest support.";
+     }
+
+     feature data-collection-manifest {
+       description
+         "This feature indicates the data collection manifest support.";
+     }
+
      typedef telemetry-notification-event-type {
        type enumeration {
          enum log {
@@ -488,6 +498,14 @@ Internet-Draft              Telmetery Message                  June 2025
               instance interface operational status changed or an internal
               event in the collector, such as a timer triggered to referesh
               old enteries.";
+
+
+
+Elhassany & Graf        Expires 12 December 2025                [Page 9]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
          }
          enum delete {
            description
@@ -497,14 +515,6 @@ Internet-Draft              Telmetery Message                  June 2025
        description
          "Type of event reported by the collector.";
      }
-
-
-
-
-Elhassany & Graf        Expires 12 December 2025                [Page 9]
-
-Internet-Draft              Telmetery Message                  June 2025
-
 
      typedef telemetry-session-protocol-type {
        type identityref {
@@ -523,6 +533,7 @@ Internet-Draft              Telmetery Message                  June 2025
          description
            "Contains the Data Manifest about the network node that
             exported Network Telemetry data.";
+         if-feature "network-node-manifest";
          uses p-mf:platform-details;
        }
        container telemetry-message-metadata {
@@ -543,6 +554,14 @@ Internet-Draft              Telmetery Message                  June 2025
               Telemetry data from the network element.";
          }
          leaf session-protocol {
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 10]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
            type telemetry-session-protocol-type;
            mandatory true;
            description
@@ -554,14 +573,7 @@ Internet-Draft              Telmetery Message                  June 2025
          description
            "Contains the Data Manifest of the data collection which
             collected the Network Telemetry data.";
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 10]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
+         if-feature "data-collection-manifest";
          uses p-mf:platform-details;
        }
        container data-collection-metadata {
@@ -578,19 +590,19 @@ Internet-Draft              Telmetery Message                  June 2025
            type inet:port-number;
            description
              "Network node transport port number from where the Network
-              Telemetry data was exported from.";
+              Telemetry data was exported.";
          }
          leaf local-address {
            type inet:host;
            description
              "Data collection IP address at which the Network Telemetry
-              data was collected from.";
+              data was collected.";
          }
          leaf local-port {
            type inet:port-number;
            description
              "Data collection transport port number at which the Network
-              Telemetry data was collected from";
+              Telemetry data was collected.";
          }
          list labels {
            key "name";
@@ -598,6 +610,14 @@ Internet-Draft              Telmetery Message                  June 2025
              "Abritrary labels assinged by the data collection.";
            leaf name {
              type string {
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 11]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
                length "1..max";
              }
              description
@@ -610,14 +630,6 @@ Internet-Draft              Telmetery Message                  June 2025
              choice string-choice {
                description
                  "String value";
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 11]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
                leaf string-value {
                  type string;
                  description
@@ -654,6 +666,14 @@ Internet-Draft              Telmetery Message                  June 2025
 
      import ietf-subscribed-notifications {
        prefix sn;
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 12]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
        reference
          "RFC 8639: Subscription to YANG Notifications";
      }
@@ -666,14 +686,6 @@ Internet-Draft              Telmetery Message                  June 2025
      import ietf-yang-push {
        prefix yp;
        reference
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 12]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
          "RFC 8641: Subscription to YANG Notifications for Datastore
           Updates";
      }
@@ -710,6 +722,14 @@ Internet-Draft              Telmetery Message                  June 2025
      description
        "Adds YANG-Push specific subscription metadata to the data
         collection protocol provenance of the ietf-telemetry-message
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 13]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
         envelope.
 
         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
@@ -721,14 +741,6 @@ Internet-Draft              Telmetery Message                  June 2025
 
         Copyright (c) 2025 IETF Trust and the persons identified as
           authors of the code.  All rights reserved.
-
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 13]
-
-Internet-Draft              Telmetery Message                  June 2025
-
 
         Redistribution and use in source and binary forms, with or without
         modification, is permitted pursuant to, and subject to the license
@@ -766,6 +778,14 @@ Internet-Draft              Telmetery Message                  June 2025
              description
                "Event stream evaluation criteria or the parameter
                 identifies the port of the target datastore encoded in the
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 14]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
                 syntax of a subtree filter as defined in RFC 6241,
                 Section 6.";
              reference
@@ -778,14 +798,6 @@ Internet-Draft              Telmetery Message                  June 2025
                "Event stream evaluation criteria or porting of the target
                 datastore encoded in the syntax of an XPath 1.0
                 expression";
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 14]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
              reference
                "XML Path Language (XPath) Version 1.0
                  (https://www.w3.org/TR/1999/REC-xpath-19991116)
@@ -822,6 +834,14 @@ Internet-Draft              Telmetery Message                  June 2025
              "For a configured subscription, this leaf specifies the
               transport used to deliver messages destined for all
               receivers of that subscription.";
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 15]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
          }
          leaf encoding {
            type sn:encoding;
@@ -834,14 +854,6 @@ Internet-Draft              Telmetery Message                  June 2025
               will be the default encoding for an underlying transport.";
          }
          leaf purpose {
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 15]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
            type string;
            description
              "Open text allowing a configuring entity to embed the
@@ -878,6 +890,14 @@ Internet-Draft              Telmetery Message                  June 2025
              }
            }
            case on-change {
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 16]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
              container on-change {
                presence "indicates an on-change subscription";
                description
@@ -890,14 +910,6 @@ Internet-Draft              Telmetery Message                  June 2025
                  description
                    "Specifies the minimum interval between the assembly of
                     successive update records for a single receiver of a
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 16]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
                     subscription.  Whenever subscribed objects change, and
                     a dampening period interval (which may be zero) has
                     elapsed since the previous update record creation for
@@ -934,6 +946,14 @@ Internet-Draft              Telmetery Message                  June 2025
              "List of yang-push-module-version grouping. The revision is
               not configurable.";
            leaf module-name {
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 17]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
              type yang:yang-identifier;
              config false;
              description
@@ -946,14 +966,6 @@ Internet-Draft              Telmetery Message                  June 2025
                "This references the YANG module revision of the sent
                 notification message.";
            }
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 17]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
            leaf revision-label {
              type ysver:version;
              description
@@ -991,6 +1003,13 @@ Internet-Draft              Telmetery Message                  June 2025
 
    *  Registrant Contact: The IESG.
 
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 18]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
    *  XML: N/A; the requested URI is an XML namespace.
 
    This document registers the following two YANG modules in the YANG
@@ -1001,14 +1020,6 @@ Internet-Draft              Telmetery Message                  June 2025
    *  Namespace: urn:ietf:params:xml:ns:yang:ietf-telemetry-message
 
    *  Prefix: tm
-
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 18]
-
-Internet-Draft              Telmetery Message                  June 2025
-
 
    *  Reference: RFC XXXX
 
@@ -1048,6 +1059,13 @@ Internet-Draft              Telmetery Message                  June 2025
    effect on network operations.  The following subtrees and data nodes
    have particular sensitivities/vulnerabilities:
 
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 19]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
    "There are no particularly sensitive writable data nodes."
 
    Some of the readable data nodes in this YANG module may be considered
@@ -1058,13 +1076,6 @@ Internet-Draft              Telmetery Message                  June 2025
    vulnerabilities:
 
    "There are no particularly sensitive readable data nodes."
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 19]
-
-Internet-Draft              Telmetery Message                  June 2025
-
 
 5.  Implementation status
 
@@ -1103,6 +1114,14 @@ Internet-Draft              Telmetery Message                  June 2025
           ],
           "on-change": {
             "sync-on-start": true
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 20]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
           },
           "purpose": "send notifications",
           "transport": "ietf-udp-notif-transport:udp-notif",
@@ -1114,14 +1133,6 @@ Internet-Draft              Telmetery Message                  June 2025
         "name": "netgauze-collector@leo-rocky",
         "os-type": "Rocky Linux",
         "os-version": "8.10",
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 20]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
         "software-flavor": "debug",
         "software-version": "0.6.2 (cbd74215)",
         "vendor": "NetGauze"
@@ -1159,6 +1170,14 @@ Internet-Draft              Telmetery Message                  June 2025
               "3625735881",
               "ietf-yang-push:datastore": "ietf-datastores:operational",
               "ietf-yang-push:datastore-xpath-filter": \
+
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 21]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
               "/state/vrf/l3vrf/interface/loopback/enabled",
               "ietf-yang-push:on-change": {
                 "sync-on-start": true
@@ -1170,14 +1189,6 @@ Internet-Draft              Telmetery Message                  June 2025
           "event-time": "2025-03-04T07:31:36.806021107+00:00",
           "hostname": "daisy-ietf-ipf-zbl1843-r-daisy-58",
           "sequence-number": 48
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 21]
-
-Internet-Draft              Telmetery Message                  June 2025
-
-
         }
       }
     }
@@ -1216,6 +1227,13 @@ Internet-Draft              Telmetery Message                  June 2025
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
               <https://www.rfc-editor.org/info/rfc7950>.
 
+
+
+Elhassany & Graf        Expires 12 December 2025               [Page 22]
+
+Internet-Draft              Telmetery Message                  June 2025
+
+
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/info/rfc8040>.
@@ -1223,16 +1241,6 @@ Internet-Draft              Telmetery Message                  June 2025
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-
-
-
-
-
-Elhassany & Graf        Expires 12 December 2025               [Page 22]
-
-Internet-Draft              Telmetery Message                  June 2025
-
 
    [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
               Access Control Model", STD 91, RFC 8341,
@@ -1272,14 +1280,6 @@ Internet-Draft              Telmetery Message                  June 2025
               DOI 10.17487/RFC9232, May 2022,
               <https://www.rfc-editor.org/info/rfc9232>.
 
-   [I-D.ietf-nmop-yang-message-broker-integration]
-              Graf, T. and A. Elhassany, "An Architecture for YANG-Push
-              to Message Broker Integration", Work in Progress,
-              Internet-Draft, draft-ietf-nmop-yang-message-broker-
-              integration-07, 3 March 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              yang-message-broker-integration-07>.
-
 
 
 
@@ -1289,6 +1289,14 @@ Elhassany & Graf        Expires 12 December 2025               [Page 23]
 
 Internet-Draft              Telmetery Message                  June 2025
 
+
+   [I-D.ietf-nmop-yang-message-broker-integration]
+              Graf, T. and A. Elhassany, "An Architecture for YANG-Push
+              to Message Broker Integration", Work in Progress,
+              Internet-Draft, draft-ietf-nmop-yang-message-broker-
+              integration-07, 3 March 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              yang-message-broker-integration-07>.
 
    [I-D.netana-netconf-notif-envelope]
               Feng, A. H., Francois, P., Graf, T., and B. Claise,
@@ -1329,14 +1337,6 @@ Internet-Draft              Telmetery Message                  June 2025
               DOI 10.17487/RFC3444, January 2003,
               <https://www.rfc-editor.org/info/rfc3444>.
 
-   [RFC7951]  Lhotka, L., "JSON Encoding of Data Modeled with YANG",
-              RFC 7951, DOI 10.17487/RFC7951, August 2016,
-              <https://www.rfc-editor.org/info/rfc7951>.
-
-
-
-
-
 
 
 
@@ -1345,6 +1345,10 @@ Elhassany & Graf        Expires 12 December 2025               [Page 24]
 
 Internet-Draft              Telmetery Message                  June 2025
 
+
+   [RFC7951]  Lhotka, L., "JSON Encoding of Data Modeled with YANG",
+              RFC 7951, DOI 10.17487/RFC7951, August 2016,
+              <https://www.rfc-editor.org/info/rfc7951>.
 
    [I-D.ietf-netmod-rfc8407bis]
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
@@ -1390,10 +1394,6 @@ Authors' Addresses
    CH- Zuerich 8045
    Switzerland
    Email: thomas.graf@swisscom.com
-
-
-
-
 
 
 

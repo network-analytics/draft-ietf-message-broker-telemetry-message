@@ -1,8 +1,7 @@
 pyang ietf-telemetry-message@2025-06-10.yang ietf-yang-push-telemetry-message@2025-06-10.yang -f tree --tree-line-length 69 -p deps
-
 module: ietf-telemetry-message
   +--ro message
-     +--ro network-node-manifest
+     +--ro network-node-manifest {network-node-manifest}?
      |  +--ro name?               string
      |  +--ro vendor?             string
      |  +--ro vendor-pen?         uint32
@@ -44,7 +43,7 @@ module: ietf-telemetry-message
      |     |  +--ro yptm:revision?         rev:revision-date
      |     |  +--ro yptm:revision-label?   ysver:version
      |     +--ro yptm:yang-library-content-id?   string
-     +--ro data-collection-manifest
+     +--ro data-collection-manifest {data-collection-manifest}?
      |  +--ro name?               string
      |  +--ro vendor?             string
      |  +--ro vendor-pen?         uint32

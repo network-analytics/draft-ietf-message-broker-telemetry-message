@@ -82,6 +82,16 @@ module ietf-telemetry-message {
       "RFC 8040.";
   }
 
+  feature network-node-manifest {
+    description
+      "This feature indicates the network node manifest support.";
+  }
+
+  feature data-collection-manifest {
+    description
+      "This feature indicates the data collection manifest support.";
+  }
+
   typedef telemetry-notification-event-type {
     type enumeration {
       enum log {
@@ -123,6 +133,7 @@ module ietf-telemetry-message {
       description
         "Contains the Data Manifest about the network node that
          exported Network Telemetry data.";
+      if-feature "network-node-manifest";
       uses p-mf:platform-details;
     }
     container telemetry-message-metadata {
@@ -154,6 +165,7 @@ module ietf-telemetry-message {
       description
         "Contains the Data Manifest of the data collection which
          collected the Network Telemetry data.";
+      if-feature "data-collection-manifest";
       uses p-mf:platform-details;
     }
     container data-collection-metadata {
@@ -170,19 +182,19 @@ module ietf-telemetry-message {
         type inet:port-number;
         description
           "Network node transport port number from where the Network
-           Telemetry data was exported from.";
+           Telemetry data was exported.";
       }
       leaf local-address {
         type inet:host;
         description
           "Data collection IP address at which the Network Telemetry
-           data was collected from.";
+           data was collected.";
       }
       leaf local-port {
         type inet:port-number;
         description
           "Data collection transport port number at which the Network
-           Telemetry data was collected from";
+           Telemetry data was collected.";
       }
       list labels {
         key "name";
