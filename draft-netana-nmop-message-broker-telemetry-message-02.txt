@@ -155,12 +155,12 @@ Internet-Draft              Telmetery Message                  June 2025
    The terms "Subscriber", "Publisher", and "Receiver" are used as
    defined in [RFC8639].
 
-   The term "Network Telemetry" is used as defined in [RFC9232].
+   The term "Network Telemetry" is used as defined in [RFC9232].  This
+   document uses the term export and collection to distinguish between
+   the data export and collection.
 
    The term "Message Broker" is used as defined in
    [I-D.ietf-nmop-yang-message-broker-integration].
-
-
 
 
 

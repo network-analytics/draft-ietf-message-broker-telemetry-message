@@ -179,7 +179,9 @@
         as defined in <xref target="RFC8639"/>.</t>
 
         <t>The term "Network Telemetry" is used
-        as defined in <xref target="RFC9232"/>.</t>
+        as defined in <xref target="RFC9232"/>. This document uses the
+				term export and collection to distinguish between the
+				data export and collection.</t>
 
         <t>The term "Message Broker" is used
         as defined in <xref
