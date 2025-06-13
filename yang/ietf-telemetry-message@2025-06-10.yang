@@ -160,17 +160,6 @@ module ietf-telemetry-message {
           "Session protocol used to collect the Network Telemetry data
            from the network node.";
       }
-    }
-    container data-collection-manifest {
-      description
-        "Contains the Data Manifest of the data collection which
-         collected the Network Telemetry data.";
-      if-feature "data-collection-manifest";
-      uses p-mf:platform-details;
-    }
-    container data-collection-metadata {
-      description
-        "Metadata added by data collection.";
       leaf remote-address {
         type inet:host;
         mandatory true;
@@ -196,6 +185,18 @@ module ietf-telemetry-message {
           "Data collection transport port number at which the Network
            Telemetry data was collected.";
       }
+    }
+    container data-collection-manifest {
+      description
+        "Contains the Data Manifest of the data collection which
+         collected the Network Telemetry data.";
+      if-feature "data-collection-manifest";
+      uses p-mf:platform-details;
+    }
+    container data-collection-metadata {
+      description
+        "Network operator specific metadata added by the Network 
+         Telemetry data collection.";
       list labels {
         key "name";
         description

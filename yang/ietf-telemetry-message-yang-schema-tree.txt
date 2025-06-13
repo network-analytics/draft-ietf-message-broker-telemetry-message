@@ -14,6 +14,10 @@ module: ietf-telemetry-message
      |  +--ro collection-timestamp           yang:date-and-time
      |  +--ro session-protocol
      |  |       telemetry-session-protocol-type
+     |  +--ro remote-address                 inet:host
+     |  +--ro remote-port?                   inet:port-number
+     |  +--ro local-address?                 inet:host
+     |  +--ro local-port?                    inet:port-number
      |  +--ro yptm:yang-push-subscription
      |     +--ro yptm:id?                        sn:subscription-id
      |     +--ro (yptm:filter-spec)?
@@ -52,10 +56,6 @@ module: ietf-telemetry-message
      |  +--ro os-version?         string
      |  +--ro os-type?            string
      +--ro data-collection-metadata
-     |  +--ro remote-address    inet:host
-     |  +--ro remote-port?      inet:port-number
-     |  +--ro local-address?    inet:host
-     |  +--ro local-port?       inet:port-number
      |  +--ro labels* [name]
      |     +--ro name                          string
      |     +--ro (value)

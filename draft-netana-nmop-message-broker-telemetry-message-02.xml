@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="10" month="June" year="2025"/>
+    <date day="13" month="June" year="2025"/>
 
     <area>General</area>
 
@@ -227,7 +227,7 @@
 			envelope.</t>
 
       <dl>
-        <dt>Network Node Provenance:</dt>
+        <dt>Network Node Manifest:</dt>
 
         <dd>The OPTIONAL "network-node-manifest" container in <xref
 				target="ietf-telemetry-message-module"/> contains the Data
@@ -241,30 +241,31 @@
         <dt>Network Telemetry Protocol Metadata:</dt>
 
         <dd>The "telemetry-message-metadata" container in <xref
-				target="ietf-telemetry-message-module"/> contains the session
-				information about the session between the collector
-				and the network node. This category adds fields such as the
-				Network Telemetry protocol and the time the event was exported
-				at the network node and received at the data collection.
-				Moreover, this document defines with <xref
+				target="ietf-telemetry-message-module"/> contains the Network
+				Telemetry session information between the collector and the
+				network node. It adds fields such as the Network Telemetry
+				protocol name, the IP addresses and ports of that transport
+				session and the time the event was exported at the network node
+				and received at the data collection. Apart from the
+				collection-timestamp, session-protocol and remote-address leafs
+				all other leafs are OPTIONAL.  These Network Telemetry session
+				informations allow a network operator to troubleshoot and
+				measure delay and loss related issues. Moreover, this document
+				also defines with <xref
 				target="ietf-yang-push-telemetry-message-module"/> an extension
 				specific to YANG-Push that includes YANG-Push subscription
+				information relevant to the Network Telemetry session
 				information.</dd>
       </dl>
 
       <dl>
-        <dt>Data Collection Provenance:</dt>
+        <dt>Data Collection Manifest:</dt>
 
         <dd>The OPTIONAL "data-collection-manifest" container in <xref
 				target="ietf-telemetry-message-module"/> contains the Data
 				Manifest of the data collection which collected the Network
 				Telemetry data. The data type is the same as the previous
-				category but specific to the collector node. It containes
-				information from which address or port the notification was
-				exported from and collected at. Apart from the remote-address
-				leaf all other leafs are OPTIONAL. This Network Telemetry
-				transport session informations allow a network operator to
-				troubleshoot and measure delay and loss related issues.</dd>
+				category but specific to the collector node.</dd>
       </dl>
 
       <dl>
@@ -298,7 +299,11 @@ module: ietf-telemetry-message
      |  +--ro node-export-timestamp?   yang:date-and-time
      |  +--ro collection-timestamp     yang:date-and-time
      |  +--ro session-protocol
-     |          telemetry-session-protocol-type
+     |  |       telemetry-session-protocol-type
+     |  +--ro remote-address           inet:host
+     |  +--ro remote-port?             inet:port-number
+     |  +--ro local-address?           inet:host
+     |  +--ro local-port?              inet:port-number
      +--ro data-collection-manifest {data-collection-manifest}?
      |  +--ro name?               string
      |  +--ro vendor?             string
@@ -308,10 +313,6 @@ module: ietf-telemetry-message
      |  +--ro os-version?         string
      |  +--ro os-type?            string
      +--ro data-collection-metadata
-     |  +--ro remote-address    inet:host
-     |  +--ro remote-port?      inet:port-number
-     |  +--ro local-address?    inet:host
-     |  +--ro local-port?       inet:port-number
      |  +--ro labels* [name]
      |     +--ro name                          string
      |     +--ro (value)
@@ -532,17 +533,6 @@ module ietf-telemetry-message {
           "Session protocol used to collect the Network Telemetry data
            from the network node.";
       }
-    }
-    container data-collection-manifest {
-      description
-        "Contains the Data Manifest of the data collection which
-         collected the Network Telemetry data.";
-      if-feature "data-collection-manifest";
-      uses p-mf:platform-details;
-    }
-    container data-collection-metadata {
-      description
-        "Metadata added by data collection.";
       leaf remote-address {
         type inet:host;
         mandatory true;
@@ -568,6 +558,18 @@ module ietf-telemetry-message {
           "Data collection transport port number at which the Network
            Telemetry data was collected.";
       }
+    }
+    container data-collection-manifest {
+      description
+        "Contains the Data Manifest of the data collection which
+         collected the Network Telemetry data.";
+      if-feature "data-collection-manifest";
+      uses p-mf:platform-details;
+    }
+    container data-collection-metadata {
+      description
+        "Network operator specific metadata added by the Network
+         Telemetry data collection.";
       list labels {
         key "name";
         description
