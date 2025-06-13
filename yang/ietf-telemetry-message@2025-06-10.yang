@@ -193,7 +193,7 @@ module ietf-telemetry-message {
       if-feature "data-collection-manifest";
       uses p-mf:platform-details;
     }
-    container data-collection-metadata {
+    container network-operator-metadata {
       description
         "Network operator specific metadata added by the Network 
          Telemetry data collection.";

@@ -55,7 +55,7 @@ module: ietf-telemetry-message
      |  +--ro software-flavor?    string
      |  +--ro os-version?         string
      |  +--ro os-type?            string
-     +--ro data-collection-metadata
+     +--ro network-operator-metadata
      |  +--ro labels* [name]
      |     +--ro name                          string
      |     +--ro (value)
