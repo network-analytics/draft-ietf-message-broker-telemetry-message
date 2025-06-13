@@ -14,10 +14,10 @@ module: ietf-telemetry-message
      |  +--ro collection-timestamp           yang:date-and-time
      |  +--ro session-protocol
      |  |       telemetry-session-protocol-type
-     |  +--ro remote-address                 inet:host
-     |  +--ro remote-port?                   inet:port-number
-     |  +--ro local-address?                 inet:host
-     |  +--ro local-port?                    inet:port-number
+     |  +--ro export-address                 inet:host
+     |  +--ro export-port?                   inet:port-number
+     |  +--ro collection-address?            inet:host
+     |  +--ro collection-port?               inet:port-number
      |  +--ro yptm:yang-push-subscription
      |     +--ro yptm:id?                        sn:subscription-id
      |     +--ro (yptm:filter-spec)?

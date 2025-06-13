@@ -160,26 +160,26 @@ module ietf-telemetry-message {
           "Session protocol used to collect the Network Telemetry data
            from the network node.";
       }
-      leaf remote-address {
+      leaf export-address {
         type inet:host;
         mandatory true;
         description
           "Network node IP address from where the Network Telemetry data
            was exported from.";
       }
-      leaf remote-port {
+      leaf export-port {
         type inet:port-number;
         description
           "Network node transport port number from where the Network
            Telemetry data was exported.";
       }
-      leaf local-address {
+      leaf collection-address {
         type inet:host;
         description
           "Data collection IP address at which the Network Telemetry
            data was collected.";
       }
-      leaf local-port {
+      leaf collection-port {
         type inet:port-number;
         description
           "Data collection transport port number at which the Network

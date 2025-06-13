@@ -300,10 +300,10 @@ module: ietf-telemetry-message
      |  +--ro collection-timestamp     yang:date-and-time
      |  +--ro session-protocol
      |  |       telemetry-session-protocol-type
-     |  +--ro remote-address           inet:host
-     |  +--ro remote-port?             inet:port-number
-     |  +--ro local-address?           inet:host
-     |  +--ro local-port?              inet:port-number
+     |  +--ro export-address           inet:host
+     |  +--ro export-port?             inet:port-number
+     |  +--ro collection-address?      inet:host
+     |  +--ro collection-port?         inet:port-number
      +--ro data-collection-manifest {data-collection-manifest}?
      |  +--ro name?               string
      |  +--ro vendor?             string
@@ -533,26 +533,26 @@ module ietf-telemetry-message {
           "Session protocol used to collect the Network Telemetry data
            from the network node.";
       }
-      leaf remote-address {
+      leaf export-address {
         type inet:host;
         mandatory true;
         description
           "Network node IP address from where the Network Telemetry data
            was exported from.";
       }
-      leaf remote-port {
+      leaf export-port {
         type inet:port-number;
         description
           "Network node transport port number from where the Network
            Telemetry data was exported.";
       }
-      leaf local-address {
+      leaf collection-address {
         type inet:host;
         description
           "Data collection IP address at which the Network Telemetry
            data was collected.";
       }
-      leaf local-port {
+      leaf collection-port {
         type inet:port-number;
         description
           "Data collection transport port number at which the Network
