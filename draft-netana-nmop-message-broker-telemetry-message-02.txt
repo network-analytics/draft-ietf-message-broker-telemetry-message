@@ -530,10 +530,10 @@ Internet-Draft              Telmetery Message                  June 2025
        description
          "Telemetry message used within the Data Mesh";
        container network-node-manifest {
+         if-feature "network-node-manifest";
          description
            "Contains the Data Manifest about the network node that
             exported Network Telemetry data.";
-         if-feature "network-node-manifest";
          uses p-mf:platform-details;
        }
        container telemetry-message-metadata {
@@ -595,10 +595,10 @@ Internet-Draft              Telmetery Message                  June 2025
          }
        }
        container data-collection-manifest {
+         if-feature "data-collection-manifest";
          description
            "Contains the Data Manifest of the data collection which
             collected the Network Telemetry data.";
-         if-feature "data-collection-manifest";
          uses p-mf:platform-details;
        }
        container network-operator-metadata {
