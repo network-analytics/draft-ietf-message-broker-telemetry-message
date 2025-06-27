@@ -144,7 +144,11 @@ module ietf-telemetry-message {
         type yang:date-and-time;
         description
           "Timestamp when the Network Telemetry data has been exported
-           from network element.";
+           from network element. This can be obtained in YANG-Push from
+           event-time defined in draft-ietf-netconf-notif-envelope or
+           in IPFIX from the export time in the message header as
+           defined in RFC 7011 or in BMP from the timestamp in The
+           per-peer header as defined in RFc 7854.";
       }
       leaf collection-timestamp {
         type yang:date-and-time;
@@ -200,7 +204,7 @@ module ietf-telemetry-message {
       list labels {
         key "name";
         description
-          "Abritrary labels assinged by the data collection.";
+          "Abritrary labels assigned by the data collection.";
         leaf name {
           type string {
             length "1..max";
