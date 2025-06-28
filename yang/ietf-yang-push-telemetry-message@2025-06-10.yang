@@ -1,6 +1,7 @@
 module ietf-yang-push-telemetry-message {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message";
+  namespace
+    "urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message";
   prefix yptm;
 
   import ietf-subscribed-notifications {

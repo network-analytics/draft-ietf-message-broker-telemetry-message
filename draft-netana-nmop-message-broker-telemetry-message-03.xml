@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="13" month="June" year="2025"/>
+    <date day="28" month="June" year="2025"/>
 
     <area>General</area>
 
@@ -84,9 +84,9 @@
 
     <abstract>
       <t>This document defines an extensible message schema in YANG to
-      be used at the data collection to transform Network Telemetry
+      be used at data collection to transform Network Telemetry
       messages into external systems such as Message Brokers.
-      The extensible message schema enables a data collection to add
+      The extensible message schema enables data collectors to add
       metadata for the provenance of the operational network data.</t>
     </abstract>
   </front>
@@ -144,7 +144,7 @@
         <li>What is the subscribed xpath, sub-tree filter and its
         schema reference?</li>  
     
-        <li>When did the data collection received the data?</li>
+        <li>When did a data collector received the data?</li>
     
         <li>What additional metadata is necessary for a consumer to make
         sense of the data?</li>
@@ -158,7 +158,7 @@
       platform-details grouping defined in <xref section="5.2"
       sectionFormat="of"
       target="I-D.ietf-opsawg-collected-data-manifest"/> for the
-      network node and the data collection.</t>
+      network node and the data collector.</t>
       
       <t>This document defines a standard YANG envelope message to carry
       with the collected Network Telemetry notifications the provenance
@@ -252,7 +252,7 @@
         network node. It adds fields such as the Network Telemetry
         protocol name, the IP addresses and ports of that transport
         session and the time the event was exported at the network node
-        and received at the data collection. Apart from the
+        and received at the data collector. Apart from the
         collection-timestamp, session-protocol and remote-address leafs
         all other leafs are OPTIONAL.  These Network Telemetry session
         informations allow a network operator to troubleshoot and
@@ -269,7 +269,7 @@
 
         <dd>The OPTIONAL "data-collection-manifest" container in <xref
         target="ietf-telemetry-message-module"/> contains the Data
-        Manifest of the data collection which collected the Network
+        Manifest of the data collector which collected the Network
         Telemetry data. The data type is the same as the previous
         category but specific to the collector node.</dd>
       </dl>
@@ -409,7 +409,7 @@ module ietf-telemetry-message {
                 <mailto:thomas.graf@swisscom.com>";
   description
     "This YANG module defines an extensible message schema to be used at
-     the data collection to transform Network Telemetry messages towards
+     data collection to transform Network Telemetry messages towards
      external systems such as Message Brokers.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
@@ -501,7 +501,7 @@ module ietf-telemetry-message {
     }
     description
       "Network Telemetry protocol used to deliver the notification
-       between the network node and the data collection.";
+       between the network node and the data collector.";
   }
 
   container message {
@@ -533,7 +533,7 @@ module ietf-telemetry-message {
         type yang:date-and-time;
         mandatory true;
         description
-          "Timestamp when the data collection collected the Network
+          "Timestamp when the data collector collected the Network
            Telemetry data from the network element.";
       }
       leaf session-protocol {
@@ -559,20 +559,20 @@ module ietf-telemetry-message {
       leaf collection-address {
         type inet:host;
         description
-          "Data collection IP address at which the Network Telemetry
+          "Data collector IP address at which the Network Telemetry
            data was collected.";
       }
       leaf collection-port {
         type inet:port-number;
         description
-          "Data collection transport port number at which the Network
+          "Data collector transport port number at which the Network
            Telemetry data was collected.";
       }
     }
     container data-collection-manifest {
       if-feature "data-collection-manifest";
       description
-        "Contains the Data Manifest of the data collection which
+        "Contains the Data Manifest of the data collector which
          collected the Network Telemetry data.";
       uses p-mf:platform-details;
     }
@@ -583,7 +583,7 @@ module ietf-telemetry-message {
       list labels {
         key "name";
         description
-          "Abritrary labels assigned by the data collection.";
+          "Abritrary labels assigned by the data collector.";
         leaf name {
           type string {
             length "1..max";

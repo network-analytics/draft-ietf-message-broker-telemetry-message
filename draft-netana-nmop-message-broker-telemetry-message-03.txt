@@ -5,7 +5,7 @@
 NMOP                                                        A. Elhassany
 Internet-Draft                                                   T. Graf
 Intended status: Informational                                  Swisscom
-Expires: 15 December 2025                                   13 June 2025
+Expires: 30 December 2025                                   28 June 2025
 
 
           Extensible YANG Model for Network Telemetry Messages
@@ -14,10 +14,10 @@ Expires: 15 December 2025                                   13 June 2025
 Abstract
 
    This document defines an extensible message schema in YANG to be used
-   at the data collection to transform Network Telemetry messages into
+   at data collection to transform Network Telemetry messages into
    external systems such as Message Brokers.  The extensible message
-   schema enables a data collection to add metadata for the provenance
-   of the operational network data.
+   schema enables data collectors to add metadata for the provenance of
+   the operational network data.
 
 Status of This Memo
 
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 December 2025.
+   This Internet-Draft will expire on 30 December 2025.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 1]
+Elhassany & Graf        Expires 30 December 2025                [Page 1]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 2]
+Elhassany & Graf        Expires 30 December 2025                [Page 2]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -127,7 +127,7 @@ Internet-Draft              Telmetery Message                  June 2025
    *  What is the subscribed xpath, sub-tree filter and its schema
       reference?
 
-   *  When did the data collection received the data?
+   *  When did a data collector received the data?
 
    *  What additional metadata is necessary for a consumer to make sense
       of the data?
@@ -138,7 +138,7 @@ Internet-Draft              Telmetery Message                  June 2025
    module defined in this document makes use of the platform-details
    grouping defined in Section 5.2 of
    [I-D.ietf-opsawg-collected-data-manifest] for the network node and
-   the data collection.
+   the data collector.
 
    This document defines a standard YANG envelope message to carry with
    the collected Network Telemetry notifications the provenance and
@@ -165,7 +165,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 3]
+Elhassany & Graf        Expires 30 December 2025                [Page 3]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -215,13 +215,13 @@ Internet-Draft              Telmetery Message                  June 2025
       It adds fields such as the Network Telemetry protocol name, the IP
       addresses and ports of that transport session and the time the
       event was exported at the network node and received at the data
-      collection.  Apart from the collection-timestamp, session-protocol
+      collector.  Apart from the collection-timestamp, session-protocol
       and remote-address leafs all other leafs are OPTIONAL.  These
       Network Telemetry session informations allow a network operator to
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 4]
+Elhassany & Graf        Expires 30 December 2025                [Page 4]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -233,7 +233,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
    Data Collection Manifest:  The OPTIONAL "data-collection-manifest"
       container in Figure 3 contains the Data Manifest of the data
-      collection which collected the Network Telemetry data.  The data
+      collector which collected the Network Telemetry data.  The data
       type is the same as the previous category but specific to the
       collector node.
 
@@ -277,7 +277,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 5]
+Elhassany & Graf        Expires 30 December 2025                [Page 5]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -333,7 +333,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 6]
+Elhassany & Graf        Expires 30 December 2025                [Page 6]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -389,7 +389,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 7]
+Elhassany & Graf        Expires 30 December 2025                [Page 7]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -414,7 +414,7 @@ Internet-Draft              Telmetery Message                  June 2025
                    <mailto:thomas.graf@swisscom.com>";
      description
        "This YANG module defines an extensible message schema to be used at
-        the data collection to transform Network Telemetry messages towards
+        data collection to transform Network Telemetry messages towards
         external systems such as Message Brokers.
 
         Copyright (c) 2025 IETF Trust and the persons identified as
@@ -445,7 +445,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 8]
+Elhassany & Graf        Expires 30 December 2025                [Page 8]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -501,7 +501,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025                [Page 9]
+Elhassany & Graf        Expires 30 December 2025                [Page 9]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -522,7 +522,7 @@ Internet-Draft              Telmetery Message                  June 2025
        }
        description
          "Network Telemetry protocol used to deliver the notification
-          between the network node and the data collection.";
+          between the network node and the data collector.";
      }
 
      container message {
@@ -557,12 +557,12 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 10]
+Elhassany & Graf        Expires 30 December 2025               [Page 10]
 
 Internet-Draft              Telmetery Message                  June 2025
 
 
-             "Timestamp when the data collection collected the Network
+             "Timestamp when the data collector collected the Network
               Telemetry data from the network element.";
          }
          leaf session-protocol {
@@ -588,20 +588,20 @@ Internet-Draft              Telmetery Message                  June 2025
          leaf collection-address {
            type inet:host;
            description
-             "Data collection IP address at which the Network Telemetry
+             "Data collector IP address at which the Network Telemetry
               data was collected.";
          }
          leaf collection-port {
            type inet:port-number;
            description
-             "Data collection transport port number at which the Network
+             "Data collector transport port number at which the Network
               Telemetry data was collected.";
          }
        }
        container data-collection-manifest {
          if-feature "data-collection-manifest";
          description
-           "Contains the Data Manifest of the data collection which
+           "Contains the Data Manifest of the data collector which
             collected the Network Telemetry data.";
          uses p-mf:platform-details;
        }
@@ -613,14 +613,14 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 11]
+Elhassany & Graf        Expires 30 December 2025               [Page 11]
 
 Internet-Draft              Telmetery Message                  June 2025
 
 
            key "name";
            description
-             "Abritrary labels assigned by the data collection.";
+             "Abritrary labels assigned by the data collector.";
            leaf name {
              type string {
                length "1..max";
@@ -669,7 +669,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 12]
+Elhassany & Graf        Expires 30 December 2025               [Page 12]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -725,7 +725,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 13]
+Elhassany & Graf        Expires 30 December 2025               [Page 13]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -781,7 +781,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 14]
+Elhassany & Graf        Expires 30 December 2025               [Page 14]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -837,7 +837,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 15]
+Elhassany & Graf        Expires 30 December 2025               [Page 15]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -893,7 +893,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 16]
+Elhassany & Graf        Expires 30 December 2025               [Page 16]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -949,7 +949,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 17]
+Elhassany & Graf        Expires 30 December 2025               [Page 17]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1005,7 +1005,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 18]
+Elhassany & Graf        Expires 30 December 2025               [Page 18]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1061,7 +1061,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 19]
+Elhassany & Graf        Expires 30 December 2025               [Page 19]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1117,7 +1117,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 20]
+Elhassany & Graf        Expires 30 December 2025               [Page 20]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1173,7 +1173,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 21]
+Elhassany & Graf        Expires 30 December 2025               [Page 21]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1229,7 +1229,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 22]
+Elhassany & Graf        Expires 30 December 2025               [Page 22]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1285,7 +1285,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 23]
+Elhassany & Graf        Expires 30 December 2025               [Page 23]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1341,7 +1341,7 @@ Internet-Draft              Telmetery Message                  June 2025
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 24]
+Elhassany & Graf        Expires 30 December 2025               [Page 24]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1397,7 +1397,7 @@ Acknowledgements
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 25]
+Elhassany & Graf        Expires 30 December 2025               [Page 25]
 
 Internet-Draft              Telmetery Message                  June 2025
 
@@ -1453,4 +1453,4 @@ Authors' Addresses
 
 
 
-Elhassany & Graf        Expires 15 December 2025               [Page 26]
+Elhassany & Graf        Expires 30 December 2025               [Page 26]
