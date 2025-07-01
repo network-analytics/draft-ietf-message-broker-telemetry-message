@@ -13,7 +13,7 @@
 <!-- If further character entities are required then they should be added to the DOCTYPE above.
      Use of an external entity file is not recommended. -->
 <rfc category="info"
-     docName="draft-netana-nmop-message-broker-telemetry-message-03"
+     docName="draft-ietf-nmop-message-broker-telemetry-message-00"
      ipr="trust200902" obsoletes="" submissionType="IETF" updates=""
      version="3" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude"
      xmlns:ns2="http://www.w3.org/2000/svg"
@@ -21,10 +21,10 @@
   <front>
     <title
     abbrev="Telmetery Message">Extensible YANG Model for Network
-     Telemetry Messages</title>
+		 Telemetry Messages</title>
 
     <seriesInfo name="Internet-Draft"
-                value="draft-netana-nmop-message-broker-telemetry-message-03"/>
+                value="draft-ietf-nmop-message-broker-telemetry-message-00"/>
 
     <author fullname="Ahmed Elhassany" initials="A" surname="Elhassany">
       <organization>Swisscom</organization>
@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="29" month="June" year="2025"/>
+    <date day="01" month="July" year="2025"/>
 
     <area>General</area>
 
@@ -84,9 +84,9 @@
 
     <abstract>
       <t>This document defines an extensible message schema in YANG to
-      be used at data collection to transform Network Telemetry
+      be used at the data collection to transform Network Telemetry
       messages into external systems such as Message Brokers.
-      The extensible message schema enables data collectors to add
+      The extensible message schema enables a data collection to add
       metadata for the provenance of the operational network data.</t>
     </abstract>
   </front>
@@ -112,7 +112,7 @@
       data transformation to make a Message Broker and its data
       processing components with YANG notifications interoperable.</t>
 
-      <t>Even though YANG is intended to ease data management, this
+      <t>Even though YANG is intented to ease data management, this
       promise has not yet been fulfilled for <xref target="RFC9232">
       Network Telemetry</xref>.</t>
 
@@ -144,7 +144,7 @@
         <li>What is the subscribed xpath, sub-tree filter and its
         schema reference?</li>  
     
-        <li>When did a data collector received the data?</li>
+        <li>When did the data collection received the data?</li>
     
         <li>What additional metadata is necessary for a consumer to make
         sense of the data?</li>
@@ -152,56 +152,52 @@
 
       <t><xref section="7.2" sectionFormat="of"
       target="I-D.ietf-opsawg-collected-data-manifest"/> describes the
-      content of a Data Manifest and how it is being mapped to the
-      collected Network Telemetry data. The "ietf-telemetry-message"
-      YANG module defined in this document makes use of the 
-      platform-details grouping defined in <xref section="5.2"
-      sectionFormat="of"
-      target="I-D.ietf-opsawg-collected-data-manifest"/> for the
-      network node and the data collector.</t>
-      
-      <t>This document defines a standard YANG envelope message to carry
+			content of a Data Manifest and how it is being mapped to the
+			collected Network Telemetry data. The "ietf-telemetry-message"
+			YANG module defined in this document makes use of the 
+			platform-details grouping defined in <xref section="5.2"
+			sectionFormat="of"
+			target="I-D.ietf-opsawg-collected-data-manifest"/> for the
+			network node and the data collection.</t>
+			
+			<t>This document defines a standard YANG envelope message to carry
       with the collected Network Telemetry notifications the provenance
       and metadata information for a YANG data exchanged in Message
       Brokers for a Data Mesh architecture.</t>
-    </section>
-    
-    <section>
-      <name>Conventions and Definitions</name>
-
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL",
-      "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", 
-      "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to
-      be interpreted as described in BCP 14 <xref target="RFC2119"/>
-      <xref target="RFC8174"/> when, and only when, they appear in all
-      capitals, as shown here.</t>
 
       <section>
-          <name>Terminology</name>
+        <name>Requirements Language</name>
+
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL",
+        "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", 
+        "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to
+        be interpreted as described in BCP 14 <xref target="RFC2119"/>
+        <xref target="RFC8174"/> when, and only when, they appear in all
+        capitals, as shown here.</t>
     
-        <t>The terms "Subscriber", "Publisher", and "Receiver" are
-        used as defined in <xref target="RFC8639"/>.</t>
-  
+        <t>The terms "Subscriber", "Publisher", and "Receiver" are used
+        as defined in <xref target="RFC8639"/>.</t>
+
         <t>The term "Network Telemetry" is used
         as defined in <xref target="RFC9232"/>. This document uses the
-        term export and collection to distinguish between the
-        data export and collection.</t>
+				term export and collection to distinguish between the
+				data export and collection.</t>
 
         <t>The term "Message Broker" is used
         as defined in <xref
-        target="I-D.ietf-nmop-yang-message-broker-integration"/>.</t>
+				target="I-D.ietf-nmop-yang-message-broker-integration"/>.</t>
 
         <t>The term "Data Manifest" is used
         as defined in <xref
-         target="I-D.ietf-opsawg-collected-data-manifest"/>. The term
-        provenance is used in general to describe the origin, history,
-         and authenticity of an asset which then is described in a
-         manifest.</t> 
+				target="I-D.ietf-opsawg-collected-data-manifest"/>. The term
+				provenance is used in general to describe the origin, history,
+				and authenticity of an asset which then is described in a
+				manifest.</t> 
  
         <t>In addition, this document reuses the terms "Notification
-         Metadata" and "Notification Envelope" defined in <xref
-         target="I-D.ietf-netconf-notif-envelope"/> for the use in
-         Message Broker environment:</t>
+				Metadata" and "Notification Envelope" defined in <xref
+				target="I-D.netana-netconf-notif-envelope"/> for the use in
+				Message Broker environment:</t>
 
         <t>Notification Metadata: Additional data describing the
         context of a notification that is sent in each message, e.g.
@@ -218,60 +214,60 @@
       <name>YANG Modules</name>
 
       <t>This document defines two YANG modules, an extensible YANG
-      module for Network Telemetry messages defined in <xref
-      target="ietf-telemetry-message-module"/> and a YANG-Push extension
-      defined in <xref
-      target="ietf-yang-push-telemetry-message-module"/>.</t>
+			module for Network Telemetry messages defined in <xref
+			target="ietf-telemetry-message-module"/> and a YANG-Push extension
+			defined in <xref
+			target="ietf-yang-push-telemetry-message-module"/>.</t>
 
       <t>The extensible YANG module for Network Telemetry messages
       defines an envelope message schema which adds two provenance
       and two metadata categories to the collected Network Telemetry
-      data.</t>
+			data.</t>
 
       <t>The YANG-Push extension adds YANG-Push specific subscription
-      metadata to the Network Telemetry protocol provenance of the
-      envelope.</t>
+			metadata to the Network Telemetry protocol provenance of the
+			envelope.</t>
 
       <dl>
         <dt>Network Node Manifest:</dt>
 
         <dd>The OPTIONAL "network-node-manifest" container in <xref
-        target="ietf-telemetry-message-module"/> contains the Data
-        Manifest about the network node that exported Network Telemetry
-        data. It adds information such as the node name, address, and
-        software version. Each leaf is OPTIONAL.
-        </dd>
+				target="ietf-telemetry-message-module"/> contains the Data
+				Manifest about the network node that exported Network Telemetry
+				data. It adds information such as the node name, address, and
+				software version. Each leaf is OPTIONAL.
+				</dd>
       </dl>
 
       <dl>
         <dt>Network Telemetry Protocol Metadata:</dt>
 
         <dd>The "telemetry-message-metadata" container in <xref
-        target="ietf-telemetry-message-module"/> contains the Network
-        Telemetry session information between the collector and the
-        network node. It adds fields such as the Network Telemetry
-        protocol name, the IP addresses and ports of that transport
-        session and the time the event was exported at the network node
-        and received at the data collector. Apart from the
-        collection-timestamp, session-protocol and remote-address leafs
-        all other leafs are OPTIONAL.  These Network Telemetry session
-        informations allow a network operator to troubleshoot and
-        measure delay and loss related issues. Moreover, this document
-        also defines with <xref
-        target="ietf-yang-push-telemetry-message-module"/> an extension
-        specific to YANG-Push that includes YANG-Push subscription
-        information relevant to the Network Telemetry session
-        information.</dd>
+				target="ietf-telemetry-message-module"/> contains the Network
+				Telemetry session information between the collector and the
+				network node. It adds fields such as the Network Telemetry
+				protocol name, the IP addresses and ports of that transport
+				session and the time the event was exported at the network node
+				and received at the data collection. Apart from the
+				collection-timestamp, session-protocol and remote-address leafs
+				all other leafs are OPTIONAL.  These Network Telemetry session
+				informations allow a network operator to troubleshoot and
+				measure delay and loss related issues. Moreover, this document
+				also defines with <xref
+				target="ietf-yang-push-telemetry-message-module"/> an extension
+				specific to YANG-Push that includes YANG-Push subscription
+				information relevant to the Network Telemetry session
+				information.</dd>
       </dl>
 
       <dl>
         <dt>Data Collection Manifest:</dt>
 
         <dd>The OPTIONAL "data-collection-manifest" container in <xref
-        target="ietf-telemetry-message-module"/> contains the Data
-        Manifest of the data collector which collected the Network
-        Telemetry data. The data type is the same as the previous
-        category but specific to the collector node.</dd>
+				target="ietf-telemetry-message-module"/> contains the Data
+				Manifest of the data collection which collected the Network
+				Telemetry data. The data type is the same as the previous
+				category but specific to the collector node.</dd>
       </dl>
 
       <dl>
@@ -279,12 +275,12 @@
 
         <dd>The OPTIONAL "labels" list in the "network-operator-metadata"
         container in <xref target="ietf-telemetry-message-module"/>
-        contains the operator specific metadata. Some operators enrich
-        the collected data with specific information. For instance: type
-        of the network node (provider or provider edge node) or which
-        operational unit the node is operated by. For this purpose the
-        document defines a generic metadata map with key/values that can
-        be used freely by the network operator.</dd>
+				contains the operator specific metadata. Some operators enrich
+				the collected data with specific information. For instance: type
+				of the network node (provider or provider edge node) or which
+				operational unit the node is operated by. For this purpose the
+				document defines a generic metadata map with key/values that can
+				be used freely by the network operator.</dd>
       </dl>
 
       <figure anchor="ietf-telemetry-message-tree"
@@ -409,7 +405,7 @@ module ietf-telemetry-message {
                 <mailto:thomas.graf@swisscom.com>";
   description
     "This YANG module defines an extensible message schema to be used at
-     data collection to transform Network Telemetry messages towards
+     the data collection to transform Network Telemetry messages into
      external systems such as Message Brokers.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
@@ -501,7 +497,7 @@ module ietf-telemetry-message {
     }
     description
       "Network Telemetry protocol used to deliver the notification
-       between the network node and the data collector.";
+       between the network node and the data collection.";
   }
 
   container message {
@@ -523,17 +519,13 @@ module ietf-telemetry-message {
         type yang:date-and-time;
         description
           "Timestamp when the Network Telemetry data has been exported
-           from network element. This can be obtained in YANG-Push from
-           event-time defined in draft-ietf-netconf-notif-envelope or
-           in IPFIX from the export time in the message header as
-           defined in RFC 7011 or in BMP from the timestamp in The
-           per-peer header as defined in RFc 7854.";
+           from network element.";
       }
       leaf collection-timestamp {
         type yang:date-and-time;
         mandatory true;
         description
-          "Timestamp when the data collector collected the Network
+          "Timestamp when the data collection collected the Network
            Telemetry data from the network element.";
       }
       leaf session-protocol {
@@ -559,20 +551,20 @@ module ietf-telemetry-message {
       leaf collection-address {
         type inet:host;
         description
-          "Data collector IP address at which the Network Telemetry
+          "Data collection IP address at which the Network Telemetry
            data was collected.";
       }
       leaf collection-port {
         type inet:port-number;
         description
-          "Data collector transport port number at which the Network
+          "Data collection transport port number at which the Network
            Telemetry data was collected.";
       }
     }
     container data-collection-manifest {
       if-feature "data-collection-manifest";
       description
-        "Contains the Data Manifest of the data collector which
+        "Contains the Data Manifest of the data collection which
          collected the Network Telemetry data.";
       uses p-mf:platform-details;
     }
@@ -583,7 +575,7 @@ module ietf-telemetry-message {
       list labels {
         key "name";
         description
-          "Abritrary labels assigned by the data collector.";
+          "Abritrary labels assinged by the data collection.";
         leaf name {
           type string {
             length "1..max";
@@ -911,71 +903,6 @@ module ietf-yang-push-telemetry-message {
     </section>
 
     <section>
-      <name>Use Cases</name>
-
-      <section>
-        <name>Data Chain Troubleshooting</name>
-
-        <t>In a distributed system like a data chain described in <xref
-				target="I-D.ietf-nmop-yang-message-broker-integration"/>, a
-				single system component could introduce a new issue after a 
-				software upgrade of a system component . Thanks to the network
-				node and the data collection manifest, the data engineer is able
-				to identify wherever a software upgrade has been performed on
-				a network node or on a data collector and its impact on the
-				telemetry messages. Such an upgrade could have a potential
-				impact on the YANG schema of the exported YANG-Push Notification
-				which is identifable through the "yang-library-content-id" and
-				"revision" and "revision-label" defined in <xref
-				target="I-D.ietf-netconf-yang-notifications-versioning"/>
-				and transformed at the data collectors as part of Network
-				Telemetry protocol metadata or the YANG schema id when being
-				produced to the message broker as described in <xref
-				section="4.5"
-				target="I-D.ietf-nmop-yang-message-broker-integration"/>.</t>
-      </section>
-
-      <section>
-        <name>Data Product Service Level Objective</name>
-
-        <t>For <xref section="3.5"
-				target="I-D.ietf-nmop-network-anomaly-architecture">Service
-				Disruption Detection</xref> in Network Anomaly Detection,
-				operational Network Telemetry data needs to to be consumeable
-				as a <xref section="4.7"
-				target="I-D.ietf-nmop-yang-message-broker-integration">YANG data
-				consumer</xref> within the defined time to ensure a holistic
-				view of the network. To measure the delay and loss between the
-				data export on the network node, the data collectors and
-				the YANG data consumer, sequence numbers and timestamps are
-				required. With "hostname" and "sequence-number"
-        defined in <xref section="3.4"
-				target="I-D.ietf-netconf-notif-envelope"/> each message is
-				uniquely identifiably and with "event-time" and 
-				"observation time" defined in section 3.4 and 3.5 of <xref
-				target="I-D.ietf-netconf-notif-envelope"/> and "collection-time"
-				defined in this document and the timestamp when the data arrived
-				at the YANG data consumer, the loss and delay for a given
-				network node and message can be deducted. Metadata introduced in
-				this document help a data engineer to determine a common
-				denominator and identify the system component causing the delay
-				and loss.</t>
-				
-				<t>Certain collection protocol types such as polling or push
-				based and subscriptions types, such as on-change or periodical,
-				have different data delay characteristics. Push based on-change
-				subscriptions are expected to export messages almost instantly
-				where polling based subscriptions observe changes depending on
-				their polling interval much later. With the Network Telemetry
-				protocol metadata introduced by this document, based on the
-				update-trigger informations, a YANG data consumer can define
-				for a given YANG-Push subscription id a lower service Level
-				objective than for another. Therefore adjust the detection
-				to be more real-time than without this information.</t>
-      </section>
-    </section>
-
-    <section>
       <name>IANA Considerations</name>
       <t>This document registers the following two namespace URIs in the
     <xref target="RFC3688">IETF XML Registry</xref>:</t>
@@ -1089,7 +1016,7 @@ module ietf-yang-push-telemetry-message {
     "telemetry-message-metadata": {
       "session-protocol": "yp-push",
       "node-export-timestamp": "2025-05-22T07:28:22.381856022Z",
-      "collection-timestamp": "2025-05-22T07:28:23.481855122Z",
+      "collection--timestamp": "2025-05-22T07:28:23.481855122Z",
       "export-address": "192.168.100.3",
       "export-port": 57914,
       "ietf-yang-push-telemetry-message:yang-push-subscription": {
@@ -1211,7 +1138,7 @@ module ietf-yang-push-telemetry-message {
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-nmop-yang-message-broker-integration.xml"/>
 
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-notif-envelope.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.netana-netconf-notif-envelope.xml"/>
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-opsawg-collected-data-manifest.xml"/>
 
@@ -1227,10 +1154,6 @@ module ietf-yang-push-telemetry-message {
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7951.xml"/>
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netmod-rfc8407bis.xml"/>
-
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-nmop-network-anomaly-architecture.xml"/>
-
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-yang-notifications-versioning.xml"/>
 
         <reference anchor="Deh22"
                    target="https://www.oreilly.com/library/view/data-mesh/9781492092384/">
@@ -1289,9 +1212,8 @@ module ietf-yang-push-telemetry-message {
     <section anchor="Acknowledgements" numbered="false">
       <name>Acknowledgements</name>
 
-      <t>The authors would like to thank Rob Wilton, Alex Huang Feng,
-      Benoit Claise, Leonardo Rodoni, Reshad Rahman and Dan Voyer for
-			their review and valuable comments.</t>
+      <t>The authors would like to thank Rob Wilton, Alex Huang Feng
+			Benoit Claise and Leonardo Rodoni for their review and valuable comments.</t>
     </section>
   </back>
 </rfc>
