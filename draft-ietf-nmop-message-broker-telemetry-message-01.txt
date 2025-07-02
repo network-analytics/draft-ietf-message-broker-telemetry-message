@@ -5,7 +5,7 @@
 NMOP                                                        A. Elhassany
 Internet-Draft                                                   T. Graf
 Intended status: Informational                                  Swisscom
-Expires: 2 January 2026                                      1 July 2025
+Expires: 3 January 2026                                      2 July 2025
 
 
           Extensible YANG Model for Network Telemetry Messages
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2026.
+   This Internet-Draft will expire on 3 January 2026.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 1]
+Elhassany & Graf         Expires 3 January 2026                 [Page 1]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -71,9 +71,9 @@ Table of Contents
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  21
    7.  Implementation status . . . . . . . . . . . . . . . . . . . .  21
      7.1.  Netgauze  . . . . . . . . . . . . . . . . . . . . . . . .  22
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  24
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  24
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  26
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  23
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  25
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  27
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 2]
+Elhassany & Graf         Expires 3 January 2026                 [Page 2]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -145,8 +145,10 @@ Internet-Draft              Telmetery Message                  July 2025
 
    This document defines a standard YANG envelope message to carry with
    the collected Network Telemetry notifications the provenance and
-   metadata information for a YANG data exchanged in Message Brokers for
-   a Data Mesh architecture.
+   metadata information for a YANG data exchange between between Message
+   Broker producers and consumers as described in Section 4.5 and 4.6
+   [I-D.ietf-nmop-yang-message-broker-integration].  The described YANG
+   model fascilitates JSON [RFC7951] and CBOR [RFC9254] serialization.
 
 2.  Conventions and Definitions
 
@@ -163,9 +165,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-
-
-Elhassany & Graf         Expires 2 January 2026                 [Page 3]
+Elhassany & Graf         Expires 3 January 2026                 [Page 3]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -221,7 +221,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 4]
+Elhassany & Graf         Expires 3 January 2026                 [Page 4]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -277,7 +277,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 5]
+Elhassany & Graf         Expires 3 January 2026                 [Page 5]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -333,7 +333,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 6]
+Elhassany & Graf         Expires 3 January 2026                 [Page 6]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -389,7 +389,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 7]
+Elhassany & Graf         Expires 3 January 2026                 [Page 7]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -445,7 +445,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 8]
+Elhassany & Graf         Expires 3 January 2026                 [Page 8]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -501,7 +501,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                 [Page 9]
+Elhassany & Graf         Expires 3 January 2026                 [Page 9]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -548,7 +548,7 @@ Internet-Draft              Telmetery Message                  July 2025
               event-time defined in draft-ietf-netconf-notif-envelope or
               in IPFIX from the export time in the message header as
               defined in RFC 7011 or in BMP from the timestamp in The
-              per-peer header as defined in RFc 7854.";
+              per-peer header as defined in RFC 7854.";
          }
          leaf collection-timestamp {
            type yang:date-and-time;
@@ -557,7 +557,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 10]
+Elhassany & Graf         Expires 3 January 2026                [Page 10]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -613,7 +613,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 11]
+Elhassany & Graf         Expires 3 January 2026                [Page 11]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -669,7 +669,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 12]
+Elhassany & Graf         Expires 3 January 2026                [Page 12]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -725,7 +725,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 13]
+Elhassany & Graf         Expires 3 January 2026                [Page 13]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -781,7 +781,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 14]
+Elhassany & Graf         Expires 3 January 2026                [Page 14]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -837,7 +837,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 15]
+Elhassany & Graf         Expires 3 January 2026                [Page 15]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -893,7 +893,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 16]
+Elhassany & Graf         Expires 3 January 2026                [Page 16]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -949,7 +949,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 17]
+Elhassany & Graf         Expires 3 January 2026                [Page 17]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1005,7 +1005,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 18]
+Elhassany & Graf         Expires 3 January 2026                [Page 18]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1061,7 +1061,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 19]
+Elhassany & Graf         Expires 3 January 2026                [Page 19]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1117,7 +1117,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 20]
+Elhassany & Graf         Expires 3 January 2026                [Page 20]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1173,7 +1173,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 21]
+Elhassany & Graf         Expires 3 January 2026                [Page 21]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1188,107 +1188,77 @@ Internet-Draft              Telmetery Message                  July 2025
    Figure 5 provides an example of a JSON encoded, [RFC7951], Network
    Telemetry message.
 
-  ========== NOTE: '\' line wrapping per RFC 8792) ===========
+   {
+     "ietf-telemetry-message:message": {
+       "network-node-manifest": {
+         "name": "pe1",
+         "vendor": "open source",
+         "software-version": "1.1.2"
+       },
+       "telemetry-message-metadata": {
+         "node-export-timestamp": "2024-02-14T12:10:10.10+01:00",
+         "collection-timestamp": "2024-02-14T12:10:10.12+01:00",
+         "session-protocol": "yp-push",
+         "export-address": "192.168.1.100",
+         "export-port": 123,
+         "collection-address": "192.168.1.1",
+         "collection-port": 9991,
+         "ietf-yang-push-telemetry-message:yang-push-subscription": {
+           "id": 89,
+           "xpath-filter": "/ietf-interfaces:interfaces",
+           "datastore": "ietf-datastores:operational",
+           "transport": "ietf-udp-notif-transport:udp-notif",
+           "encoding": "ietf-subscribed-notifications:encode-json",
+           "module-version": [
+             {
+               "module-name": "ietf-interfaces",
+               "revision": "2018-02-20",
+               "revision-label": "2.0.0"
+             }
+           ],
+           "yang-library-content-id": "abc"
+         }
+       },
+       "data-collection-manifest": {
+         "name": "collector-1",
+         "vendor": "open source",
+         "software-version": "2.1.0"
+       },
+       "network-operator-metadata": {
+         "labels": [
 
-  {
-    "ietf-telemetry-message:message": {
-      "network-node-manifest": {},
-      "telemetry-message-metadata": {
-        "session-protocol": "yp-push",
-        "node-export-timestamp": "2025-05-22T07:28:22.381856022Z",
-        "collection-timestamp": "2025-05-22T07:28:23.481855122Z",
-        "export-address": "192.168.100.3",
-        "export-port": 57914,
-        "ietf-yang-push-telemetry-message:yang-push-subscription": {
-          "datastore": "ietf-datastores:operational",
-          "encoding": "ietf-subscribed-notifications:encode-json",
-          "id": 12345678,
-          "module-version": [
-            {
-              "module-name": "vrouter-loopback",
-              "revision": "2024-04-22"
-            }
-          ],
-          "on-change": {
-            "sync-on-start": true
-          },
-          "purpose": "send notifications",
-          "transport": "ietf-udp-notif-transport:udp-notif",
-          "xpath-filter": "/state/vrf/l3vrf/interface/loopback/enabled",
-          "yang-library-content-id": "3625735881"
-        }
-      },
-      "data-collection-manifest": {
-        "name": "netgauze-collector@leo-rocky",
-        "os-type": "Rocky Linux",
-        "os-version": "8.10",
-        "software-flavor": "debug",
-        "software-version": "0.6.2 (cbd74215)",
-        "vendor": "NetGauze"
-      },
 
 
-
-Elhassany & Graf         Expires 2 January 2026                [Page 22]
+Elhassany & Graf         Expires 3 January 2026                [Page 22]
 
 Internet-Draft              Telmetery Message                  July 2025
 
 
-      "network-operator-metadata": {
-        "labels": [
-          {
-            "name": "nkey",
-            "string-value": "unknown"
-          },
-          {
-            "name": "pkey",
-            "string-value": "unknown"
-          }
-        ]
-      },
-      "payload": {
-        "ietf-yp-notification:envelope": {
-          "contents": {
-            "ietf-subscribed-notifications:subscription-started": {
-              "encoding": "ietf-subscribed-notifications:encode-json",
-              "id": 12345678,
-              "ietf-distributed-notif:message-publisher-ids": [
-                0
-              ],
-              "ietf-yang-push-revision:module-version": [
-                {
-                  "module-name": "vrouter-loopback",
-                  "revision": "2024-04-22"
-                }
-              ],
-              "ietf-yang-push-revision:yang-library-content-id": \
-              "3625735881",
-              "ietf-yang-push:datastore": "ietf-datastores:operational",
-              "ietf-yang-push:datastore-xpath-filter": \
-              "/state/vrf/l3vrf/interface/loopback/enabled",
-              "ietf-yang-push:on-change": {
-                "sync-on-start": true
-              },
-              "purpose": "send notifications",
-              "transport": "ietf-udp-notif-transport:udp-notif"
-            }
-          },
-          "event-time": "2025-03-04T07:31:36.806021107+00:00",
-          "hostname": "daisy-ietf-ipf-zbl1843-r-daisy-58",
-          "sequence-number": 48
-        }
-      }
-    }
-  }
+           {
+             "name": "platform-name",
+             "string-value": "name"
+           }
+         ]
+       },
+       "payload": {
+         "ietf-yang-push:push-update": {
+           "id": 89,
+           "datastore-contents": {
+             "ietf-interfaces:interfaces": {
+               "interface": [
+                 {
+                   "name": "eth0",
+                   "oper-status": "down"
+                 }
+               ]
+             }
+           }
+         }
+       }
+     }
+   }
 
-                 Figure 5: JSON Network Telemetry Example
-
-
-
-Elhassany & Graf         Expires 2 January 2026                [Page 23]
-
-Internet-Draft              Telmetery Message                  July 2025
-
+                  Figure 5: JSON Network Telemetry Example
 
 8.  References
 
@@ -1312,6 +1282,13 @@ Internet-Draft              Telmetery Message                  July 2025
               Initiation Protocol (SIP)", RFC 6141,
               DOI 10.17487/RFC6141, March 2011,
               <https://www.rfc-editor.org/info/rfc6141>.
+
+
+
+Elhassany & Graf         Expires 3 January 2026                [Page 23]
+
+Internet-Draft              Telmetery Message                  July 2025
+
 
    [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
               RFC 6991, DOI 10.17487/RFC6991, July 2013,
@@ -1339,13 +1316,6 @@ Internet-Draft              Telmetery Message                  July 2025
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
               <https://www.rfc-editor.org/info/rfc8342>.
 
-
-
-Elhassany & Graf         Expires 2 January 2026                [Page 24]
-
-Internet-Draft              Telmetery Message                  July 2025
-
-
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/info/rfc8446>.
@@ -1359,11 +1329,6 @@ Internet-Draft              Telmetery Message                  July 2025
               for Datastore Updates", RFC 8641, DOI 10.17487/RFC8641,
               September 2019, <https://www.rfc-editor.org/info/rfc8641>.
 
-   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
-              "Handling Long Lines in Content of Internet-Drafts and
-              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
-              <https://www.rfc-editor.org/info/rfc8792>.
-
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
@@ -1373,6 +1338,13 @@ Internet-Draft              Telmetery Message                  July 2025
               A. Wang, "Network Telemetry Framework", RFC 9232,
               DOI 10.17487/RFC9232, May 2022,
               <https://www.rfc-editor.org/info/rfc9232>.
+
+
+
+Elhassany & Graf         Expires 3 January 2026                [Page 24]
+
+Internet-Draft              Telmetery Message                  July 2025
+
 
    [I-D.ietf-nmop-yang-message-broker-integration]
               Graf, T. and A. Elhassany, "An Architecture for YANG-Push
@@ -1394,14 +1366,6 @@ Internet-Draft              Telmetery Message                  July 2025
               Claise, B., Quilbeuf, J., Lopez, D., Martinez-Casanueva,
               I. D., and T. Graf, "A Data Manifest for Contextualized
               Telemetry Data", Work in Progress, Internet-Draft, draft-
-
-
-
-Elhassany & Graf         Expires 2 January 2026                [Page 25]
-
-Internet-Draft              Telmetery Message                  July 2025
-
-
               ietf-opsawg-collected-data-manifest-08, 27 June 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
               collected-data-manifest-08>.
@@ -1429,9 +1393,24 @@ Internet-Draft              Telmetery Message                  July 2025
               DOI 10.17487/RFC3444, January 2003,
               <https://www.rfc-editor.org/info/rfc3444>.
 
+
+
+
+
+Elhassany & Graf         Expires 3 January 2026                [Page 25]
+
+Internet-Draft              Telmetery Message                  July 2025
+
+
    [RFC7951]  Lhotka, L., "JSON Encoding of Data Modeled with YANG",
               RFC 7951, DOI 10.17487/RFC7951, August 2016,
               <https://www.rfc-editor.org/info/rfc7951>.
+
+   [RFC9254]  Veillette, M., Ed., Petrov, I., Ed., Pelov, A., Bormann,
+              C., and M. Richardson, "Encoding of Data Modeled with YANG
+              in the Concise Binary Object Representation (CBOR)",
+              RFC 9254, DOI 10.17487/RFC9254, July 2022,
+              <https://www.rfc-editor.org/info/rfc9254>.
 
    [I-D.ietf-netmod-rfc8407bis]
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
@@ -1448,15 +1427,6 @@ Internet-Draft              Telmetery Message                  July 2025
               anomaly-architecture-03, 8 May 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               network-anomaly-architecture-03>.
-
-
-
-
-
-Elhassany & Graf         Expires 2 January 2026                [Page 26]
-
-Internet-Draft              Telmetery Message                  July 2025
-
 
    [I-D.ietf-netconf-yang-notifications-versioning]
               Graf, T., Claise, B., and A. H. Feng, "Support of
@@ -1481,11 +1451,18 @@ Internet-Draft              Telmetery Message                  July 2025
               "Netgauze open source Network Telemetry Data Collection",
               <https://github.com/NetGauze/NetGauze/pull/213>.
 
+
+
+Elhassany & Graf         Expires 3 January 2026                [Page 26]
+
+Internet-Draft              Telmetery Message                  July 2025
+
+
 Acknowledgements
 
    The authors would like to thank Rob Wilton, Alex Huang Feng, Benoit
-   Claise, Leonardo Rodoni, Reshad Rahman and Dan Voyer for their review
-   and valuable comments.
+   Claise, Leonardo Rodoni, Reshad Rahman, Dan Voyer and Paolo Lucente
+   for their review and valuable comments.
 
 Authors' Addresses
 
@@ -1509,4 +1486,27 @@ Authors' Addresses
 
 
 
-Elhassany & Graf         Expires 2 January 2026                [Page 27]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Elhassany & Graf         Expires 3 January 2026                [Page 27]

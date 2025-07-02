@@ -148,7 +148,7 @@ module ietf-telemetry-message {
            event-time defined in draft-ietf-netconf-notif-envelope or
            in IPFIX from the export time in the message header as
            defined in RFC 7011 or in BMP from the timestamp in The
-           per-peer header as defined in RFc 7854.";
+           per-peer header as defined in RFC 7854.";
       }
       leaf collection-timestamp {
         type yang:date-and-time;

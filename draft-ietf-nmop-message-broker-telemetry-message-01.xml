@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="01" month="July" year="2025"/>
+    <date day="02" month="July" year="2025"/>
 
     <area>General</area>
 
@@ -162,8 +162,13 @@
       
       <t>This document defines a standard YANG envelope message to carry
       with the collected Network Telemetry notifications the provenance
-      and metadata information for a YANG data exchanged in Message
-      Brokers for a Data Mesh architecture.</t>
+      and metadata information for a YANG data exchange between between
+			Message Broker producers and consumers as described in
+			Section 4.5 and 4.6 <xref
+      target="I-D.ietf-nmop-yang-message-broker-integration"/>. The
+			described YANG model fascilitates <xref
+			target="RFC7951">JSON</xref> and <xref
+			target="RFC9254">CBOR</xref> serialization.</t>
     </section>
     
     <section>
@@ -527,7 +532,7 @@ module ietf-telemetry-message {
            event-time defined in draft-ietf-netconf-notif-envelope or
            in IPFIX from the export time in the message header as
            defined in RFC 7011 or in BMP from the timestamp in The
-           per-peer header as defined in RFc 7854.";
+           per-peer header as defined in RFC 7854.";
       }
       leaf collection-timestamp {
         type yang:date-and-time;
@@ -1081,86 +1086,63 @@ module ietf-yang-push-telemetry-message {
         <figure anchor="netgauze_message_example_json_fig"
                 title="JSON Network Telemetry Example">
           <artwork><![CDATA[
-========== NOTE: '\' line wrapping per RFC 8792) ===========
-
 {
   "ietf-telemetry-message:message": {
-    "network-node-manifest": {},
+    "network-node-manifest": {
+      "name": "pe1",
+      "vendor": "open source",
+      "software-version": "1.1.2"
+    },
     "telemetry-message-metadata": {
+      "node-export-timestamp": "2024-02-14T12:10:10.10+01:00",
+      "collection-timestamp": "2024-02-14T12:10:10.12+01:00",
       "session-protocol": "yp-push",
-      "node-export-timestamp": "2025-05-22T07:28:22.381856022Z",
-      "collection-timestamp": "2025-05-22T07:28:23.481855122Z",
-      "export-address": "192.168.100.3",
-      "export-port": 57914,
+      "export-address": "192.168.1.100",
+      "export-port": 123,
+      "collection-address": "192.168.1.1",
+      "collection-port": 9991,
       "ietf-yang-push-telemetry-message:yang-push-subscription": {
+        "id": 89,
+        "xpath-filter": "/ietf-interfaces:interfaces",
         "datastore": "ietf-datastores:operational",
+        "transport": "ietf-udp-notif-transport:udp-notif",
         "encoding": "ietf-subscribed-notifications:encode-json",
-        "id": 12345678,
         "module-version": [
           {
-            "module-name": "vrouter-loopback",
-            "revision": "2024-04-22"
+            "module-name": "ietf-interfaces",
+            "revision": "2018-02-20",
+            "revision-label": "2.0.0"
           }
         ],
-        "on-change": {
-          "sync-on-start": true
-        },
-        "purpose": "send notifications",
-        "transport": "ietf-udp-notif-transport:udp-notif",
-        "xpath-filter": "/state/vrf/l3vrf/interface/loopback/enabled",
-        "yang-library-content-id": "3625735881"
+        "yang-library-content-id": "abc"
       }
     },
     "data-collection-manifest": {
-      "name": "netgauze-collector@leo-rocky",
-      "os-type": "Rocky Linux",
-      "os-version": "8.10",
-      "software-flavor": "debug",
-      "software-version": "0.6.2 (cbd74215)",
-      "vendor": "NetGauze"
+      "name": "collector-1",
+      "vendor": "open source",
+      "software-version": "2.1.0"
     },
     "network-operator-metadata": {
       "labels": [
         {
-          "name": "nkey",
-          "string-value": "unknown"
-        },
-        {
-          "name": "pkey",
-          "string-value": "unknown"
+          "name": "platform-name",
+          "string-value": "name"
         }
       ]
     },
     "payload": {
-      "ietf-yp-notification:envelope": {
-        "contents": {
-          "ietf-subscribed-notifications:subscription-started": {
-            "encoding": "ietf-subscribed-notifications:encode-json",
-            "id": 12345678,
-            "ietf-distributed-notif:message-publisher-ids": [
-              0
-            ],
-            "ietf-yang-push-revision:module-version": [
+      "ietf-yang-push:push-update": {
+        "id": 89,
+        "datastore-contents": {
+          "ietf-interfaces:interfaces": {
+            "interface": [
               {
-                "module-name": "vrouter-loopback",
-                "revision": "2024-04-22"
+                "name": "eth0",
+                "oper-status": "down"
               }
-            ],
-            "ietf-yang-push-revision:yang-library-content-id": \
-            "3625735881",
-            "ietf-yang-push:datastore": "ietf-datastores:operational",
-            "ietf-yang-push:datastore-xpath-filter": \
-            "/state/vrf/l3vrf/interface/loopback/enabled",
-            "ietf-yang-push:on-change": {
-              "sync-on-start": true
-            },
-            "purpose": "send notifications",
-            "transport": "ietf-udp-notif-transport:udp-notif"
+            ]
           }
-        },
-        "event-time": "2025-03-04T07:31:36.806021107+00:00",
-        "hostname": "daisy-ietf-ipf-zbl1843-r-daisy-58",
-        "sequence-number": 48
+        }
       }
     }
   }
@@ -1203,8 +1185,6 @@ module ietf-yang-push-telemetry-message {
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8641.xml"/>
 
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8792.xml"/>
-
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9000.xml"/>
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9232.xml"/>
@@ -1225,6 +1205,8 @@ module ietf-yang-push-telemetry-message {
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3444.xml"/>
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7951.xml"/>
+
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9254.xml"/>
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netmod-rfc8407bis.xml"/>
 
@@ -1290,8 +1272,8 @@ module ietf-yang-push-telemetry-message {
       <name>Acknowledgements</name>
 
       <t>The authors would like to thank Rob Wilton, Alex Huang Feng,
-      Benoit Claise, Leonardo Rodoni, Reshad Rahman and Dan Voyer for
-			their review and valuable comments.</t>
+      Benoit Claise, Leonardo Rodoni, Reshad Rahman, Dan Voyer and
+			Paolo Lucente for their review and valuable comments.</t>
     </section>
   </back>
 </rfc>
