@@ -5,7 +5,7 @@
 NMOP                                                        A. Elhassany
 Internet-Draft                                                   T. Graf
 Intended status: Informational                                  Swisscom
-Expires: 15 January 2026                                    14 July 2025
+Expires: 16 January 2026                                    15 July 2025
 
 
           Extensible YANG Model for Network Telemetry Messages
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 January 2026.
+   This Internet-Draft will expire on 16 January 2026.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 1]
+Elhassany & Graf         Expires 16 January 2026                [Page 1]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 2]
+Elhassany & Graf         Expires 16 January 2026                [Page 2]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -165,7 +165,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 3]
+Elhassany & Graf         Expires 16 January 2026                [Page 3]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -221,7 +221,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 4]
+Elhassany & Graf         Expires 16 January 2026                [Page 4]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -230,9 +230,9 @@ Internet-Draft              Telmetery Message                  July 2025
       collector.  Apart from the collection-timestamp, session-protocol
       and remote-address leafs all other leafs are OPTIONAL.  These
       Network Telemetry session informations allow a network operator to
-      troubleshoot wherever the metrics where obtained through NETCONF
-      or RESTCONF <GET> operations or YANG-Push and measure delay and
-      loss related issues.  Moreover, this document also defines with
+      troubleshoot whether the metrics were obtained through NETCONF or
+      RESTCONF <GET> operations or YANG-Push and measure delay and loss
+      related issues.  Moreover, this document also defines with
       Figure 4 an extension specific to YANG-Push that includes YANG-
       Push subscription information relevant to the Network Telemetry
       session information.
@@ -277,7 +277,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 5]
+Elhassany & Graf         Expires 16 January 2026                [Page 5]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -333,7 +333,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 6]
+Elhassany & Graf         Expires 16 January 2026                [Page 6]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -389,7 +389,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 7]
+Elhassany & Graf         Expires 16 January 2026                [Page 7]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -445,7 +445,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 8]
+Elhassany & Graf         Expires 16 January 2026                [Page 8]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -501,7 +501,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026                [Page 9]
+Elhassany & Graf         Expires 16 January 2026                [Page 9]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -557,7 +557,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 10]
+Elhassany & Graf         Expires 16 January 2026               [Page 10]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -613,7 +613,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 11]
+Elhassany & Graf         Expires 16 January 2026               [Page 11]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -669,7 +669,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 12]
+Elhassany & Graf         Expires 16 January 2026               [Page 12]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -725,7 +725,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 13]
+Elhassany & Graf         Expires 16 January 2026               [Page 13]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -781,7 +781,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 14]
+Elhassany & Graf         Expires 16 January 2026               [Page 14]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -837,7 +837,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 15]
+Elhassany & Graf         Expires 16 January 2026               [Page 15]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -893,7 +893,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 16]
+Elhassany & Graf         Expires 16 January 2026               [Page 16]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -949,7 +949,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 17]
+Elhassany & Graf         Expires 16 January 2026               [Page 17]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1005,7 +1005,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 18]
+Elhassany & Graf         Expires 16 January 2026               [Page 18]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1061,7 +1061,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 19]
+Elhassany & Graf         Expires 16 January 2026               [Page 19]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1117,7 +1117,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 20]
+Elhassany & Graf         Expires 16 January 2026               [Page 20]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1173,7 +1173,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 21]
+Elhassany & Graf         Expires 16 January 2026               [Page 21]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1229,7 +1229,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 22]
+Elhassany & Graf         Expires 16 January 2026               [Page 22]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1285,7 +1285,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 23]
+Elhassany & Graf         Expires 16 January 2026               [Page 23]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1341,7 +1341,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 24]
+Elhassany & Graf         Expires 16 January 2026               [Page 24]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1397,7 +1397,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 25]
+Elhassany & Graf         Expires 16 January 2026               [Page 25]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1453,7 +1453,7 @@ Internet-Draft              Telmetery Message                  July 2025
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 26]
+Elhassany & Graf         Expires 16 January 2026               [Page 26]
 
 Internet-Draft              Telmetery Message                  July 2025
 
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Elhassany & Graf         Expires 15 January 2026               [Page 27]
+Elhassany & Graf         Expires 16 January 2026               [Page 27]

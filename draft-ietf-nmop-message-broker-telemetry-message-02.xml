@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="14" month="July" year="2025"/>
+    <date day="15" month="July" year="2025"/>
 
     <area>General</area>
 
@@ -260,8 +260,8 @@
         and received at the data collector. Apart from the
         collection-timestamp, session-protocol and remote-address leafs
         all other leafs are OPTIONAL.  These Network Telemetry session
-        informations allow a network operator to troubleshoot wherever
-				the metrics where obtained through NETCONF or RESTCONF
+        informations allow a network operator to troubleshoot whether
+				the metrics were obtained through NETCONF or RESTCONF
 				&#60;GET&#62; operations or YANG-Push and measure delay
 				and loss related issues. Moreover, this document also defines
 				with <xref target="ietf-yang-push-telemetry-message-module"/> an
