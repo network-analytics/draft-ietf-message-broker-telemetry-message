@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="15" month="July" year="2025"/>
+    <date day="17" month="August" year="2025"/>
 
     <area>General</area>
 
@@ -369,10 +369,10 @@ module: ietf-yang-push-telemetry-message
        |     +--ro on-change!
        |        +--ro dampening-period?   yp:centiseconds
        |        +--ro sync-on-start?      boolean
-       +--ro module-version* [module-name]
-       |  +--ro module-name       yang:yang-identifier
+       +--ro module* [name]
+       |  +--ro name              yang:yang-identifier
        |  +--ro revision?         rev:revision-date
-       |  +--ro revision-label?   ysver:version
+       |  +--ro version?          ysver:version
        +--ro yang-library-content-id?   string
 ]]></artwork>
 </figure>
@@ -633,7 +633,7 @@ module ietf-telemetry-message {
       <figure anchor="ietf-yang-push-telemetry-message-module"
       title="YANG 'ietf-yang-push-telemetry-message' module.">
 
-<sourcecode name="ietf-yang-push-telemetry-message@2025-06-10.yang"
+<sourcecode name="ietf-yang-push-telemetry-message@2025-08-15.yang"
 type="yang" markers="true"><![CDATA[
 module ietf-yang-push-telemetry-message {
   yang-version 1.1;
@@ -712,7 +712,7 @@ module ietf-yang-push-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2025-06-10 {
+  revision 2025-08-15 {
     description
       "Initial revision.";
     reference
@@ -876,30 +876,33 @@ module ietf-yang-push-telemetry-message {
           }
         }
       }
-      list module-version {
-        key "module-name";
+      list module {
+        key "name";
         config false;
         description
-          "List of yang-push-module-version grouping. The revision is
-           not configurable.";
-        leaf module-name {
+          "List of yang-push-module-version grouping defined in
+           draft-ietf-netconf-yang-notifications-versioning. The
+           revision is not configurable.";
+        leaf name {
           type yang:yang-identifier;
           config false;
           description
-            "This references the YANG module name.";
+            "This references the YANG module name, section 7.1 of
+             RFC 7950.";
         }
         leaf revision {
           type rev:revision-date;
           config false;
           description
-            "This references the YANG module revision of the sent
-             notification message.";
+            "This references the YANG module revision, section 7.1.2
+             of RFC 7950, of the sent notification message.";
         }
-        leaf revision-label {
+        leaf version {
           type ysver:version;
           description
-            "This references the YANG module semantic version of the
-             sent notification message.";
+            "This references the YANG module semantic version,
+             draft-ietf-netmod-yang-semver, of the sent notification
+						 message.";
         }
       }
       leaf yang-library-content-id {
@@ -932,7 +935,7 @@ module ietf-yang-push-telemetry-message {
 				telemetry messages. Such an upgrade could have a potential
 				impact on the YANG schema of the exported YANG-Push Notification
 				which is identifable through the "yang-library-content-id" and
-				"revision" and "revision-label" defined in <xref
+				"revision" and "version" defined in <xref
 				target="I-D.ietf-netconf-yang-notifications-versioning"/>
 				and transformed at the data collectors as part of Network
 				Telemetry protocol metadata or the YANG schema id when being
@@ -1108,11 +1111,11 @@ module ietf-yang-push-telemetry-message {
         "datastore": "ietf-datastores:operational",
         "transport": "ietf-udp-notif-transport:udp-notif",
         "encoding": "ietf-subscribed-notifications:encode-json",
-        "module-version": [
+        "module": [
           {
-            "module-name": "ietf-interfaces",
+            "name": "ietf-interfaces",
             "revision": "2018-02-20",
-            "revision-label": "2.0.0"
+            "version": "2.0.0"
           }
         ],
         "yang-library-content-id": "abc"
