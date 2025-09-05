@@ -5,7 +5,7 @@
 NMOP                                                        A. Elhassany
 Internet-Draft                                                   T. Graf
 Intended status: Informational                                  Swisscom
-Expires: 18 February 2026                                 17 August 2025
+Expires: 9 March 2026                                   5 September 2025
 
 
           Extensible YANG Model for Network Telemetry Messages
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 February 2026.
+   This Internet-Draft will expire on 9 March 2026.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 1]
+Elhassany & Graf          Expires 9 March 2026                  [Page 1]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 2]
+Elhassany & Graf          Expires 9 March 2026                  [Page 2]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    The message could be published as it was received from the network to
@@ -165,9 +165,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 3]
+Elhassany & Graf          Expires 9 March 2026                  [Page 3]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    The term "Network Telemetry" is used as defined in [RFC9232].  This
@@ -221,9 +221,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 4]
+Elhassany & Graf          Expires 9 March 2026                  [Page 4]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
       event was exported at the network node and received at the data
@@ -277,9 +277,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 5]
+Elhassany & Graf          Expires 9 March 2026                  [Page 5]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    module: ietf-telemetry-message
@@ -333,9 +333,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 6]
+Elhassany & Graf          Expires 9 March 2026                  [Page 6]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    module: ietf-yang-push-telemetry-message
@@ -389,9 +389,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 7]
+Elhassany & Graf          Expires 9 March 2026                  [Page 7]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
        reference
@@ -445,9 +445,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 8]
+Elhassany & Graf          Expires 9 March 2026                  [Page 8]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
        base session-protocol;
@@ -501,9 +501,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026                [Page 9]
+Elhassany & Graf          Expires 9 March 2026                  [Page 9]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
          }
@@ -557,9 +557,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 10]
+Elhassany & Graf          Expires 9 March 2026                 [Page 10]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
              "Timestamp when the data collector collected the Network
@@ -613,9 +613,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 11]
+Elhassany & Graf          Expires 9 March 2026                 [Page 11]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
            key "name";
@@ -669,9 +669,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 12]
+Elhassany & Graf          Expires 9 March 2026                 [Page 12]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    <CODE BEGINS> file "ietf-yang-push-telemetry-message@2025-08-15.yang"
@@ -725,9 +725,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 13]
+Elhassany & Graf          Expires 9 March 2026                 [Page 13]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
      contact
@@ -781,9 +781,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 14]
+Elhassany & Graf          Expires 9 March 2026                 [Page 14]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
              "This references the affected subscription.";
@@ -837,9 +837,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 15]
+Elhassany & Graf          Expires 9 March 2026                 [Page 15]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
              }
@@ -893,9 +893,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 16]
+Elhassany & Graf          Expires 9 March 2026                 [Page 16]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
                     update will take place at a whole multiple interval
@@ -949,9 +949,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 17]
+Elhassany & Graf          Expires 9 March 2026                 [Page 17]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
            }
@@ -1005,9 +1005,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 18]
+Elhassany & Graf          Expires 9 March 2026                 [Page 18]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
 4.  Use Cases
@@ -1061,9 +1061,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 19]
+Elhassany & Graf          Expires 9 March 2026                 [Page 19]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    data consumer can define for a given YANG-Push subscription id a
@@ -1117,9 +1117,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 20]
+Elhassany & Graf          Expires 9 March 2026                 [Page 20]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    The "ietf-telemetry-message" and "ietf-yang-push-telemetry-message"
@@ -1173,9 +1173,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 21]
+Elhassany & Graf          Expires 9 March 2026                 [Page 21]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    {
@@ -1229,9 +1229,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 22]
+Elhassany & Graf          Expires 9 March 2026                 [Page 22]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
              "ietf-interfaces:interfaces": {
@@ -1285,9 +1285,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 23]
+Elhassany & Graf          Expires 9 March 2026                 [Page 23]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
@@ -1341,9 +1341,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 24]
+Elhassany & Graf          Expires 9 March 2026                 [Page 24]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    [I-D.ietf-netconf-notif-envelope]
@@ -1374,8 +1374,9 @@ Internet-Draft              Telmetery Message                August 2025
               Clarke, J., Wilton, R., Rahman, R., Lengyel, B., Sterne,
               J., and B. Claise, "YANG Semantic Versioning", Work in
               Progress, Internet-Draft, draft-ietf-netmod-yang-semver-
-              22, 1 August 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-netmod-yang-semver-22>.
+              23, 12 August 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
+              yang-semver-23>.
 
 8.2.  Informative References
 
@@ -1396,10 +1397,9 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-
-Elhassany & Graf        Expires 18 February 2026               [Page 25]
+Elhassany & Graf          Expires 9 March 2026                 [Page 25]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    [I-D.ietf-netmod-rfc8407bis]
@@ -1453,9 +1453,9 @@ Authors' Addresses
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 26]
+Elhassany & Graf          Expires 9 March 2026                 [Page 26]
 
-Internet-Draft              Telmetery Message                August 2025
+Internet-Draft              Telmetery Message             September 2025
 
 
    Ahmed Elhassany
@@ -1509,4 +1509,4 @@ Internet-Draft              Telmetery Message                August 2025
 
 
 
-Elhassany & Graf        Expires 18 February 2026               [Page 27]
+Elhassany & Graf          Expires 9 March 2026                 [Page 27]
