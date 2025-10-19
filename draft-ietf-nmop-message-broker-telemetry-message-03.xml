@@ -74,7 +74,7 @@
       </address>
     </author>
 
-    <date day="20" month="September" year="2025"/>
+    <date day="19" month="October" year="2025"/>
 
     <area>General</area>
 
@@ -310,6 +310,8 @@ module: ietf-telemetry-message
      +--ro telemetry-message-metadata
      |  +--ro node-export-timestamp?   yang:date-and-time
      |  +--ro collection-timestamp     yang:date-and-time
+     |  +--ro notification-event
+     |  |       telemetry-notification-event-type
      |  +--ro session-protocol
      |  |       telemetry-session-protocol-type
      |  +--ro export-address           inet:host
@@ -381,7 +383,7 @@ module: ietf-yang-push-telemetry-message
       <figure anchor="ietf-telemetry-message-module"
       title="YANG 'ietf-telemetry-message' module.">
 
-<sourcecode name="ietf-telemetry-message@2025-06-10.yang" type="yang"
+<sourcecode name="ietf-telemetry-message@2025-10-19.yang" type="yang"
 markers="true"><![CDATA[
 module ietf-telemetry-message {
   yang-version 1.1;
@@ -430,7 +432,7 @@ module ietf-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2025-06-10 {
+  revision 2025-10-19 {
     description
       "Initial revision.";
     reference
@@ -442,7 +444,7 @@ module ietf-telemetry-message {
       "Base identity to represent session protocols.";
   }
 
-  identity yp-push {
+  identity yang-push {
     base session-protocol;
     description
       "YANG-Push in RFC 8640 or RFC 8641 or RFC 8650.";
@@ -541,6 +543,14 @@ module ietf-telemetry-message {
         description
           "Timestamp when the data collector collected the Network
            Telemetry data from the network element.";
+      }
+      leaf notification-event {
+        type telemetry-notification-event-type;
+        mandatory true;
+        description
+          "Describes wherever the notification was received and forwarded
+           from the network node or generated or removed from the data
+           collector state cache.";
       }
       leaf session-protocol {
         type telemetry-session-protocol-type;
@@ -1100,7 +1110,8 @@ module ietf-yang-push-telemetry-message {
     "telemetry-message-metadata": {
       "node-export-timestamp": "2024-02-14T12:10:10.10+01:00",
       "collection-timestamp": "2024-02-14T12:10:10.12+01:00",
-      "session-protocol": "yp-push",
+      "notification-event": "log",
+      "session-protocol": "yang-push",
       "export-address": "192.168.1.100",
       "export-port": 123,
       "collection-address": "192.168.1.1",
@@ -1278,8 +1289,9 @@ module ietf-yang-push-telemetry-message {
       <name>Acknowledgements</name>
 
       <t>The authors would like to thank Rob Wilton, Alex Huang Feng,
-      Benoit Claise, Leonardo Rodoni, Reshad Rahman, Dan Voyer and
-			Paolo Lucente for their review and valuable comments.</t>
+      Benoit Claise, Leonardo Rodoni, Reshad Rahman, Dan Voyer, Paolo
+			Lucente and Martin Björklund for their review and valuable
+			comments.</t>
     </section>
   </back>
 </rfc>

@@ -1,4 +1,4 @@
-pyang ietf-telemetry-message@2025-06-10.yang ietf-yang-push-telemetry-message@2025-06-10.yang -f tree --tree-line-length 69 -p deps
+pyang ietf-telemetry-message@2025-10-19.yang ietf-yang-push-telemetry-message@2025-08-15.yang -f tree --tree-line-length 69 -p deps
 module: ietf-telemetry-message
   +--ro message
      +--ro network-node-manifest {network-node-manifest}?
@@ -12,6 +12,8 @@ module: ietf-telemetry-message
      +--ro telemetry-message-metadata
      |  +--ro node-export-timestamp?         yang:date-and-time
      |  +--ro collection-timestamp           yang:date-and-time
+     |  +--ro notification-event
+     |  |       telemetry-notification-event-type
      |  +--ro session-protocol
      |  |       telemetry-session-protocol-type
      |  +--ro export-address                 inet:host
@@ -42,10 +44,10 @@ module: ietf-telemetry-message
      |     |     +--ro yptm:on-change!
      |     |        +--ro yptm:dampening-period?   yp:centiseconds
      |     |        +--ro yptm:sync-on-start?      boolean
-     |     +--ro yptm:module-version* [module-name]
-     |     |  +--ro yptm:module-name       yang:yang-identifier
-     |     |  +--ro yptm:revision?         rev:revision-date
-     |     |  +--ro yptm:revision-label?   ysver:version
+     |     +--ro yptm:module* [name]
+     |     |  +--ro yptm:name        yang:yang-identifier
+     |     |  +--ro yptm:revision?   rev:revision-date
+     |     |  +--ro yptm:version?    ysver:version
      |     +--ro yptm:yang-library-content-id?   string
      +--ro data-collection-manifest {data-collection-manifest}?
      |  +--ro name?               string
