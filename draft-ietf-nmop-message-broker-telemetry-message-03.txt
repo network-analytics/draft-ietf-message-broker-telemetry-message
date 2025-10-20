@@ -1346,6 +1346,10 @@ Elhassany & Graf          Expires 22 April 2026                [Page 24]
 Internet-Draft              Telmetery Message               October 2025
 
 
+   [RFC8791]  Bierman, A., Björklund, M., and K. Watsen, "YANG Data
+              Structure Extensions", RFC 8791, DOI 10.17487/RFC8791,
+              June 2020, <https://www.rfc-editor.org/info/rfc8791>.
+
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
@@ -1387,10 +1391,6 @@ Internet-Draft              Telmetery Message               October 2025
               versioning-15, 18 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               yang-module-versioning-15>.
-
-
-
-
 
 
 
