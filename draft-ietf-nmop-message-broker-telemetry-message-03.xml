@@ -298,47 +298,46 @@
       
 <sourcecode type="yangtree"><![CDATA[
 module: ietf-telemetry-message
-  +--ro message
-     +--ro network-node-manifest {network-node-manifest}?
-     |  +--ro name?               string
-     |  +--ro vendor?             string
-     |  +--ro vendor-pen?         uint32
-     |  +--ro software-version?   string
-     |  +--ro software-flavor?    string
-     |  +--ro os-version?         string
-     |  +--ro os-type?            string
-     +--ro telemetry-message-metadata
-     |  +--ro node-export-timestamp?   yang:date-and-time
-     |  +--ro collection-timestamp     yang:date-and-time
-     |  +--ro notification-event
-     |  |       telemetry-notification-event-type
-     |  +--ro session-protocol
-     |  |       telemetry-session-protocol-type
-     |  +--ro export-address           inet:host
-     |  +--ro export-port?             inet:port-number
-     |  +--ro collection-address?      inet:host
-     |  +--ro collection-port?         inet:port-number
-     +--ro data-collection-manifest {data-collection-manifest}?
-     |  +--ro name?               string
-     |  +--ro vendor?             string
-     |  +--ro vendor-pen?         uint32
-     |  +--ro software-version?   string
-     |  +--ro software-flavor?    string
-     |  +--ro os-version?         string
-     |  +--ro os-type?            string
-     +--ro network-operator-metadata
-     |  +--ro labels* [name]
-     |     +--ro name                          string
-     |     +--ro (value)
-     |        +--:(string-choice)
-     |        |  +--ro (string-choice)?
-     |        |     +--:(string-value)
-     |        |        +--ro string-value?     string
-     |        +--:(anydata-choice)
-     |           +--ro (anydata-choice)?
-     |              +--:(anydata-values)
-     |                 +--ro anydata-values?   <anydata>
-     +--ro payload?                      <anydata>
+
+  structure message:
+    +-- network-node-manifest {network-node-manifest}?
+    |  +-- name?               string
+    |  +-- vendor?             string
+    |  +-- vendor-pen?         uint32
+    |  +-- software-version?   string
+    |  +-- software-flavor?    string
+    |  +-- os-version?         string
+    |  +-- os-type?            string
+    +-- telemetry-message-metadata
+    |  +-- node-export-timestamp?   yang:date-and-time
+    |  +-- collection-timestamp     yang:date-and-time
+    |  +-- notification-event       telemetry-notification-event-type
+    |  +-- session-protocol         telemetry-session-protocol-type
+    |  +-- export-address           inet:host
+    |  +-- export-port?             inet:port-number
+    |  +-- collection-address?      inet:host
+    |  +-- collection-port?         inet:port-number
+    +-- data-collection-manifest {data-collection-manifest}?
+    |  +-- name?               string
+    |  +-- vendor?             string
+    |  +-- vendor-pen?         uint32
+    |  +-- software-version?   string
+    |  +-- software-flavor?    string
+    |  +-- os-version?         string
+    |  +-- os-type?            string
+    +-- network-operator-metadata
+    |  +-- labels* [name]
+    |     +-- name       string
+    |     +-- (value)
+    |        +--:(string-choice)
+    |        |  +-- (string-choice)?
+    |        |     +--:(string-value)
+    |        |        +-- string-value?   string
+    |        +--:(anydata-choice)
+    |           +-- (anydata-choice)?
+    |              +--:(anydata-values)
+    |                 +-- anydata-values?   anydata
+    +-- payload?                      anydata
 ]]></sourcecode></figure>
 
 <figure title="ietf-yang-push-telemetry-message tree">
@@ -346,36 +345,36 @@ module: ietf-telemetry-message
 <![CDATA[
 module: ietf-yang-push-telemetry-message
 
-  augment /tm:message/tm:telemetry-message-metadata:
-    +--ro yang-push-subscription
-       +--ro id?                        sn:subscription-id
-       +--ro (filter-spec)?
-       |  +--:(subtree-filter)
-       |  |  +--ro subtree-filter?      <anydata>
-       |  +--:(xpath-filter)
-       |     +--ro xpath-filter?        yang:xpath1.0
-       +--ro (target)?
+  augment-structure /tm:message/tm:telemetry-message-metadata:
+    +-- yang-push-subscription
+       +-- id?                        sn:subscription-id
+       +-- (filter-spec)?
+       |  +--:(subtree-filter)?
+       |  |  +-- subtree-filter?   anydata
+       |  +--:(xpath-filter)?
+       |     +-- xpath-filter?     yang:xpath1.0
+       +-- (target)?
        |  +--:(stream)
-       |  |  +--ro stream?              string
+       |  |  +-- stream?   string
        |  +--:(datastore)
-       |     +--ro datastore?           identityref
-       +--ro transport?                 sn:transport
-       +--ro encoding?                  sn:encoding
-       +--ro purpose?                   string
-       +--ro (update-trigger)?
+       |     +-- datastore?   identityref
+       +-- transport?                 sn:transport
+       +-- encoding?                  sn:encoding
+       +-- purpose?                   string
+       +-- (update-trigger)?
        |  +--:(periodic)
-       |  |  +--ro periodic!
-       |  |     +--ro period?        yp:centiseconds
-       |  |     +--ro anchor-time?   yang:date-and-time
+       |  |  +-- periodic!
+       |  |     +-- period?        yp:centiseconds
+       |  |     +-- anchor-time?   yang:date-and-time
        |  +--:(on-change)
-       |     +--ro on-change!
-       |        +--ro dampening-period?   yp:centiseconds
-       |        +--ro sync-on-start?      boolean
-       +--ro module* [name]
-       |  +--ro name              yang:yang-identifier
-       |  +--ro revision?         rev:revision-date
-       |  +--ro version?          ysver:version
-       +--ro yang-library-content-id?   string
+       |     +-- on-change!
+       |        +-- dampening-period?   yp:centiseconds
+       |        +-- sync-on-start?      boolean
+       +-- module* [name]
+       |  +-- name        yang:yang-identifier
+       |  +-- revision?   rev:revision-date
+       |  +-- version?    ysver:version
+       +-- yang-library-content-id?   string
 ]]></artwork>
 </figure>
 
@@ -405,6 +404,11 @@ module ietf-telemetry-message {
     reference
       "draft-ietf-opsawg-collected-data-manifest: A Data Manifest for
        Contextualized Telemetry Data";
+  }
+  import ietf-yang-structure-ext {
+    prefix sx;
+    reference
+      "RFC 8791: YANG Data Structure Extensions";
   }
 
   organization
@@ -439,85 +443,12 @@ module ietf-telemetry-message {
       "RFC XXXX";
   }
 
-  identity session-protocol {
-    description
-      "Base identity to represent session protocols.";
-  }
-
-  identity yang-push {
-    base session-protocol;
-    description
-      "YANG-Push in RFC 8640 or RFC 8641 or RFC 8650.";
-    reference
-      "RFC 8640, RFC 8641, RFC 8650: YANG-Push Events and Notifications
-       for Datastores.";
-  }
-
-  identity netconf {
-    base session-protocol;
-    description
-      "NETCONF GET RPC as described in RFC 6241.";
-    reference
-      "RFC 6241: NETCONF GET RPC.";
-  }
-
-  identity restconf {
-    base session-protocol;
-    description
-      "RESTCONF HTTP GET as described in RFC 8040.";
-    reference
-      "RFC 8040: HTTP GET.";
-  }
-
-  feature network-node-manifest {
-    description
-      "This feature indicates the network node manifest support.";
-  }
-
-  feature data-collection-manifest {
-    description
-      "This feature indicates the data collection manifest support.";
-  }
-
-  typedef telemetry-notification-event-type {
-    type enumeration {
-      enum log {
-        description
-          "Collector is reporting the event as it arrived from the
-           network element.";
-      }
-      enum update {
-        description
-          "Collector has updated an entry inside its local cache.
-           This could be triggered by an event from the network for
-           instance interface operational status changed or an internal
-           event in the collector, such as a timer triggered to referesh
-           old enteries.";
-      }
-      enum delete {
-        description
-          "Collector has deleted an entry from its local cache.";
-      }
-    }
-    description
-      "Type of event reported by the collector.";
-  }
-
-  typedef telemetry-session-protocol-type {
-    type identityref {
-      base session-protocol;
-    }
-    description
-      "Network Telemetry protocol used to deliver the notification
-       between the network node and the data collector.";
-  }
-
-  container message {
-    config false;
+  sx:structure "message" {
     description
       "Telemetry message used within the Data Mesh";
     container network-node-manifest {
-      if-feature "network-node-manifest";
+      if-feature
+        "network-node-manifest";
       description
         "Contains the Data Manifest about the network node that
          exported Network Telemetry data.";
@@ -586,7 +517,8 @@ module ietf-telemetry-message {
       }
     }
     container data-collection-manifest {
-      if-feature "data-collection-manifest";
+      if-feature
+        "data-collection-manifest";
       description
         "Contains the Data Manifest of the data collector which
          collected the Network Telemetry data.";
@@ -597,12 +529,14 @@ module ietf-telemetry-message {
         "Network operator specific metadata added by the Network
          Telemetry data collection.";
       list labels {
-        key "name";
+        key
+          "name";
         description
           "Abritrary labels assigned by the data collector.";
         leaf name {
           type string {
-            length "1..max";
+            length
+              "1..max";
           }
           description
             "Label name.";
@@ -636,6 +570,79 @@ module ietf-telemetry-message {
         "Message or notification received from network element.";
     }
   }
+
+  feature network-node-manifest {
+    description
+      "This feature indicates the network node manifest support.";
+  }
+
+  feature data-collection-manifest {
+    description
+      "This feature indicates the data collection manifest support.";
+  }
+
+  identity session-protocol {
+    description
+      "Base identity to represent session protocols.";
+  }
+
+  identity yang-push {
+    base session-protocol;
+    description
+      "YANG-Push in RFC 8640 or RFC 8641 or RFC 8650.";
+    reference
+      "RFC 8640, RFC 8641, RFC 8650: YANG-Push Events and Notifications
+       for Datastores.";
+  }
+
+  identity netconf {
+    base session-protocol;
+    description
+      "NETCONF GET RPC as described in RFC 6241.";
+    reference
+      "RFC 6241: NETCONF GET RPC.";
+  }
+
+  identity restconf {
+    base session-protocol;
+    description
+      "RESTCONF HTTP GET as described in RFC 8040.";
+    reference
+      "RFC 8040: HTTP GET.";
+  }
+
+  typedef telemetry-notification-event-type {
+    type enumeration {
+      enum "log" {
+        description
+          "Collector is reporting the event as it arrived from the
+           network element.";
+      }
+      enum "update" {
+        description
+          "Collector has updated an entry inside its local cache.
+           This could be triggered by an event from the network for
+           instance interface operational status changed or an internal
+           event in the collector, such as a timer triggered to referesh
+           old enteries.";
+      }
+      enum "delete" {
+        description
+          "Collector has deleted an entry from its local cache.";
+      }
+    }
+    description
+      "Type of event reported by the collector.";
+  }
+
+  typedef telemetry-session-protocol-type {
+    type identityref {
+      base session-protocol;
+    }
+    description
+      "Network Telemetry protocol used to deliver the notification
+       between the network node and the data collector.";
+  }
 }
 ]]></sourcecode>
 </figure>
@@ -643,12 +650,11 @@ module ietf-telemetry-message {
       <figure anchor="ietf-yang-push-telemetry-message-module"
       title="YANG 'ietf-yang-push-telemetry-message' module.">
 
-<sourcecode name="ietf-yang-push-telemetry-message@2025-08-15.yang"
+<sourcecode name="ietf-yang-push-telemetry-message@2025-10-19.yang"
 type="yang" markers="true"><![CDATA[
 module ietf-yang-push-telemetry-message {
   yang-version 1.1;
-  namespace
-    "urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message";
   prefix yptm;
 
   import ietf-subscribed-notifications {
@@ -689,6 +695,11 @@ module ietf-yang-push-telemetry-message {
     reference
       "draft-ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
+  import ietf-yang-structure-ext {
+    prefix sx;
+    reference
+      "RFC 8791: YANG Data Structure Extensions";
+  }
 
   organization
     "IETF Draft";
@@ -722,14 +733,14 @@ module ietf-yang-push-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2025-08-15 {
+  revision 2025-10-19 {
     description
       "Initial revision.";
     reference
       "RFC XXXX";
   }
 
-  augment "/tm:message/tm:telemetry-message-metadata" {
+  sx:augment-structure "/tm:message/tm:telemetry-message-metadata" {
     description
       "Augments telemetry-message-metadata with YANG-Push specific
        subscription metadata";
@@ -820,7 +831,8 @@ module ietf-yang-push-telemetry-message {
            the subscriber.";
         case periodic {
           container periodic {
-            presence "indicates a periodic subscription";
+            presence
+              "indicates a periodic subscription";
             description
               "The publisher is requested to notify periodically the
                current values of the datastore as defined by the
@@ -846,14 +858,16 @@ module ietf-yang-push-telemetry-message {
         }
         case on-change {
           container on-change {
-            presence "indicates an on-change subscription";
+            presence
+              "indicates an on-change subscription";
             description
               "The publisher is requested to notify changes in values
                in the datastore subset as defined by a selection
                filter.";
             leaf dampening-period {
               type yp:centiseconds;
-              default "0";
+              default
+                "0";
               description
                 "Specifies the minimum interval between the assembly of
                  successive update records for a single receiver of a
@@ -867,7 +881,8 @@ module ietf-yang-push-telemetry-message {
             }
             leaf sync-on-start {
               type boolean;
-              default "true";
+              default
+                "true";
               description
                 "When this object is set to false, it restricts an
                  on-change subscription from sending push-update
@@ -887,7 +902,8 @@ module ietf-yang-push-telemetry-message {
         }
       }
       list module {
-        key "name";
+        key
+          "name";
         config false;
         description
           "List of yang-push-module-version grouping defined in
@@ -912,14 +928,14 @@ module ietf-yang-push-telemetry-message {
           description
             "This references the YANG module semantic version,
              draft-ietf-netmod-yang-semver, of the sent notification
-						 message.";
+                \t\t\t\t message.";
         }
       }
       leaf yang-library-content-id {
         type string;
         config false;
         description
-          "Contains the YANG library content identifier RFC 8525
+          "Contains the YANG library content identifier, RFC 8525,
            information.";
       }
     }

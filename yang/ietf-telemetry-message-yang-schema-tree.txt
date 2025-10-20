@@ -1,72 +1,105 @@
-pyang ietf-telemetry-message@2025-10-19.yang ietf-yang-push-telemetry-message@2025-08-15.yang -f tree --tree-line-length 69 -p deps
+yanglint ietf-telemetry-message@2025-10-19.yang ietf-yang-push-telemetry-message@2025-08-15.yang -f tree --tree-line-length 69 -p deps
 module: ietf-telemetry-message
-  +--ro message
-     +--ro network-node-manifest {network-node-manifest}?
-     |  +--ro name?               string
-     |  +--ro vendor?             string
-     |  +--ro vendor-pen?         uint32
-     |  +--ro software-version?   string
-     |  +--ro software-flavor?    string
-     |  +--ro os-version?         string
-     |  +--ro os-type?            string
-     +--ro telemetry-message-metadata
-     |  +--ro node-export-timestamp?         yang:date-and-time
-     |  +--ro collection-timestamp           yang:date-and-time
-     |  +--ro notification-event
-     |  |       telemetry-notification-event-type
-     |  +--ro session-protocol
-     |  |       telemetry-session-protocol-type
-     |  +--ro export-address                 inet:host
-     |  +--ro export-port?                   inet:port-number
-     |  +--ro collection-address?            inet:host
-     |  +--ro collection-port?               inet:port-number
-     |  +--ro yptm:yang-push-subscription
-     |     +--ro yptm:id?                        sn:subscription-id
-     |     +--ro (yptm:filter-spec)?
-     |     |  +--:(yptm:subtree-filter)
-     |     |  |  +--ro yptm:subtree-filter?      <anydata>
-     |     |  +--:(yptm:xpath-filter)
-     |     |     +--ro yptm:xpath-filter?        yang:xpath1.0
-     |     +--ro (yptm:target)?
-     |     |  +--:(yptm:stream)
-     |     |  |  +--ro yptm:stream?              string
-     |     |  +--:(yptm:datastore)
-     |     |     +--ro yptm:datastore?           identityref
-     |     +--ro yptm:transport?                 sn:transport
-     |     +--ro yptm:encoding?                  sn:encoding
-     |     +--ro yptm:purpose?                   string
-     |     +--ro (yptm:update-trigger)?
-     |     |  +--:(yptm:periodic)
-     |     |  |  +--ro yptm:periodic!
-     |     |  |     +--ro yptm:period?        yp:centiseconds
-     |     |  |     +--ro yptm:anchor-time?   yang:date-and-time
-     |     |  +--:(yptm:on-change)
-     |     |     +--ro yptm:on-change!
-     |     |        +--ro yptm:dampening-period?   yp:centiseconds
-     |     |        +--ro yptm:sync-on-start?      boolean
-     |     +--ro yptm:module* [name]
-     |     |  +--ro yptm:name        yang:yang-identifier
-     |     |  +--ro yptm:revision?   rev:revision-date
-     |     |  +--ro yptm:version?    ysver:version
-     |     +--ro yptm:yang-library-content-id?   string
-     +--ro data-collection-manifest {data-collection-manifest}?
-     |  +--ro name?               string
-     |  +--ro vendor?             string
-     |  +--ro vendor-pen?         uint32
-     |  +--ro software-version?   string
-     |  +--ro software-flavor?    string
-     |  +--ro os-version?         string
-     |  +--ro os-type?            string
-     +--ro network-operator-metadata
-     |  +--ro labels* [name]
-     |     +--ro name                          string
-     |     +--ro (value)
-     |        +--:(string-choice)
-     |        |  +--ro (string-choice)?
-     |        |     +--:(string-value)
-     |        |        +--ro string-value?     string
-     |        +--:(anydata-choice)
-     |           +--ro (anydata-choice)?
-     |              +--:(anydata-values)
-     |                 +--ro anydata-values?   <anydata>
-     +--ro payload?                      <anydata>
+
+  structure message:
+    +-- network-node-manifest {network-node-manifest}?
+    |  +-- name?               string
+    |  +-- vendor?             string
+    |  +-- vendor-pen?         uint32
+    |  +-- software-version?   string
+    |  +-- software-flavor?    string
+    |  +-- os-version?         string
+    |  +-- os-type?            string
+    +-- telemetry-message-metadata
+    |  +-- node-export-timestamp?    yang:date-and-time
+    |  +-- collection-timestamp      yang:date-and-time
+    |  +-- notification-event
+    |  |     telemetry-notification-event-type
+    |  +-- session-protocol          telemetry-session-protocol-type
+    |  +-- export-address            inet:host
+    |  +-- export-port?              inet:port-number
+    |  +-- collection-address?       inet:host
+    |  +-- collection-port?          inet:port-number
+    |  +-- yang-push-subscription
+    |     +-- id?                        sn:subscription-id
+    |     +-- (filter-spec)?
+    |     |  +--:(subtree-filter)
+    |     |  |  +-- subtree-filter?   anydata
+    |     |  +--:(xpath-filter)
+    |     |     +-- xpath-filter?   yang:xpath1.0
+    |     +-- (target)?
+    |     |  +--:(stream)
+    |     |  |  +-- stream?   string
+    |     |  +--:(datastore)
+    |     |     +-- datastore?   identityref
+    |     +-- transport?                 sn:transport
+    |     +-- encoding?                  sn:encoding
+    |     +-- purpose?                   string
+    |     +-- (update-trigger)?
+    |     |  +--:(periodic)
+    |     |  |  +-- periodic!
+    |     |  |     +-- period?        yp:centiseconds
+    |     |  |     +-- anchor-time?   yang:date-and-time
+    |     |  +--:(on-change)
+    |     |     +-- on-change!
+    |     |        +-- dampening-period?   yp:centiseconds
+    |     |        +-- sync-on-start?      boolean
+    |     +-- module* [name]
+    |     |  +-- name        yang:yang-identifier
+    |     |  +-- revision?   rev:revision-date
+    |     |  +-- version?    ysver:version
+    |     +-- yang-library-content-id?   string
+    +-- data-collection-manifest {data-collection-manifest}?
+    |  +-- name?               string
+    |  +-- vendor?             string
+    |  +-- vendor-pen?         uint32
+    |  +-- software-version?   string
+    |  +-- software-flavor?    string
+    |  +-- os-version?         string
+    |  +-- os-type?            string
+    +-- network-operator-metadata
+    |  +-- labels* [name]
+    |     +-- name       string
+    |     +-- (value)
+    |        +--:(string-choice)
+    |        |  +-- (string-choice)?
+    |        |     +--:(string-value)
+    |        |        +-- string-value?   string
+    |        +--:(anydata-choice)
+    |           +-- (anydata-choice)?
+    |              +--:(anydata-values)
+    |                 +-- anydata-values?   anydata
+    +-- payload?                      anydata
+
+module: ietf-yang-push-telemetry-message
+
+  augment-structure /tm:message/tm:telemetry-message-metadata:
+    +-- yang-push-subscription
+       +-- id?                        sn:subscription-id
+       +-- (filter-spec)?
+       |  +--:(subtree-filter)?
+       |  |  +-- subtree-filter?   anydata
+       |  +--:(xpath-filter)?
+       |     +-- xpath-filter?     yang:xpath1.0
+       +-- (target)?
+       |  +--:(stream)
+       |  |  +-- stream?   string
+       |  +--:(datastore)
+       |     +-- datastore?   identityref
+       +-- transport?                 sn:transport
+       +-- encoding?                  sn:encoding
+       +-- purpose?                   string
+       +-- (update-trigger)?
+       |  +--:(periodic)
+       |  |  +-- periodic!
+       |  |     +-- period?        yp:centiseconds
+       |  |     +-- anchor-time?   yang:date-and-time
+       |  +--:(on-change)
+       |     +-- on-change!
+       |        +-- dampening-period?   yp:centiseconds
+       |        +-- sync-on-start?      boolean
+       +-- module* [name]
+       |  +-- name        yang:yang-identifier
+       |  +-- revision?   rev:revision-date
+       |  +-- version?    ysver:version
+       +-- yang-library-content-id?   string

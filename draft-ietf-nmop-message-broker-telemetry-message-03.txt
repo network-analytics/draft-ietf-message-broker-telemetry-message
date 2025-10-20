@@ -68,14 +68,14 @@ Table of Contents
      4.1.  Data Chain Troubleshooting  . . . . . . . . . . . . . . .  19
      4.2.  Data Product Service Level Objective  . . . . . . . . . .  19
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  20
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  20
-   7.  Implementation status . . . . . . . . . . . . . . . . . . . .  21
-     7.1.  Netgauze  . . . . . . . . . . . . . . . . . . . . . . . .  21
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  21
+   7.  Implementation status . . . . . . . . . . . . . . . . . . . .  22
+     7.1.  Netgauze  . . . . . . . . . . . . . . . . . . . . . . . .  22
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  23
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  25
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  26
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  26
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  27
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
 
 1.  Introduction
 
@@ -283,49 +283,49 @@ Internet-Draft              Telmetery Message               October 2025
 
 
    module: ietf-telemetry-message
-     +--ro message
-        +--ro network-node-manifest {network-node-manifest}?
-        |  +--ro name?               string
-        |  +--ro vendor?             string
-        |  +--ro vendor-pen?         uint32
-        |  +--ro software-version?   string
-        |  +--ro software-flavor?    string
-        |  +--ro os-version?         string
-        |  +--ro os-type?            string
-        +--ro telemetry-message-metadata
-        |  +--ro node-export-timestamp?   yang:date-and-time
-        |  +--ro collection-timestamp     yang:date-and-time
-        |  +--ro notification-event
-        |  |       telemetry-notification-event-type
-        |  +--ro session-protocol
-        |  |       telemetry-session-protocol-type
-        |  +--ro export-address           inet:host
-        |  +--ro export-port?             inet:port-number
-        |  +--ro collection-address?      inet:host
-        |  +--ro collection-port?         inet:port-number
-        +--ro data-collection-manifest {data-collection-manifest}?
-        |  +--ro name?               string
-        |  +--ro vendor?             string
-        |  +--ro vendor-pen?         uint32
-        |  +--ro software-version?   string
-        |  +--ro software-flavor?    string
-        |  +--ro os-version?         string
-        |  +--ro os-type?            string
-        +--ro network-operator-metadata
-        |  +--ro labels* [name]
-        |     +--ro name                          string
-        |     +--ro (value)
-        |        +--:(string-choice)
-        |        |  +--ro (string-choice)?
-        |        |     +--:(string-value)
-        |        |        +--ro string-value?     string
-        |        +--:(anydata-choice)
-        |           +--ro (anydata-choice)?
-        |              +--:(anydata-values)
-        |                 +--ro anydata-values?   <anydata>
-        +--ro payload?                      <anydata>
+
+     structure message:
+       +-- network-node-manifest {network-node-manifest}?
+       |  +-- name?               string
+       |  +-- vendor?             string
+       |  +-- vendor-pen?         uint32
+       |  +-- software-version?   string
+       |  +-- software-flavor?    string
+       |  +-- os-version?         string
+       |  +-- os-type?            string
+       +-- telemetry-message-metadata
+       |  +-- node-export-timestamp?   yang:date-and-time
+       |  +-- collection-timestamp     yang:date-and-time
+       |  +-- notification-event       telemetry-notification-event-type
+       |  +-- session-protocol         telemetry-session-protocol-type
+       |  +-- export-address           inet:host
+       |  +-- export-port?             inet:port-number
+       |  +-- collection-address?      inet:host
+       |  +-- collection-port?         inet:port-number
+       +-- data-collection-manifest {data-collection-manifest}?
+       |  +-- name?               string
+       |  +-- vendor?             string
+       |  +-- vendor-pen?         uint32
+       |  +-- software-version?   string
+       |  +-- software-flavor?    string
+       |  +-- os-version?         string
+       |  +-- os-type?            string
+       +-- network-operator-metadata
+       |  +-- labels* [name]
+       |     +-- name       string
+       |     +-- (value)
+       |        +--:(string-choice)
+       |        |  +-- (string-choice)?
+       |        |     +--:(string-value)
+       |        |        +-- string-value?   string
+       |        +--:(anydata-choice)
+       |           +-- (anydata-choice)?
+       |              +--:(anydata-values)
+       |                 +-- anydata-values?   anydata
+       +-- payload?                      anydata
 
       Figure 1: YANG tree diagram for 'ietf-telemetry-message' module.
+
 
 
 
@@ -340,36 +340,36 @@ Internet-Draft              Telmetery Message               October 2025
 
    module: ietf-yang-push-telemetry-message
 
-     augment /tm:message/tm:telemetry-message-metadata:
-       +--ro yang-push-subscription
-          +--ro id?                        sn:subscription-id
-          +--ro (filter-spec)?
-          |  +--:(subtree-filter)
-          |  |  +--ro subtree-filter?      <anydata>
-          |  +--:(xpath-filter)
-          |     +--ro xpath-filter?        yang:xpath1.0
-          +--ro (target)?
+     augment-structure /tm:message/tm:telemetry-message-metadata:
+       +-- yang-push-subscription
+          +-- id?                        sn:subscription-id
+          +-- (filter-spec)?
+          |  +--:(subtree-filter)?
+          |  |  +-- subtree-filter?   anydata
+          |  +--:(xpath-filter)?
+          |     +-- xpath-filter?     yang:xpath1.0
+          +-- (target)?
           |  +--:(stream)
-          |  |  +--ro stream?              string
+          |  |  +-- stream?   string
           |  +--:(datastore)
-          |     +--ro datastore?           identityref
-          +--ro transport?                 sn:transport
-          +--ro encoding?                  sn:encoding
-          +--ro purpose?                   string
-          +--ro (update-trigger)?
+          |     +-- datastore?   identityref
+          +-- transport?                 sn:transport
+          +-- encoding?                  sn:encoding
+          +-- purpose?                   string
+          +-- (update-trigger)?
           |  +--:(periodic)
-          |  |  +--ro periodic!
-          |  |     +--ro period?        yp:centiseconds
-          |  |     +--ro anchor-time?   yang:date-and-time
+          |  |  +-- periodic!
+          |  |     +-- period?        yp:centiseconds
+          |  |     +-- anchor-time?   yang:date-and-time
           |  +--:(on-change)
-          |     +--ro on-change!
-          |        +--ro dampening-period?   yp:centiseconds
-          |        +--ro sync-on-start?      boolean
-          +--ro module* [name]
-          |  +--ro name              yang:yang-identifier
-          |  +--ro revision?         rev:revision-date
-          |  +--ro version?          ysver:version
-          +--ro yang-library-content-id?   string
+          |     +-- on-change!
+          |        +-- dampening-period?   yp:centiseconds
+          |        +-- sync-on-start?      boolean
+          +-- module* [name]
+          |  +-- name        yang:yang-identifier
+          |  +-- revision?   rev:revision-date
+          |  +-- version?    ysver:version
+          +-- yang-library-content-id?   string
 
               Figure 2: ietf-yang-push-telemetry-message tree
 
@@ -402,6 +402,11 @@ Internet-Draft              Telmetery Message               October 2025
        reference
          "draft-ietf-opsawg-collected-data-manifest: A Data Manifest for
           Contextualized Telemetry Data";
+     }
+     import ietf-yang-structure-ext {
+       prefix sx;
+       reference
+         "RFC 8791: YANG Data Structure Extensions";
      }
 
      organization
@@ -436,12 +441,7 @@ Internet-Draft              Telmetery Message               October 2025
          "RFC XXXX";
      }
 
-     identity session-protocol {
-       description
-         "Base identity to represent session protocols.";
-     }
-
-     identity yang-push {
+     sx:structure "message" {
 
 
 
@@ -450,87 +450,11 @@ Elhassany & Graf          Expires 22 April 2026                 [Page 8]
 Internet-Draft              Telmetery Message               October 2025
 
 
-       base session-protocol;
-       description
-         "YANG-Push in RFC 8640 or RFC 8641 or RFC 8650.";
-       reference
-         "RFC 8640, RFC 8641, RFC 8650: YANG-Push Events and Notifications
-          for Datastores.";
-     }
-
-     identity netconf {
-       base session-protocol;
-       description
-         "NETCONF GET RPC as described in RFC 6241.";
-       reference
-         "RFC 6241: NETCONF GET RPC.";
-     }
-
-     identity restconf {
-       base session-protocol;
-       description
-         "RESTCONF HTTP GET as described in RFC 8040.";
-       reference
-         "RFC 8040: HTTP GET.";
-     }
-
-     feature network-node-manifest {
-       description
-         "This feature indicates the network node manifest support.";
-     }
-
-     feature data-collection-manifest {
-       description
-         "This feature indicates the data collection manifest support.";
-     }
-
-     typedef telemetry-notification-event-type {
-       type enumeration {
-         enum log {
-           description
-             "Collector is reporting the event as it arrived from the
-              network element.";
-         }
-         enum update {
-           description
-             "Collector has updated an entry inside its local cache.
-              This could be triggered by an event from the network for
-              instance interface operational status changed or an internal
-              event in the collector, such as a timer triggered to referesh
-              old enteries.";
-
-
-
-Elhassany & Graf          Expires 22 April 2026                 [Page 9]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
-         }
-         enum delete {
-           description
-             "Collector has deleted an entry from its local cache.";
-         }
-       }
-       description
-         "Type of event reported by the collector.";
-     }
-
-     typedef telemetry-session-protocol-type {
-       type identityref {
-         base session-protocol;
-       }
-       description
-         "Network Telemetry protocol used to deliver the notification
-          between the network node and the data collector.";
-     }
-
-     container message {
-       config false;
        description
          "Telemetry message used within the Data Mesh";
        container network-node-manifest {
-         if-feature "network-node-manifest";
+         if-feature
+           "network-node-manifest";
          description
            "Contains the Data Manifest about the network node that
             exported Network Telemetry data.";
@@ -554,14 +478,6 @@ Internet-Draft              Telmetery Message               October 2025
            type yang:date-and-time;
            mandatory true;
            description
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 10]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
              "Timestamp when the data collector collected the Network
               Telemetry data from the network element.";
          }
@@ -582,6 +498,14 @@ Internet-Draft              Telmetery Message               October 2025
          }
          leaf export-address {
            type inet:host;
+
+
+
+Elhassany & Graf          Expires 22 April 2026                 [Page 9]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
            mandatory true;
            description
              "Network node IP address from where the Network Telemetry data
@@ -607,17 +531,10 @@ Internet-Draft              Telmetery Message               October 2025
          }
        }
        container data-collection-manifest {
-         if-feature "data-collection-manifest";
+         if-feature
+           "data-collection-manifest";
          description
            "Contains the Data Manifest of the data collector which
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 11]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
             collected the Network Telemetry data.";
          uses p-mf:platform-details;
        }
@@ -626,15 +543,25 @@ Internet-Draft              Telmetery Message               October 2025
            "Network operator specific metadata added by the Network
             Telemetry data collection.";
          list labels {
-           key "name";
+           key
+             "name";
            description
              "Abritrary labels assigned by the data collector.";
            leaf name {
              type string {
-               length "1..max";
+               length
+                 "1..max";
              }
              description
                "Label name.";
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 10]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
            }
            choice value {
              mandatory true;
@@ -665,7 +592,80 @@ Internet-Draft              Telmetery Message               October 2025
            "Message or notification received from network element.";
        }
      }
-   }
+
+     feature network-node-manifest {
+       description
+         "This feature indicates the network node manifest support.";
+     }
+
+     feature data-collection-manifest {
+       description
+         "This feature indicates the data collection manifest support.";
+     }
+
+     identity session-protocol {
+       description
+         "Base identity to represent session protocols.";
+     }
+
+     identity yang-push {
+       base session-protocol;
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 11]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
+       description
+         "YANG-Push in RFC 8640 or RFC 8641 or RFC 8650.";
+       reference
+         "RFC 8640, RFC 8641, RFC 8650: YANG-Push Events and Notifications
+          for Datastores.";
+     }
+
+     identity netconf {
+       base session-protocol;
+       description
+         "NETCONF GET RPC as described in RFC 6241.";
+       reference
+         "RFC 6241: NETCONF GET RPC.";
+     }
+
+     identity restconf {
+       base session-protocol;
+       description
+         "RESTCONF HTTP GET as described in RFC 8040.";
+       reference
+         "RFC 8040: HTTP GET.";
+     }
+
+     typedef telemetry-notification-event-type {
+       type enumeration {
+         enum "log" {
+           description
+             "Collector is reporting the event as it arrived from the
+              network element.";
+         }
+         enum "update" {
+           description
+             "Collector has updated an entry inside its local cache.
+              This could be triggered by an event from the network for
+              instance interface operational status changed or an internal
+              event in the collector, such as a timer triggered to referesh
+              old enteries.";
+         }
+         enum "delete" {
+           description
+             "Collector has deleted an entry from its local cache.";
+         }
+       }
+       description
+         "Type of event reported by the collector.";
+     }
+
+     typedef telemetry-session-protocol-type {
 
 
 
@@ -674,15 +674,22 @@ Elhassany & Graf          Expires 22 April 2026                [Page 12]
 Internet-Draft              Telmetery Message               October 2025
 
 
+       type identityref {
+         base session-protocol;
+       }
+       description
+         "Network Telemetry protocol used to deliver the notification
+          between the network node and the data collector.";
+     }
+   }
    <CODE ENDS>
 
               Figure 3: YANG 'ietf-telemetry-message' module.
 
-   <CODE BEGINS> file "ietf-yang-push-telemetry-message@2025-08-15.yang"
+   <CODE BEGINS> file "ietf-yang-push-telemetry-message@2025-10-19.yang"
    module ietf-yang-push-telemetry-message {
      yang-version 1.1;
-     namespace
-       "urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message";
+     namespace "urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message";
      prefix yptm;
 
      import ietf-subscribed-notifications {
@@ -715,13 +722,6 @@ Internet-Draft              Telmetery Message               October 2025
      import ietf-yang-revisions {
        prefix rev;
        reference
-         "draft-ietf-netmod-yang-module-versioning: Updated YANG Module
-          Revision Handling";
-     }
-     import ietf-yang-semver {
-       prefix ysver;
-       reference
-         "draft-ietf-netmod-yang-semver: YANG Semantic Versioning";
 
 
 
@@ -730,6 +730,18 @@ Elhassany & Graf          Expires 22 April 2026                [Page 13]
 Internet-Draft              Telmetery Message               October 2025
 
 
+         "draft-ietf-netmod-yang-module-versioning: Updated YANG Module
+          Revision Handling";
+     }
+     import ietf-yang-semver {
+       prefix ysver;
+       reference
+         "draft-ietf-netmod-yang-semver: YANG Semantic Versioning";
+     }
+     import ietf-yang-structure-ext {
+       prefix sx;
+       reference
+         "RFC 8791: YANG Data Structure Extensions";
      }
 
      organization
@@ -764,20 +776,8 @@ Internet-Draft              Telmetery Message               October 2025
         This version of this YANG module is part of RFC XXXX; see the RFC
         itself for full legal notices.";
 
-     revision 2025-08-15 {
+     revision 2025-10-19 {
        description
-         "Initial revision.";
-       reference
-         "RFC XXXX";
-     }
-
-     augment "/tm:message/tm:telemetry-message-metadata" {
-       description
-         "Augments telemetry-message-metadata with YANG-Push specific
-          subscription metadata";
-       container yang-push-subscription {
-         config false;
-         description
 
 
 
@@ -786,6 +786,18 @@ Elhassany & Graf          Expires 22 April 2026                [Page 14]
 Internet-Draft              Telmetery Message               October 2025
 
 
+         "Initial revision.";
+       reference
+         "RFC XXXX";
+     }
+
+     sx:augment-structure "/tm:message/tm:telemetry-message-metadata" {
+       description
+         "Augments telemetry-message-metadata with YANG-Push specific
+          subscription metadata";
+       container yang-push-subscription {
+         config false;
+         description
            "YANG-Push specific subscription metadata";
          leaf id {
            type sn:subscription-id;
@@ -822,6 +834,14 @@ Internet-Draft              Telmetery Message               October 2025
            description
              "Identifies the source of information against which a
               subscription is being applied as well as specifics on the
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 15]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
               subset of information desired from that source.";
            case stream {
              leaf stream {
@@ -834,14 +854,6 @@ Internet-Draft              Telmetery Message               October 2025
            case datastore {
              leaf datastore {
                type identityref {
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 15]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
                  base ds:datastore;
                }
                description
@@ -878,7 +890,16 @@ Internet-Draft              Telmetery Message               October 2025
               the subscriber.";
            case periodic {
              container periodic {
-               presence "indicates a periodic subscription";
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 16]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
+               presence
+                 "indicates a periodic subscription";
                description
                  "The publisher is requested to notify periodically the
                   current values of the datastore as defined by the
@@ -890,14 +911,6 @@ Internet-Draft              Telmetery Message               October 2025
                     push updates, in one hundredths of a second.";
                }
                leaf anchor-time {
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 16]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
                  type yang:date-and-time;
                  description
                    "Designates a timestamp before or after which a series
@@ -912,14 +925,16 @@ Internet-Draft              Telmetery Message               October 2025
            }
            case on-change {
              container on-change {
-               presence "indicates an on-change subscription";
+               presence
+                 "indicates an on-change subscription";
                description
                  "The publisher is requested to notify changes in values
                   in the datastore subset as defined by a selection
                   filter.";
                leaf dampening-period {
                  type yp:centiseconds;
-                 default "0";
+                 default
+                   "0";
                  description
                    "Specifies the minimum interval between the assembly of
                     successive update records for a single receiver of a
@@ -931,9 +946,18 @@ Internet-Draft              Telmetery Message               October 2025
                     will have their current values marshalled and placed
                     into a new update record.";
                }
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 17]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
                leaf sync-on-start {
                  type boolean;
-                 default "true";
+                 default
+                   "true";
                  description
                    "When this object is set to false, it restricts an
                     on-change subscription from sending push-update
@@ -946,14 +970,6 @@ Internet-Draft              Telmetery Message               October 2025
                     the subscription starts using a push-update
                     notification.  After that, push-change-update
                     notifications are exclusively sent unless the publisher
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 17]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
                     chooses to resync the subscription via a new
                     push-update notification.";
                }
@@ -961,7 +977,8 @@ Internet-Draft              Telmetery Message               October 2025
            }
          }
          list module {
-           key "name";
+           key
+             "name";
            config false;
            description
              "List of yang-push-module-version grouping defined in
@@ -985,15 +1002,23 @@ Internet-Draft              Telmetery Message               October 2025
              type ysver:version;
              description
                "This references the YANG module semantic version,
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 18]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
                 draft-ietf-netmod-yang-semver, of the sent notification
-                                                    message.";
+                   \t\t\t\t message.";
            }
          }
          leaf yang-library-content-id {
            type string;
            config false;
            description
-             "Contains the YANG library content identifier RFC 8525
+             "Contains the YANG library content identifier, RFC 8525,
               information.";
          }
        }
@@ -1002,13 +1027,6 @@ Internet-Draft              Telmetery Message               October 2025
    <CODE ENDS>
 
          Figure 4: YANG 'ietf-yang-push-telemetry-message' module.
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 18]
-
-Internet-Draft              Telmetery Message               October 2025
-
 
 4.  Use Cases
 
@@ -1040,6 +1058,14 @@ Internet-Draft              Telmetery Message               October 2025
    time to ensure a holistic view of the network.  To measure the delay
    and loss between the data export on the network node, the data
    collectors and the YANG data consumer, sequence numbers and
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 19]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
    timestamps are required.  With "hostname" and "sequence-number"
    defined in Section 3.4 of [I-D.ietf-netconf-notif-envelope] each
    message is uniquely identifiably and with "event-time" and
@@ -1058,14 +1084,6 @@ Internet-Draft              Telmetery Message               October 2025
    subscriptions observe changes depending on their polling interval
    much later.  With the Network Telemetry protocol metadata introduced
    by this document, based on the update-trigger informations, a YANG
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 19]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
    data consumer can define for a given YANG-Push subscription id a
    lower service Level objective than for another.  Therefore adjust the
    detection to be more real-time than without this information.
@@ -1097,6 +1115,13 @@ Internet-Draft              Telmetery Message               October 2025
 
    *  Prefix: tm
 
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 20]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
    *  Reference: RFC XXXX
 
 
@@ -1113,14 +1138,6 @@ Internet-Draft              Telmetery Message               October 2025
 
    This section is modeled after the template described in Section 3.7
    of [I-D.ietf-netmod-rfc8407bis].
-
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 20]
-
-Internet-Draft              Telmetery Message               October 2025
-
 
    The "ietf-telemetry-message" and "ietf-yang-push-telemetry-message"
    YANG modules defines two data models that are designed to be accessed
@@ -1154,6 +1171,13 @@ Internet-Draft              Telmetery Message               October 2025
 
    "There are no particularly sensitive readable data nodes."
 
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 21]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
 7.  Implementation status
 
    This section provides pointers to existing open source
@@ -1169,14 +1193,6 @@ Internet-Draft              Telmetery Message               October 2025
 
    Figure 5 provides an example of a JSON encoded, [RFC7951], Network
    Telemetry message.
-
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 21]
-
-Internet-Draft              Telmetery Message               October 2025
-
 
    {
      "ietf-telemetry-message:message": {
@@ -1210,6 +1226,14 @@ Internet-Draft              Telmetery Message               October 2025
            "yang-library-content-id": "abc"
          }
        },
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 22]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
        "data-collection-manifest": {
          "name": "collector-1",
          "vendor": "open source",
@@ -1226,14 +1250,6 @@ Internet-Draft              Telmetery Message               October 2025
        "payload": {
          "ietf-yang-push:push-update": {
            "id": 89,
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 22]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
            "datastore-contents": {
              "ietf-interfaces:interfaces": {
                "interface": [
@@ -1264,6 +1280,16 @@ Internet-Draft              Telmetery Message               October 2025
               DOI 10.17487/RFC3688, January 2004,
               <https://www.rfc-editor.org/info/rfc3688>.
 
+
+
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 23]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
    [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
               Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
               January 2006, <https://www.rfc-editor.org/info/rfc4252>.
@@ -1281,14 +1307,6 @@ Internet-Draft              Telmetery Message               October 2025
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
               <https://www.rfc-editor.org/info/rfc7950>.
-
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 23]
-
-Internet-Draft              Telmetery Message               October 2025
-
 
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
@@ -1321,6 +1339,13 @@ Internet-Draft              Telmetery Message               October 2025
               for Datastore Updates", RFC 8641, DOI 10.17487/RFC8641,
               September 2019, <https://www.rfc-editor.org/info/rfc8641>.
 
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 24]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
@@ -1338,13 +1363,6 @@ Internet-Draft              Telmetery Message               October 2025
               integration-08, 7 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               yang-message-broker-integration-08>.
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 24]
-
-Internet-Draft              Telmetery Message               October 2025
-
 
    [I-D.ietf-netconf-notif-envelope]
               Feng, A. H., Francois, P., Graf, T., and B. Claise,
@@ -1369,6 +1387,20 @@ Internet-Draft              Telmetery Message               October 2025
               versioning-15, 18 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               yang-module-versioning-15>.
+
+
+
+
+
+
+
+
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 25]
+
+Internet-Draft              Telmetery Message               October 2025
+
 
    [I-D.ietf-netmod-yang-semver]
               Clarke, J., Wilton, R., Rahman, R., Lengyel, B., Sterne,
@@ -1395,13 +1427,6 @@ Internet-Draft              Telmetery Message               October 2025
               RFC 9254, DOI 10.17487/RFC9254, July 2022,
               <https://www.rfc-editor.org/info/rfc9254>.
 
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 25]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
    [I-D.ietf-netmod-rfc8407bis]
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
@@ -1426,6 +1451,13 @@ Internet-Draft              Telmetery Message               October 2025
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               yang-notifications-versioning-09>.
 
+
+
+Elhassany & Graf          Expires 22 April 2026                [Page 26]
+
+Internet-Draft              Telmetery Message               October 2025
+
+
    [Deh22]    Dehghani, Z., "Data Mesh", O'Reilly Media,
               ISBN 9781492092391, March 2022,
               <https://www.oreilly.com/library/view/data-
@@ -1449,15 +1481,6 @@ Acknowledgements
 
 Authors' Addresses
 
-
-
-
-
-Elhassany & Graf          Expires 22 April 2026                [Page 26]
-
-Internet-Draft              Telmetery Message               October 2025
-
-
    Ahmed Elhassany
    Swisscom
    Binzring 17
@@ -1472,29 +1495,6 @@ Internet-Draft              Telmetery Message               October 2025
    CH- Zuerich 8045
    Switzerland
    Email: thomas.graf@swisscom.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
