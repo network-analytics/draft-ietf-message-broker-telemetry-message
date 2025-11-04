@@ -1212,6 +1212,7 @@ module ietf-yang-push-telemetry-message {
         <figure anchor="pmacct_message_example_json_fig"
                 title="JSON Network Telemetry Example">
           <artwork><![CDATA[
+========== NOTE: '\' line wrapping per RFC 8792 ===========
 {
   "ietf-telemetry-message:message": {
     "data-collection-manifest": {
@@ -1253,7 +1254,8 @@ module ietf-yang-push-telemetry-message {
                         "out-multicast-pkts": "0",
                         "out-discards": "0",
                         "out-errors": "0",
-                        "Cisco-IOS-XR-openconfig-interfaces-stats-ext:cisco": {
+                        "Cisco-IOS-XR-openconfig-interfaces-stats-ext:\
+												cisco": {
                           "last-read-time": "1752832251474"
                         }
                       }
@@ -1287,7 +1289,8 @@ module ietf-yang-push-telemetry-message {
       "ietf-yang-push-telemetry-message:yang-push-subscription": {
         "id": 210,
         "ietf-yang-push:datastore": "ietf-datastores:operational",
-        "ietf-yang-push:datastore-xpath-filter": "openconfig-interfaces:interfaces/interface/state/counters",
+        "ietf-yang-push:datastore-xpath-filter": "openconfig-interfaces\
+				:interfaces/interface/state/counters",
         "transport": "ietf-udp-notif-transport:udp-notif",
         "ietf-yang-push-revision:module-version": [
           {
@@ -1295,7 +1298,8 @@ module ietf-yang-push-telemetry-message {
             "revision": "2022-10-25"
           }
         ],
-        "ietf-yang-push-revision:yang-library-content-id": "6d13bafd8fd1dc21aa8932d1199b369794881393",
+        "ietf-yang-push-revision:yang-library-content-id":\
+				"6d13bafd8fd1dc21aa8932d1199b369794881393",
         "encoding": "encode-json",
         "ietf-yang-push:periodic": {
           "period": 3000,
