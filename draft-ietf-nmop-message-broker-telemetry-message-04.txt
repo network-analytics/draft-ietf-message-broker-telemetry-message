@@ -5,7 +5,9 @@
 NMOP                                                        A. Elhassany
 Internet-Draft                                                   T. Graf
 Intended status: Informational                                  Swisscom
-Expires: 8 May 2026                                      4 November 2025
+Expires: 23 May 2026                                          P. Lucente
+                                                                     NTT
+                                                        19 November 2025
 
 
           Extensible YANG Model for Network Telemetry Messages
@@ -34,12 +36,27 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2026.
+   This Internet-Draft will expire on 23 May 2026.
 
 Copyright Notice
 
    Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
+
+
+
+
+
+
+
+
+
+
+
+Elhassany, et al.          Expires 23 May 2026                  [Page 1]
+
+Internet-Draft              Telmetery Message              November 2025
+
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
@@ -50,19 +67,11 @@ Copyright Notice
    described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Revised BSD License.
 
-
-
-
-Elhassany & Graf           Expires 8 May 2026                   [Page 1]
-
-Internet-Draft              Telmetery Message              November 2025
-
-
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Conventions and Definitions . . . . . . . . . . . . . . . . .   3
-     2.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  Conventions and Definitions . . . . . . . . . . . . . . . . .   4
+     2.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   4
    3.  YANG Modules  . . . . . . . . . . . . . . . . . . . . . . . .   4
    4.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . . . .  19
      4.1.  Data Chain Troubleshooting  . . . . . . . . . . . . . . .  19
@@ -98,6 +107,13 @@ Table of Contents
    Even though YANG is intended to ease data management, this promise
    has not yet been fulfilled for Network Telemetry [RFC9232].
 
+
+
+Elhassany, et al.          Expires 23 May 2026                  [Page 2]
+
+Internet-Draft              Telmetery Message              November 2025
+
+
    An Architecture for YANG-Push to Message Broker Integration
    [I-D.ietf-nmop-yang-message-broker-integration] defined an
    architecture for integrating YANG-Push with Message Brokers for a
@@ -106,13 +122,6 @@ Table of Contents
    described in Section Section 4.5 of
    [I-D.ietf-nmop-yang-message-broker-integration], however the produced
    message format left unspecified.
-
-
-
-Elhassany & Graf           Expires 8 May 2026                   [Page 2]
-
-Internet-Draft              Telmetery Message              November 2025
-
 
    The message could be published as it was received from the network to
    their organization's Message Broker.  However, this approach is
@@ -150,6 +159,17 @@ Internet-Draft              Telmetery Message              November 2025
    [I-D.ietf-nmop-yang-message-broker-integration].  The described YANG
    model fascilitates JSON [RFC7951] and CBOR [RFC9254] serialization.
 
+
+
+
+
+
+
+Elhassany, et al.          Expires 23 May 2026                  [Page 3]
+
+Internet-Draft              Telmetery Message              November 2025
+
+
 2.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -162,13 +182,6 @@ Internet-Draft              Telmetery Message              November 2025
 
    The terms "Subscriber", "Publisher", and "Receiver" are used as
    defined in [RFC8639].
-
-
-
-Elhassany & Graf           Expires 8 May 2026                   [Page 3]
-
-Internet-Draft              Telmetery Message              November 2025
-
 
    The term "Network Telemetry" is used as defined in [RFC9232].  This
    document uses the term export and collection to distinguish between
@@ -204,6 +217,15 @@ Internet-Draft              Telmetery Message              November 2025
    envelope message schema which adds two provenance and two metadata
    categories to the collected Network Telemetry data.
 
+
+
+
+
+Elhassany, et al.          Expires 23 May 2026                  [Page 4]
+
+Internet-Draft              Telmetery Message              November 2025
+
+
    The YANG-Push extension adds YANG-Push specific subscription metadata
    to the Network Telemetry protocol provenance of the envelope.
 
@@ -218,14 +240,6 @@ Internet-Draft              Telmetery Message              November 2025
       session information between the collector and the network node.
       It adds fields such as the Network Telemetry protocol name, the IP
       addresses and ports of that transport session and the time the
-
-
-
-Elhassany & Graf           Expires 8 May 2026                   [Page 4]
-
-Internet-Draft              Telmetery Message              November 2025
-
-
       event was exported at the network node and received at the data
       collector.  Apart from the collection-timestamp, notification-
       event, session-protocol and remote-address leafs all other leafs
@@ -263,21 +277,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Elhassany & Graf           Expires 8 May 2026                   [Page 5]
+Elhassany, et al.          Expires 23 May 2026                  [Page 5]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -333,7 +333,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                   [Page 6]
+Elhassany, et al.          Expires 23 May 2026                  [Page 6]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -389,7 +389,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                   [Page 7]
+Elhassany, et al.          Expires 23 May 2026                  [Page 7]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -445,7 +445,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                   [Page 8]
+Elhassany, et al.          Expires 23 May 2026                  [Page 8]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -501,7 +501,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                   [Page 9]
+Elhassany, et al.          Expires 23 May 2026                  [Page 9]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -557,7 +557,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 10]
+Elhassany, et al.          Expires 23 May 2026                 [Page 10]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -613,7 +613,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 11]
+Elhassany, et al.          Expires 23 May 2026                 [Page 11]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -669,7 +669,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 12]
+Elhassany, et al.          Expires 23 May 2026                 [Page 12]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -725,7 +725,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 13]
+Elhassany, et al.          Expires 23 May 2026                 [Page 13]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -781,7 +781,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 14]
+Elhassany, et al.          Expires 23 May 2026                 [Page 14]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -837,7 +837,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 15]
+Elhassany, et al.          Expires 23 May 2026                 [Page 15]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -893,7 +893,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 16]
+Elhassany, et al.          Expires 23 May 2026                 [Page 16]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -949,7 +949,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 17]
+Elhassany, et al.          Expires 23 May 2026                 [Page 17]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1005,7 +1005,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 18]
+Elhassany, et al.          Expires 23 May 2026                 [Page 18]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1061,7 +1061,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 19]
+Elhassany, et al.          Expires 23 May 2026                 [Page 19]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1117,7 +1117,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 20]
+Elhassany, et al.          Expires 23 May 2026                 [Page 20]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1173,7 +1173,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 21]
+Elhassany, et al.          Expires 23 May 2026                 [Page 21]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1229,7 +1229,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 22]
+Elhassany, et al.          Expires 23 May 2026                 [Page 22]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1285,7 +1285,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 23]
+Elhassany, et al.          Expires 23 May 2026                 [Page 23]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1341,7 +1341,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 24]
+Elhassany, et al.          Expires 23 May 2026                 [Page 24]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1397,7 +1397,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 25]
+Elhassany, et al.          Expires 23 May 2026                 [Page 25]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1453,7 +1453,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 26]
+Elhassany, et al.          Expires 23 May 2026                 [Page 26]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1509,7 +1509,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 27]
+Elhassany, et al.          Expires 23 May 2026                 [Page 27]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1565,7 +1565,7 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 28]
+Elhassany, et al.          Expires 23 May 2026                 [Page 28]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1621,7 +1621,7 @@ Authors' Addresses
 
 
 
-Elhassany & Graf           Expires 8 May 2026                  [Page 29]
+Elhassany, et al.          Expires 23 May 2026                 [Page 29]
 
 Internet-Draft              Telmetery Message              November 2025
 
@@ -1637,6 +1637,12 @@ Internet-Draft              Telmetery Message              November 2025
    Email: thomas.graf@swisscom.com
 
 
+   Paolo Lucente
+   NTT
+   Veemweg 23
+   Barneveld 3771
+   Netherlands
+   Email: paolo@ntt.net
 
 
 
@@ -1671,10 +1677,4 @@ Internet-Draft              Telmetery Message              November 2025
 
 
 
-
-
-
-
-
-
-Elhassany & Graf           Expires 8 May 2026                  [Page 30]
+Elhassany, et al.          Expires 23 May 2026                 [Page 30]

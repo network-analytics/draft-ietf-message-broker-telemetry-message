@@ -74,7 +74,31 @@
       </address>
     </author>
 
-    <date day="4" month="November" year="2025"/>
+    <author fullname="Paolo Lucente" initials="P." surname="Lucente">
+      <organization>NTT</organization>
+
+      <address>
+        <postal>
+          <street>Veemweg 23</street>
+
+          <city>Barneveld 3771</city>
+
+          <region/>
+
+          <code/>
+
+          <country>Netherlands</country>
+        </postal>
+
+        <phone/>
+
+        <email>paolo@ntt.net</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <date day="19" month="November" year="2025"/>
 
     <area>General</area>
 
