@@ -12,7 +12,7 @@
 <?rfc subcompact="no"?>
 <!-- If further character entities are required then they should be added to the DOCTYPE above.
      Use of an external entity file is not recommended. -->
-<rfc category="info"
+<rfc category="std"
      docName="draft-ietf-nmop-message-broker-telemetry-message-04"
      ipr="trust200902" obsoletes="" submissionType="IETF" updates=""
      version="3" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="19" month="November" year="2025"/>
+    <date day="22" month="November" year="2025"/>
 
     <area>General</area>
 
