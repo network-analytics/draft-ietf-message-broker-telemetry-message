@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="22" month="November" year="2025"/>
+    <date day="02" month="December" year="2025"/>
 
     <area>General</area>
 
@@ -367,6 +367,10 @@ module: ietf-telemetry-message
     |  +-- labels* [name]
     |     +-- name       string
     |     +-- (value)
+    |        +--:(number-choice)
+    |        |  +-- (number-choice)?
+    |        |     +--:(number-value)
+    |        |        +-- number-value?   uint16
     |        +--:(string-choice)
     |        |  +-- (string-choice)?
     |        |     +--:(string-value)
@@ -583,6 +587,15 @@ module ietf-telemetry-message {
           mandatory true;
           description
             "label value";
+          choice number-choice {
+            description
+              "Number value";
+            leaf number-value {
+              type uint16;
+              description
+                "Number value";
+            }
+          }
           choice string-choice {
             description
               "String value";

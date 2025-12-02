@@ -1,4 +1,4 @@
-yanglint ietf-telemetry-message@2025-10-19.yang ietf-yang-push-telemetry-message@2025-08-15.yang -f tree --tree-line-length 69 -p deps
+yanglint ietf-telemetry-message@2025-10-19.yang ietf-yang-push-telemetry-message@2025-10-19.yang -f tree --tree-line-length 69 -p deps
 module: ietf-telemetry-message
 
   structure message:
@@ -61,6 +61,10 @@ module: ietf-telemetry-message
     |  +-- labels* [name]
     |     +-- name       string
     |     +-- (value)
+    |        +--:(number-choice)
+    |        |  +-- (number-choice)?
+    |        |     +--:(number-value)
+    |        |        +-- number-value?   uint16
     |        +--:(string-choice)
     |        |  +-- (string-choice)?
     |        |     +--:(string-value)

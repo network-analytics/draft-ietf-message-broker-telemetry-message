@@ -228,6 +228,15 @@ module ietf-telemetry-message {
           mandatory true;
           description
             "label value";
+          choice number-choice {
+            description
+              "Number value";
+            leaf number-value {
+              type uint16;
+              description
+                "Number value";
+            }
+          }
           choice string-choice {
             description
               "String value";
