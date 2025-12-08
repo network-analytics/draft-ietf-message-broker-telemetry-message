@@ -1235,11 +1235,11 @@ Internet-Draft              Telmetery Message              December 2025
 
 
            "encoding": "ietf-subscribed-notifications:encode-json",
-           "module-version": [
+           "module": [
              {
-               "module-name": "ietf-interfaces",
+               "module": "ietf-interfaces",
                "revision": "2018-02-20",
-               "revision-label": "2.0.0"
+               "version": "2.0.0"
              }
            ],
            "yang-library-content-id": "abc"
