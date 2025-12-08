@@ -5,9 +5,9 @@
 NMOP                                                        A. Elhassany
 Internet-Draft                                                   T. Graf
 Intended status: Standards Track                                Swisscom
-Expires: 5 June 2026                                          P. Lucente
+Expires: 11 June 2026                                         P. Lucente
                                                                      NTT
-                                                         2 December 2025
+                                                         8 December 2025
 
 
           Extensible YANG Model for Network Telemetry Messages
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2026.
+   This Internet-Draft will expire on 11 June 2026.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 1]
+Elhassany, et al.         Expires 11 June 2026                  [Page 1]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 2]
+Elhassany, et al.         Expires 11 June 2026                  [Page 2]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -165,7 +165,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 3]
+Elhassany, et al.         Expires 11 June 2026                  [Page 3]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -221,7 +221,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 4]
+Elhassany, et al.         Expires 11 June 2026                  [Page 4]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -277,7 +277,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 5]
+Elhassany, et al.         Expires 11 June 2026                  [Page 5]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -333,7 +333,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 6]
+Elhassany, et al.         Expires 11 June 2026                  [Page 6]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -389,7 +389,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 7]
+Elhassany, et al.         Expires 11 June 2026                  [Page 7]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -445,7 +445,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 8]
+Elhassany, et al.         Expires 11 June 2026                  [Page 8]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -501,7 +501,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                  [Page 9]
+Elhassany, et al.         Expires 11 June 2026                  [Page 9]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -557,7 +557,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 10]
+Elhassany, et al.         Expires 11 June 2026                 [Page 10]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -613,7 +613,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 11]
+Elhassany, et al.         Expires 11 June 2026                 [Page 11]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -669,7 +669,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 12]
+Elhassany, et al.         Expires 11 June 2026                 [Page 12]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -725,7 +725,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 13]
+Elhassany, et al.         Expires 11 June 2026                 [Page 13]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -781,7 +781,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 14]
+Elhassany, et al.         Expires 11 June 2026                 [Page 14]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -837,7 +837,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 15]
+Elhassany, et al.         Expires 11 June 2026                 [Page 15]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -893,7 +893,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 16]
+Elhassany, et al.         Expires 11 June 2026                 [Page 16]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -949,7 +949,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 17]
+Elhassany, et al.         Expires 11 June 2026                 [Page 17]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1005,7 +1005,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 18]
+Elhassany, et al.         Expires 11 June 2026                 [Page 18]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1061,7 +1061,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 19]
+Elhassany, et al.         Expires 11 June 2026                 [Page 19]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1117,7 +1117,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 20]
+Elhassany, et al.         Expires 11 June 2026                 [Page 20]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1173,7 +1173,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 21]
+Elhassany, et al.         Expires 11 June 2026                 [Page 21]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1215,8 +1215,8 @@ Internet-Draft              Telmetery Message              December 2025
        "telemetry-message-metadata": {
          "node-export-timestamp": "2024-02-14T12:10:10.10+01:00",
          "collection-timestamp": "2024-02-14T12:10:10.12+01:00",
-         "notification-event": "log",
          "session-protocol": "yang-push",
+         "notification-event": "log",
          "export-address": "192.168.1.100",
          "export-port": 123,
          "collection-address": "192.168.1.1",
@@ -1229,17 +1229,17 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 22]
+Elhassany, et al.         Expires 11 June 2026                 [Page 22]
 
 Internet-Draft              Telmetery Message              December 2025
 
 
            "encoding": "ietf-subscribed-notifications:encode-json",
-           "module": [
+           "module-version": [
              {
-               "name": "ietf-interfaces",
+               "module-name": "ietf-interfaces",
                "revision": "2018-02-20",
-               "version": "2.0.0"
+               "revision-label": "2.0.0"
              }
            ],
            "yang-library-content-id": "abc"
@@ -1285,7 +1285,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 23]
+Elhassany, et al.         Expires 11 June 2026                 [Page 23]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1341,7 +1341,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 24]
+Elhassany, et al.         Expires 11 June 2026                 [Page 24]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1397,7 +1397,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 25]
+Elhassany, et al.         Expires 11 June 2026                 [Page 25]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1453,7 +1453,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 26]
+Elhassany, et al.         Expires 11 June 2026                 [Page 26]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1509,7 +1509,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 27]
+Elhassany, et al.         Expires 11 June 2026                 [Page 27]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1565,7 +1565,7 @@ Internet-Draft              Telmetery Message              December 2025
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 28]
+Elhassany, et al.         Expires 11 June 2026                 [Page 28]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1621,7 +1621,7 @@ Acknowledgements
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 29]
+Elhassany, et al.         Expires 11 June 2026                 [Page 29]
 
 Internet-Draft              Telmetery Message              December 2025
 
@@ -1677,4 +1677,4 @@ Authors' Addresses
 
 
 
-Elhassany, et al.          Expires 5 June 2026                 [Page 30]
+Elhassany, et al.         Expires 11 June 2026                 [Page 30]

@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="02" month="December" year="2025"/>
+    <date day="08" month="December" year="2025"/>
 
     <area>General</area>
 
@@ -1177,8 +1177,8 @@ module ietf-yang-push-telemetry-message {
     "telemetry-message-metadata": {
       "node-export-timestamp": "2024-02-14T12:10:10.10+01:00",
       "collection-timestamp": "2024-02-14T12:10:10.12+01:00",
-      "notification-event": "log",
       "session-protocol": "yang-push",
+      "notification-event": "log",
       "export-address": "192.168.1.100",
       "export-port": 123,
       "collection-address": "192.168.1.1",
@@ -1189,11 +1189,11 @@ module ietf-yang-push-telemetry-message {
         "datastore": "ietf-datastores:operational",
         "transport": "ietf-udp-notif-transport:udp-notif",
         "encoding": "ietf-subscribed-notifications:encode-json",
-        "module": [
+        "module-version": [
           {
-            "name": "ietf-interfaces",
+            "module-name": "ietf-interfaces",
             "revision": "2018-02-20",
-            "version": "2.0.0"
+            "revision-label": "2.0.0"
           }
         ],
         "yang-library-content-id": "abc"
