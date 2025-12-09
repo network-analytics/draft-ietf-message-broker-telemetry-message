@@ -64,7 +64,7 @@ module: ietf-telemetry-message
     |        +--:(number-choice)
     |        |  +-- (number-choice)?
     |        |     +--:(number-value)
-    |        |        +-- number-value?   uint16
+    |        |        +-- number-value?   uint64
     |        +--:(string-choice)
     |        |  +-- (string-choice)?
     |        |     +--:(string-value)

@@ -232,7 +232,7 @@ module ietf-telemetry-message {
             description
               "Number value";
             leaf number-value {
-              type uint16;
+              type uint64;
               description
                 "Number value";
             }
