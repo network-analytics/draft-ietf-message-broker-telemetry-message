@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="08" month="December" year="2025"/>
+    <date day="09" month="December" year="2025"/>
 
     <area>General</area>
 
@@ -350,6 +350,7 @@ module: ietf-telemetry-message
     |  +-- node-export-timestamp?   yang:date-and-time
     |  +-- collection-timestamp     yang:date-and-time
     |  +-- notification-event       telemetry-notification-event-type
+    |  +-- sequence-number?         yang:counter32
     |  +-- session-protocol         telemetry-session-protocol-type
     |  +-- export-address           inet:host
     |  +-- export-port?             inet:port-number
@@ -499,7 +500,8 @@ module ietf-telemetry-message {
     container telemetry-message-metadata {
       description
         "contains the session information about the session between the
-         collector and the network node.";
+         collector and the network node and the publishing process
+         of the collector.";
       leaf node-export-timestamp {
         type yang:date-and-time;
         description
@@ -524,6 +526,14 @@ module ietf-telemetry-message {
           "Describes wherever the notification was received and forwarded
            from the network node or generated or removed from the data
            collector state cache.";
+      }
+      leaf sequence-number {
+        type yang:counter32;
+        description
+          "Unique unique sequence number for each published telemetry
+           message by the collector. The initial number is 1 and
+           counts up by 1 at every published telemetry message
+           until it reaches 4294967295 and wraps around.";
       }
       leaf session-protocol {
         type telemetry-session-protocol-type;
