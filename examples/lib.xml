@@ -185,6 +185,11 @@
       <revision>2024-10-16</revision>
       <namespace>urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs</namespace>
     </module>
+    <module>
+      <name>ietf-yang-push-revision</name>
+      <revision>2025-08-29</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:ietf-yang-push-revision</namespace>
+    </module>
   </module-set>
   <schema>
     <name>complete</name>

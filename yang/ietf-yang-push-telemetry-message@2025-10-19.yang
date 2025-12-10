@@ -47,6 +47,12 @@ module ietf-yang-push-telemetry-message {
     reference
       "RFC 8791: YANG Data Structure Extensions";
   }
+   import ietf-yang-push-revision {
+    prefix ypr;
+    reference
+      "draft-ietf-netmod-yang-module-versioning: Updated YANG Module
+       Revision Handling";
+  }
 
   organization
     "IETF Draft";
@@ -244,42 +250,7 @@ module ietf-yang-push-telemetry-message {
           }
         }
       }
-      list module {
-        key "name";
-        config false;
-        description
-          "List of yang-push-module-version grouping defined in
-           draft-ietf-netconf-yang-notifications-versioning. The
-           revision is not configurable.";
-        leaf name {
-          type yang:yang-identifier;
-          config false;
-          description
-            "This references the YANG module name, section 7.1 of
-             RFC 7950.";
-        }
-        leaf revision {
-          type rev:revision-date;
-          config false;
-          description
-            "This references the YANG module revision, section 7.1.2
-             of RFC 7950, of the sent notification message.";
-        }
-        leaf version {
-          type ysver:version;
-          description
-            "This references the YANG module semantic version,
-             draft-ietf-netmod-yang-semver, of the sent notification
-						 message.";
-        }
-      }
-      leaf yang-library-content-id {
-        type string;
-        config false;
-        description
-          "Contains the YANG library content identifier, RFC 8525,
-           information.";
-      }
+      uses ypr:yang-push-module-version-list;
     }
   }
 }
