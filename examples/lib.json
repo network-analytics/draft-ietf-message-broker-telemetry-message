@@ -8,7 +8,10 @@
             "name": "ietf-telemetry-message",
             "revision": "2025-10-19",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-telemetry-message",
-            "feature": ["network-node-manifest", "data-collection-manifest"]
+            "feature": [
+              "network-node-manifest",
+              "data-collection-manifest"
+            ]
           },
           {
             "name": "ietf-yang-push-telemetry-message",
@@ -51,7 +54,9 @@
             "name": "ietf-yang-push",
             "revision": "2019-09-09",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-yang-push",
-            "feature": ["on-change"]
+            "feature": [
+              "on-change"
+            ]
           },
           {
             "name": "ietf-datastores",
@@ -136,7 +141,7 @@
           {
             "name": "ietf-udp-client",
             "revision": "2025-02-24",
-            "namespace": "urn:ietf:params:xml:ns:yang:ietf-subscribed-notif-receivers"
+            "namespace": "urn:ietf:params:xml:ns:yang:ietf-udp-client"
           },
           {
             "name": "ietf-tls-client",
@@ -179,7 +184,9 @@
     "schema": [
       {
         "name": "complete",
-        "module-set": ["complete"]
+        "module-set": [
+          "complete"
+        ]
       }
     ],
     "content-id": "34"

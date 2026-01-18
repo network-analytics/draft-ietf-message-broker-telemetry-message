@@ -137,7 +137,7 @@
       <namespace>urn:ietf:params:xml:ns:yang:ietf-udp-notif-transport</namespace>
     </module>
     <!-- Direct import by ietf-udp-notif-transport -->
-        <module>
+    <module>
       <name>ietf-subscribed-notif-receivers</name>
       <revision>2024-02-01</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-subscribed-notif-receivers</namespace>
@@ -145,14 +145,14 @@
     <module>
       <name>ietf-udp-client</name>
       <revision>2025-02-24</revision>
-      <namespace>urn:ietf:params:xml:ns:yang:ietf-subscribed-notif-receivers</namespace>
+      <namespace>urn:ietf:params:xml:ns:yang:ietf-udp-client</namespace>
     </module>
     <module>
       <name>ietf-tls-client</name>
       <revision>2024-10-10</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-tls-client</namespace>
     </module>
-     <!-- Used for interface type -->
+    <!-- Used for interface type -->
     <module>
       <name>iana-if-type</name>
       <revision>2014-05-08</revision>
