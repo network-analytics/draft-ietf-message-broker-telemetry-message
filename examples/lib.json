@@ -81,7 +81,8 @@
           {
             "name": "ietf-interfaces",
             "revision": "2018-02-20",
-            "namespace": "urn:ietf:params:xml:ns:yang:ietf-interfaces"
+            "namespace": "urn:ietf:params:xml:ns:yang:ietf-interfaces",
+            "feature": ["if-mib"]
           },
           {
             "name": "ietf-netconf-acm",
