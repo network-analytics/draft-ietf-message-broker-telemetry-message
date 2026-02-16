@@ -80,6 +80,7 @@
       <name>ietf-interfaces</name>
       <revision>2018-02-20</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-interfaces</namespace>
+      <feature>if-mib</feature>
     </module>
     <module>
       <name>ietf-netconf-acm</name>
