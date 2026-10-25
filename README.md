@@ -27,11 +27,6 @@ Validating the example using YANG Library
 yanglint -e -Y examples/lib.xml -p yang/deps -p yang examples/example.json -f xml
 ```
 
-Validating the example without using YANG Library
-```bash
-yanglint --anydata-strict -p yang/deps yang/deps/ietf-yang-push@2019-09-09.yang yang/deps/ietf-udp-notif-transport@2026-07-29.yang yang/deps/ietf-datastores@2018-02-14.yang yang/ietf-yang-push-telemetry-message@2026-10-25.yang yang/ietf-telemetry-message@2026-10-25.yang examples/example.json -f json
-```
-
 Validating the example telemetry-message with notification envelope payload using YANG Library (currently working with yanglint 5.4.9)
 ```bash
 yanglint --anydata-strict -e -Y examples/lib.xml -p yang/deps -p yang examples/example-with-envelope.json -f json

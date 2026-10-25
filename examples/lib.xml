@@ -11,7 +11,7 @@
     </module>
     <module>
       <name>ietf-yang-push-telemetry-message</name>
-      <revision>2025-10-19</revision>
+      <revision>2026-10-25</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message</namespace>
     </module>
     <!-- Direct imports by ietf-telemetry-message -->
@@ -117,7 +117,7 @@
     <!-- start the ietf-yp-notification -->
     <module>
       <name>ietf-yp-notification</name>
-      <revision>2025-02-24</revision>
+      <revision>2026-09-25</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-yp-notification</namespace>
     </module>
     <!-- Direct import by ietf-yp-notification -->

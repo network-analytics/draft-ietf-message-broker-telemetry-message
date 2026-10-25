@@ -15,7 +15,7 @@
           },
           {
             "name": "ietf-yang-push-telemetry-message",
-            "revision": "2025-10-19",
+            "revision": "2026-10-25",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-yang-push-telemetry-message"
           },
           {
