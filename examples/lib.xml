@@ -4,7 +4,7 @@
     <!-- Main IETF telemetry message and the YANG push augmentation -->
     <module>
       <name>ietf-telemetry-message</name>
-      <revision>2025-10-19</revision>
+      <revision>2026-10-25</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-telemetry-message</namespace>
       <feature>network-node-manifest</feature>
       <feature>data-collection-manifest</feature>
@@ -17,17 +17,17 @@
     <!-- Direct imports by ietf-telemetry-message -->
     <module>
       <name>ietf-yang-types</name>
-      <revision>2013-07-15</revision>
+      <revision>2025-12-22</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-yang-types</namespace>
     </module>
     <module>
       <name>ietf-inet-types</name>
-      <revision>2021-02-22</revision>
+      <revision>2025-12-22</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-inet-types</namespace>
     </module>
     <module>
       <name>ietf-platform-manifest</name>
-      <revision>2025-02-21</revision>
+      <revision>2026-06-27</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-platform-manifest</namespace>
     </module>
     <module>
@@ -134,7 +134,7 @@
     <!-- Direct used to define the transport in yang-push-subscription -->
     <module>
       <name>ietf-udp-notif-transport</name>
-      <revision>2025-02-14</revision>
+      <revision>2026-07-29</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-udp-notif-transport</namespace>
     </module>
     <!-- Direct import by ietf-udp-notif-transport -->
@@ -145,7 +145,7 @@
     </module>
     <module>
       <name>ietf-udp-client</name>
-      <revision>2025-02-24</revision>
+      <revision>2026-06-15</revision>
       <namespace>urn:ietf:params:xml:ns:yang:ietf-udp-client</namespace>
     </module>
     <module>

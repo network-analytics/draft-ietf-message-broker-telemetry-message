@@ -6,7 +6,7 @@
         "module": [
           {
             "name": "ietf-telemetry-message",
-            "revision": "2025-10-19",
+            "revision": "2026-10-25",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-telemetry-message",
             "feature": [
               "network-node-manifest",
@@ -20,17 +20,17 @@
           },
           {
             "name": "ietf-yang-types",
-            "revision": "2013-07-15",
+            "revision": "2025-12-22",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-yang-types"
           },
           {
             "name": "ietf-inet-types",
-            "revision": "2021-02-22",
+            "revision": "2025-12-22",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-inet-types"
           },
           {
             "name": "ietf-platform-manifest",
-            "revision": "2025-02-21",
+            "revision": "2026-06-27",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-platform-manifest"
           },
           {
@@ -116,7 +116,7 @@
           },
           {
             "name": "ietf-yp-notification",
-            "revision": "2025-02-24",
+            "revision": "2026-09-25",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-yp-notification"
           },
           {
@@ -131,7 +131,7 @@
           },
           {
             "name": "ietf-udp-notif-transport",
-            "revision": "2025-02-14",
+            "revision": "2026-07-29",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-udp-notif-transport"
           },
           {
@@ -141,7 +141,7 @@
           },
           {
             "name": "ietf-udp-client",
-            "revision": "2025-02-24",
+            "revision": "2026-06-15",
             "namespace": "urn:ietf:params:xml:ns:yang:ietf-udp-client"
           },
           {

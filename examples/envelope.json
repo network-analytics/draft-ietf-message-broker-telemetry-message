@@ -1,11 +1,11 @@
 {
   "ietf-yp-notification:envelope": {
-    "event-time": "2023-03-25T08:30:11.22Z",
+    "event-time": "2026-10-25T08:30:11.22Z",
     "hostname": "example-router.example.com",
     "sequence-number": 1,
     "contents": {
       "ietf-yang-push:push-update": {
-        "id": 6666,
+        "id": 1234,
         "datastore-contents": {
           "ietf-interfaces:interfaces": {
             "interface": [
@@ -16,7 +16,7 @@
                 "admin-status": "up",
                 "oper-status": "up",
                 "statistics": {
-                  "discontinuity-time": "2023-03-25T08:20:00.00Z"
+                  "discontinuity-time": "2026-10-25T08:20:00.00Z"
                 }
               }
             ]

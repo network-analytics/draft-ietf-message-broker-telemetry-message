@@ -1,19 +1,29 @@
 {
   "ietf-telemetry-message:message": {
     "network-node-manifest": {
-      "name": "pe1",
-      "vendor": "open source",
-      "software-version": "1.1.2"
+      "system": {
+        "hostname": "router",
+        "contact": "network-operation@example.com",
+        "location": "Data Center 1, Rack B4"
+      },
+      "system-state": {
+        "platform": {
+          "os-name": "Cisco IOS XR",
+          "os-release": "25.4.2",
+          "os-version": "25.4.2.04-IPI-BUILD",
+          "machine": "ASR-9904"
+        }
+      }
     },
     "telemetry-message-metadata": {
-      "node-export-timestamp": "2024-02-14T12:10:10.10+01:00",
-      "collection-timestamp": "2024-02-14T12:10:10.12+01:00",
+      "node-export-timestamp": "2026-10-14T12:10:10.10+01:00",
+      "collection-timestamp": "2026-10-14T12:10:10.12+01:00",
       "session-protocol": "yang-push",
       "notification-event": "log",
       "export-address": "192.168.1.100",
-      "export-port": 123,
+      "export-port": 1025,
       "collection-address": "192.168.1.1",
-      "collection-port": 9991,
+      "collection-port": 10100,
       "ietf-yang-push-telemetry-message:yang-push-subscription": {
         "id": 89,
         "xpath-filter": "/ietf-interfaces:interfaces",
@@ -31,9 +41,19 @@
       }
     },
     "data-collection-manifest": {
-      "name": "collector-1",
-      "vendor": "open source",
-      "software-version": "2.1.0"
+      "system": {
+        "hostname": "data-collector-1",
+        "contact": "network-telemetry@example.com",
+        "location": "Data Center 1, Rack D4"
+      },
+      "system-state": {
+        "platform": {
+          "os-name": "Red Hat Enterprise Linux",
+          "os-release": "10.0",
+          "os-version": "Linux 6.12.0-rc3-rh10 x86_64",
+          "machine": "x86_64-server"
+        }
+      }
     },
     "network-operator-metadata": {
       "labels": [
@@ -45,12 +65,12 @@
     },
     "payload": {
       "ietf-yp-notification:envelope": {
-        "event-time": "2023-03-25T08:30:11.22Z",
+        "event-time": "2026-10-25T08:30:11.22Z",
         "hostname": "example-router.example.com",
         "sequence-number": 1,
         "contents": {
           "ietf-yang-push:push-update": {
-            "id": 6666,
+            "id": 12345,
             "datastore-contents": {
               "ietf-interfaces:interfaces": {
                 "interface": [
@@ -61,7 +81,7 @@
                     "admin-status": "up",
                     "oper-status": "up",
                     "statistics": {
-                      "discontinuity-time": "2023-03-25T08:20:00.00Z"
+                      "discontinuity-time": "2026-10-25T08:20:00.00Z"
                     }
                   }
                 ]

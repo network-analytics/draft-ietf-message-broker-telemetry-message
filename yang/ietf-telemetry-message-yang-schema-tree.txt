@@ -1,80 +1,4 @@
-yanglint ietf-telemetry-message@2025-10-19.yang ietf-yang-push-telemetry-message@2025-10-19.yang -f tree --tree-line-length 69 -p deps
-module: ietf-telemetry-message
-
-  structure message:
-    +-- network-node-manifest {network-node-manifest}?
-    |  +-- name?               string
-    |  +-- vendor?             string
-    |  +-- vendor-pen?         uint32
-    |  +-- software-version?   string
-    |  +-- software-flavor?    string
-    |  +-- os-version?         string
-    |  +-- os-type?            string
-    +-- telemetry-message-metadata
-    |  +-- node-export-timestamp?    yang:date-and-time
-    |  +-- collection-timestamp      yang:date-and-time
-    |  +-- notification-event
-    |  |     telemetry-notification-event-type
-    |  +-- session-protocol          telemetry-session-protocol-type
-    |  +-- export-address            inet:host
-    |  +-- export-port?              inet:port-number
-    |  +-- collection-address?       inet:host
-    |  +-- collection-port?          inet:port-number
-    |  +-- yang-push-subscription
-    |     +-- id?                        sn:subscription-id
-    |     +-- (filter-spec)?
-    |     |  +--:(subtree-filter)
-    |     |  |  +-- subtree-filter?   anydata
-    |     |  +--:(xpath-filter)
-    |     |     +-- xpath-filter?   yang:xpath1.0
-    |     +-- (target)?
-    |     |  +--:(stream)
-    |     |  |  +-- stream?   string
-    |     |  +--:(datastore)
-    |     |     +-- datastore?   identityref
-    |     +-- transport?                 sn:transport
-    |     +-- encoding?                  sn:encoding
-    |     +-- purpose?                   string
-    |     +-- (update-trigger)?
-    |     |  +--:(periodic)
-    |     |  |  +-- periodic!
-    |     |  |     +-- period?        yp:centiseconds
-    |     |  |     +-- anchor-time?   yang:date-and-time
-    |     |  +--:(on-change)
-    |     |     +-- on-change!
-    |     |        +-- dampening-period?   yp:centiseconds
-    |     |        +-- sync-on-start?      boolean
-    |     +-- module* [name]
-    |     |  +-- name        yang:yang-identifier
-    |     |  +-- revision?   rev:revision-date
-    |     |  +-- version?    ysver:version
-    |     +-- yang-library-content-id?   string
-    +-- data-collection-manifest {data-collection-manifest}?
-    |  +-- name?               string
-    |  +-- vendor?             string
-    |  +-- vendor-pen?         uint32
-    |  +-- software-version?   string
-    |  +-- software-flavor?    string
-    |  +-- os-version?         string
-    |  +-- os-type?            string
-    +-- network-operator-metadata
-    |  +-- labels* [name]
-    |     +-- name       string
-    |     +-- (value)
-    |        +--:(number-choice)
-    |        |  +-- (number-choice)?
-    |        |     +--:(number-value)
-    |        |        +-- number-value?   uint64
-    |        +--:(string-choice)
-    |        |  +-- (string-choice)?
-    |        |     +--:(string-value)
-    |        |        +-- string-value?   string
-    |        +--:(anydata-choice)
-    |           +-- (anydata-choice)?
-    |              +--:(anydata-values)
-    |                 +-- anydata-values?   anydata
-    +-- payload?                      anydata
-
+yanglint yang/ietf-yang-push-telemetry-message@2026-10-25.yang  yang/ietf-telemetry-message@2026-10-25.yang -f tree --tree-line-length 69 -p yang/deps
 module: ietf-yang-push-telemetry-message
 
   augment-structure /tm:message/tm:telemetry-message-metadata:
@@ -107,3 +31,87 @@ module: ietf-yang-push-telemetry-message
        |  +-- revision?   rev:revision-date
        |  +-- version?    ysver:version
        +-- yang-library-content-id?   string
+
+module: ietf-telemetry-message
+
+  structure message:
+    +-- network-node-manifest {network-node-manifest}?
+    |  +-- system
+    |  |  +-- contact?    string
+    |  |  +-- hostname?   inet:domain-name
+    |  |  +-- location?   string
+    |  +-- system-state
+    |     +-- platform
+    |        +-- os-name?      string
+    |        +-- os-release?   string
+    |        +-- os-version?   string
+    |        +-- machine?      string
+    +-- telemetry-message-metadata
+    |  +-- node-export-timestamp?         yang:date-and-time
+    |  +-- collection-timestamp           yang:date-and-time
+    |  +-- notification-event
+    |  |     telemetry-notification-event-type
+    |  +-- sequence-number?               yang:counter32
+    |  +-- session-protocol
+    |  |     telemetry-session-protocol-type
+    |  +-- export-address                 inet:host
+    |  +-- export-port?                   inet:port-number
+    |  +-- collection-address?            inet:host
+    |  +-- collection-port?               inet:port-number
+    |  +-- yptm:yang-push-subscription
+    |     +-- yptm:id?                        sn:subscription-id
+    |     +-- (yptm:filter-spec)?
+    |     |  +--:(yptm:subtree-filter)
+    |     |  |  +-- yptm:subtree-filter?   anydata
+    |     |  +--:(yptm:xpath-filter)
+    |     |     +-- yptm:xpath-filter?   yang:xpath1.0
+    |     +-- (yptm:target)?
+    |     |  +--:(yptm:stream)
+    |     |  |  +-- yptm:stream?   string
+    |     |  +--:(yptm:datastore)
+    |     |     +-- yptm:datastore?   identityref
+    |     +-- yptm:transport?                 sn:transport
+    |     +-- yptm:encoding?                  sn:encoding
+    |     +-- yptm:purpose?                   string
+    |     +-- (yptm:update-trigger)?
+    |     |  +--:(yptm:periodic)
+    |     |  |  +-- yptm:periodic!
+    |     |  |     +-- yptm:period?        yp:centiseconds
+    |     |  |     +-- yptm:anchor-time?   yang:date-and-time
+    |     |  +--:(yptm:on-change)
+    |     |     +-- yptm:on-change!
+    |     |        +-- yptm:dampening-period?   yp:centiseconds
+    |     |        +-- yptm:sync-on-start?      boolean
+    |     +-- yptm:module* [name]
+    |     |  +-- yptm:name        yang:yang-identifier
+    |     |  +-- yptm:revision?   rev:revision-date
+    |     |  +-- yptm:version?    ysver:version
+    |     +-- yptm:yang-library-content-id?   string
+    +-- data-collection-manifest {data-collection-manifest}?
+    |  +-- system
+    |  |  +-- contact?    string
+    |  |  +-- hostname?   inet:domain-name
+    |  |  +-- location?   string
+    |  +-- system-state
+    |     +-- platform
+    |        +-- os-name?      string
+    |        +-- os-release?   string
+    |        +-- os-version?   string
+    |        +-- machine?      string
+    +-- network-operator-metadata
+    |  +-- labels* [name]
+    |     +-- name       string
+    |     +-- (value)
+    |        +--:(number-choice)
+    |        |  +-- (number-choice)?
+    |        |     +--:(number-value)
+    |        |        +-- number-value?   uint64
+    |        +--:(string-choice)
+    |        |  +-- (string-choice)?
+    |        |     +--:(string-value)
+    |        |        +-- string-value?   string
+    |        +--:(anydata-choice)
+    |           +-- (anydata-choice)?
+    |              +--:(anydata-values)
+    |                 +-- anydata-values?   anydata
+    +-- payload?                      anydata
