@@ -2,7 +2,7 @@ IETF YANG Telemetry message draft.
 
 
 # Validation
-Examples are validated with development `yanglint` version 5.4.9 tool from [libyang](https://github.com/CESNET/libyang)
+Examples are validated with development `yanglint` version 6.4.13 tool from [libyang](https://github.com/CESNET/libyang)
 
 
 Single Tree
@@ -23,9 +23,6 @@ $ yanglint yang/ietf-yang-push-telemetry-message@2026-10-25.yang -f yang -p yang
 ```
 
 Validating the example using YANG Library
-```bash
-yanglint -e -Y examples/lib.xml -p yang/deps -p yang examples/example.json -f xml
-```
 
 Validating the example telemetry-message with notification envelope payload using YANG Library (currently working with yanglint 5.4.9)
 ```bash
