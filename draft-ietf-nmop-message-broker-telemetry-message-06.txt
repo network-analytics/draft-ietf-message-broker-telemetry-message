@@ -1747,9 +1747,9 @@ Internet-Draft              Telmetery Message              November 2026
            }
          },
          "collector": {
-           "collector-name": "data-collector-5",
-           "collector-release": "1.1",
-           "collector-version": "Example Collector 20261114 (90e364ec)",
+           "name": "data-collector-5",
+           "release": "1.1",
+           "version": "Example Collector 20261114 (90e364ec)",
          }
        },
        "network-operator-metadata": {
