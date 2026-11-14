@@ -1745,10 +1745,12 @@ Internet-Draft              Telmetery Message              November 2026
              "os-version": "Linux 6.12.0-rc3-rh10 x86_64",
              "machine": "x86_64-server"
            }
+         },
+         "collector": {
+           "collector-name": "data-collector-5",
+           "collector-release": "1.1",
+           "collector-version": "Example Collector 20261114 (90e364ec)",
          }
-         "collector-name": "data-collector-5",
-         "collector-release": "1.1",
-         "collector-version": "Example Collector 20261114 (90e364ec)",
        },
        "network-operator-metadata": {
          "labels": [
@@ -1784,8 +1786,6 @@ Internet-Draft              Telmetery Message              November 2026
                }
              }
            }
-         }
-       }
 
 
 
@@ -1794,6 +1794,8 @@ Elhassany, et al.          Expires 18 May 2027                 [Page 32]
 Internet-Draft              Telmetery Message              November 2026
 
 
+         }
+       }
      }
    }
 
@@ -1824,8 +1826,6 @@ Authors' Addresses
    Barneveld 3771
    Netherlands
    Email: paolo@ntt.net
-
-
 
 
 
