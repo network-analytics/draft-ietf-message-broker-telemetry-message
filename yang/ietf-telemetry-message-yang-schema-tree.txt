@@ -1,4 +1,4 @@
-yanglint yang/ietf-yang-push-telemetry-message@2026-10-25.yang  yang/ietf-telemetry-message@2026-10-25.yang -f tree --tree-line-length 69 -p yang/deps
+yanglint -p yang/deps yang/ietf-yang-push-telemetry-message@2026-11-14.yang  yang/ietf-telemetry-message@2026-11-14.yang -f tree
 module: ietf-yang-push-telemetry-message
 
   augment-structure /tm:message/tm:telemetry-message-metadata:
@@ -49,11 +49,9 @@ module: ietf-telemetry-message
     +-- telemetry-message-metadata
     |  +-- node-export-timestamp?         yang:date-and-time
     |  +-- collection-timestamp           yang:date-and-time
-    |  +-- notification-event
-    |  |     telemetry-notification-event-type
+    |  +-- notification-event             telemetry-notification-event-type
     |  +-- sequence-number?               yang:counter32
-    |  +-- session-protocol
-    |  |     telemetry-session-protocol-type
+    |  +-- session-protocol               telemetry-session-protocol-type
     |  +-- export-address                 inet:host
     |  +-- export-port?                   inet:port-number
     |  +-- collection-address?            inet:host
@@ -93,11 +91,15 @@ module: ietf-telemetry-message
     |  |  +-- hostname?   inet:domain-name
     |  |  +-- location?   string
     |  +-- system-state
-    |     +-- platform
-    |        +-- os-name?      string
-    |        +-- os-release?   string
-    |        +-- os-version?   string
-    |        +-- machine?      string
+    |  |  +-- platform
+    |  |     +-- os-name?      string
+    |  |     +-- os-release?   string
+    |  |     +-- os-version?   string
+    |  |     +-- machine?      string
+    |  +-- collector
+    |     +-- name?      string
+    |     +-- release?   string
+    |     +-- version?   string
     +-- network-operator-metadata
     |  +-- labels* [name]
     |     +-- name       string

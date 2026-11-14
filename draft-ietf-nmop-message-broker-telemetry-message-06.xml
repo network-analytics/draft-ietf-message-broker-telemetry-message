@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="25" month="October" year="2026"/>
+    <date day="14" month="November" year="2026"/>
 
     <area>General</area>
 
@@ -304,7 +304,7 @@
         Manifest of the data collector which collected the Network
         Telemetry data. The data type is the same as for the
 				"network-node-manifest" container but specific to the collector
-				node.</dd>
+				node with additional collector leaves.</dd>
       </dl>
 
       <dl>
@@ -367,11 +367,15 @@ module: ietf-telemetry-message
     |  |  +-- hostname?   inet:domain-name
     |  |  +-- location?   string
     |  +-- system-state
-    |     +-- platform
-    |        +-- os-name?      string
-    |        +-- os-release?   string
-    |        +-- os-version?   string
-    |        +-- machine?      string
+    |  |  +-- platform
+    |  |     +-- os-name?      string
+    |  |     +-- os-release?   string
+    |  |     +-- os-version?   string
+    |  |     +-- machine?      string
+    |  +-- collector
+    |     +-- name?      string
+    |     +-- release?   string
+    |     +-- version?   string
     +-- network-operator-metadata
     |  +-- labels* [name]
     |     +-- name       string
@@ -433,7 +437,7 @@ module: ietf-yang-push-telemetry-message
       <figure anchor="ietf-telemetry-message-module"
       title="YANG 'ietf-telemetry-message' module.">
 
-<sourcecode name="ietf-telemetry-message@2026-10-25.yang" type="yang"
+<sourcecode name="ietf-telemetry-message@2026-11-14.yang" type="yang"
 markers="true"><![CDATA[
 module ietf-telemetry-message {
   yang-version 1.1;
@@ -487,7 +491,7 @@ module ietf-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2026-10-25 {
+  revision 2026-11-14 {
     description
       "Initial revision.";
     reference
@@ -583,6 +587,29 @@ module ietf-telemetry-message {
         "Contains the Data Manifest of the data collector which
          collected the Network Telemetry data.";
       uses p-mf:platform-ietf-system;
+      container collector {
+        description
+          "Contains collector application properties in use.";
+        leaf name {
+          type string;
+          description
+            "The instance name of the collector application in use";
+        }
+        leaf release {
+          type string;
+          description
+            "The current release level of the collector application
+             in use. This string MAY indicate the collector source code
+             revision.";
+        }
+        leaf version {
+          type string;
+          description
+            "The current version of the collector application in use.
+             This string MAY indicate the specific collector build
+             date and target variant information.";
+        }
+      }
     }
     container network-operator-metadata {
       description
@@ -719,7 +746,7 @@ module ietf-telemetry-message {
       <figure anchor="ietf-yang-push-telemetry-message-module"
       title="YANG 'ietf-yang-push-telemetry-message' module.">
 
-<sourcecode name="ietf-yang-push-telemetry-message@2026-10-25.yang"
+<sourcecode name="ietf-yang-push-telemetry-message@2026-11-14.yang"
 type="yang" markers="true"><![CDATA[
 module ietf-yang-push-telemetry-message {
   yang-version 1.1;
@@ -802,7 +829,7 @@ module ietf-yang-push-telemetry-message {
      This version of this YANG module is part of RFC XXXX; see the RFC
      itself for full legal notices.";
 
-  revision 2026-10-25 {
+  revision 2026-11-14 {
     description
       "Initial revision.";
     reference
@@ -1560,7 +1587,7 @@ module ietf-yang-push-telemetry-message {
     },
     "data-collection-manifest": {
       "system": {
-        "hostname": "data-collector-1",
+        "hostname": "data-collector-server-1",
         "contact": "network-telemetry@example.com",
         "location": "Data Center 1, Rack D4"
       },
@@ -1572,6 +1599,9 @@ module ietf-yang-push-telemetry-message {
           "machine": "x86_64-server"
         }
       }
+      "collector-name": "data-collector-5",
+      "collector-release": "1.1",
+      "collector-version": "Example Collector 20261114 (90e364ec)",
     },
     "network-operator-metadata": {
       "labels": [

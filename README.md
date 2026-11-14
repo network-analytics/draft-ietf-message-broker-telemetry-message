@@ -7,19 +7,19 @@ Examples are validated with development `yanglint` version 6.4.13 tool from [lib
 
 Single Tree
 ```shell
-$ yanglint yang/ietf-telemetry-message@2026-10-25.yang -f tree --tree-line-length 69 -p yang/deps
-$ yanglint yang/ietf-yang-push-telemetry-message@2026-10-25.yang -f tree --tree-line-length 69 -p yang/deps
+$ yanglint yang/ietf-telemetry-message@2026-11-14.yang -f tree --tree-line-length 69 -p yang/deps
+$ yanglint yang/ietf-yang-push-telemetry-message@2026-11-14.yang -f tree --tree-line-length 69 -p yang/deps
 ```
 
 Full tree validating the schemas
 ```bash
-yanglint -p yang/deps yang/ietf-yang-push-telemetry-message@2026-10-25.yang  yang/ietf-telemetry-message@2026-10-25.yang -f tree
+yanglint -p yang/deps yang/ietf-yang-push-telemetry-message@2026-11-14.yang  yang/ietf-telemetry-message@2026-11-14.yang -f tree
 ```
 
 Format for Datatracker
 ```shell
-$ yanglint yang/ietf-telemetry-message@2026-10-25.yang -f yang -p yang/deps
-$ yanglint yang/ietf-yang-push-telemetry-message@2026-10-25.yang -f yang -p yang/deps
+$ yanglint yang/ietf-telemetry-message@2026-11-14.yang -f yang -p yang/deps
+$ yanglint yang/ietf-yang-push-telemetry-message@2026-11-14.yang -f yang -p yang/deps
 ```
 
 Validating the example using YANG Library
